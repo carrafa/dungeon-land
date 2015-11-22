@@ -51,45 +51,106 @@ var guyImage = new Image();
 guyImage.onload = function () {
 	guyReady = true;
 };
-guyImage.src = "/games/images/guy.png";
+guyImage.src = "/images/guy.png";
 
 
 
 //----------------------------------------------
 
 
+//======building/item images===================
+
+var houseReady = false;
+var houseImage = new Image();
+houseImage.onload = function () {
+	houseReady = true;
+};
+houseImage.src = "/images/house.png";
+
+var stairsReady = false;
+var stairsImage = new Image();
+stairsImage.onload = function () {
+	stairsReady = true;
+};
+stairsImage.src = "/images/stairs.png";
+
+//----------------------------------------------
+
+
 //===========background image =============
+
+var bgs = [
+	"/images/bg0.png",
+	"/images/bg1.png",
+];
+
+var currentLevel = 0;
+
 
 var bgReady = false;
 var bgImage = new Image();
 bgImage.onload = function () {
 	bgReady = true;
 };
-bgImage.src = "/games/images/bg.png";
-
-//-----------------------------------------
+bgImage.src = bgs[currentLevel];
 
 
 
 
-//===============characters------------------
+//---------------------------------------------------
+
+
+
+
+//===============characters================================
 
 var guy = {
-  speed: 300,
+  speed: 200,
+  health: 100,
+	strength: 100,
   charisma: 0,
-  dexterity: 0,
-  blabla: 0,
-  x: 5,
-  y: 5,
+  x: 20,
+  y: 60,
   xp: 0,
   yp: 0,
 };
 
-var rocket = {
-  speed: 300,
+var ogre = {
+	health: 20,
+	strength: 20,
+}
+
+var dragon = {
+  health: 100,
+	strength: 100,
 }
 
 //---------------------------------------------------------------------------
+
+//======================objects==============================
+
+var house = {
+	speed: 0,
+	x: null,
+	y: null,
+}
+
+var stairsDown = {
+	speed: 0,
+	x: null,
+	y: null,
+}
+
+var stairs = {
+	speed: 0,
+	x: null,
+	y: null,
+}
+//-----------------------------------------------------------
+
+
+
+
 
 //---------------------------------------------------------------------------
 //===========================================================================
@@ -147,38 +208,61 @@ var update = function (modifier) {
 
 };
 
+//==========get mouse coordinates (for debugging) ===========
 
+function mousePos(e)
+{
+    var mouseX, mouseY;
+
+    if(e.offsetX) {
+        mouseX = e.offsetX;
+        mouseY = e.offsetY;
+    }
+    else if(e.layerX) {
+        mouseX = e.layerX;
+        mouseY = e.layerY;
+    }
+		console.log("x:" + mouseX);
+		console.log("y:" + mouseY);
+
+    /* do something with mouseX/mouseY */
+}
+
+$('#canvas').on('click', mousePos);
+
+//-----------------------------------------------------------
 
 
   //=============collision=====================================
 
   collision = function(direction){
 		if(direction==='right'){
-			clipWidth = 2;
-			clipDepth = 10;
-			clipOffsetX = 40;
-			clipOffsetY = 20;
+			clipWidth = 5;
+			clipHeight = 20;
+			clipOffsetX = 36;
+			clipOffsetY = 12;
 		}
 		if(direction==='left'){
-			clipWidth = 2;
-			clipDepth = 10;
+			clipWidth = 5;
+			clipHeight = 10;
 			clipOffsetX = 0;
 			clipOffsetY = 20;
 		}
 		if(direction==='up'){
 			clipWidth = 10;
-			clipDepth = 2;
-			clipOffsetX = 20;
+			clipHeight = 5;
+			clipOffsetX = 0;
 			clipOffsetY = 0;
 		}
 		if(direction==='down'){
-			clipWidth = 10;
-			clipDepth = 4;
-			clipOffsetX = 20;
-			clipOffsetY = 40;
+			clipWidth = 20;
+			clipHeight = 5;
+			clipOffsetX = 6;
+			clipOffsetY = 42;
 		}
-		clipLength = clipWidth*clipDepth;
-    var whatColor = ctx.getImageData(guy.x+clipOffsetX, guy.y+clipOffsetY, clipWidth, clipDepth);
+
+		clipLength = clipWidth*clipHeight;
+    var whatColor = ctx.getImageData(guy.x+clipOffsetX, guy.y+clipOffsetY, clipWidth, clipHeight);
 
       for (var i = 0; i < clipLength*4; i+=4 ) {
         console.log(whatColor.data[i]);
@@ -186,17 +270,27 @@ var update = function (modifier) {
           console.log('red!');
 					return true;
         };
-        if(whatColor.data[i+1]>200){
-          console.log('green!');
-					return false;
-        };
-        if(whatColor.data[i+2]>200){
-          console.log('blue!');
-          return false;
-        }
+        // if(whatColor.data[i+1]>200){   \
+        //   console.log('green!')         |
+        // };                              |  looks for green and blue.
+        // if(whatColor.data[i+2]>200){    |  maybe do something with it later.
+        //   console.log('blue!');         |
+        // }                              /
       };
 
   };
+
+//---------------------------------------------------------------------------
+//===========================================================================
+//                       LEVEL SWITCHER
+//===========================================================================
+//---------------------------------------------------------------------------
+
+//
+
+
+
+
 
 //---------------------------------------------------------------------------
 
@@ -236,11 +330,45 @@ var update = function (modifier) {
 
 var render = function () {
 
+	switch(currentLevel){
+		case 0:
+			if (
+				(guy.x > stairs.x-30 && guy.x < stairs.x)
+				&&
+				(guy.y > stairs.y-30 && guy.y < stairs.y+20)
+			){
+				currentLevel = 1;
+			}
+			break;
+	};
+
+
 	if (bgReady) {
+		bgImage.src = bgs[currentLevel];
     bgImage.width = c.width;
     bgImage.height = c.height();
 		ctx.drawImage(bgImage, 0, 0);
 	}
+
+	if(houseReady&&(currentLevel===0)){
+		ctx.drawImage(houseImage, 10, 10);
+	}
+
+	if(stairsReady){
+		switch(currentLevel){
+			case 0:
+				stairs.x = 447;
+				stairs.y = 438;
+				ctx.drawImage(stairsImage, stairs.x, stairs.y);
+				break;
+			case 1:
+			stairs.x = 447;
+			stairs.y = 438;
+				ctx.drawImage(stairsImage, 447, 438);
+				break;
+		};
+	}
+
 
 	if (guyReady) {
 		ctx.drawImage(guyImage, guy.x, guy.y);
