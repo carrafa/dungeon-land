@@ -21,7 +21,6 @@ var c = $('#canvas');
 var ct = $('#canvas').get(0).getContext('2d');
 var container = $(c).parent();
 
-
 //======== responsive canvas function ========
 var respondWidth = $(container).width();
 var respondHeight = $(container).height();
@@ -54,7 +53,7 @@ var guyImage = new Image();
 guyImage.onload = function () {
 	guyReady = true;
 };
-guyImage.src = "/images/guy.png";
+guyImage.src = "/images/guy3030.png";
 
 
 
@@ -75,7 +74,7 @@ var stairsImage = new Image();
 stairsImage.onload = function () {
 	stairsReady = true;
 };
-stairsImage.src = "/images/stairs.png";
+stairsImage.src = "/images/stairsL.png";
 
 //----------------------------------------------
 
@@ -83,8 +82,8 @@ stairsImage.src = "/images/stairs.png";
 //===========background image =============
 
 var bgs = [
-	"/images/bg0.png",
-	"/images/bg1.png",
+	"/images/bg00.png",
+	"/images/bg01.png",
 ];
 
 var currentLevel = 0;
@@ -216,9 +215,9 @@ var update = function (modifier) {
   collision = function(direction){
 		if(direction==='right'){
 			clipWidth = 5;
-			clipHeight = 20;
-			clipOffsetX = 36;
-			clipOffsetY = 12;
+			clipHeight = 10;
+			clipOffsetX = 30;
+			clipOffsetY = 20;
 		}
 		if(direction==='left'){
 			clipWidth = 5;
@@ -233,7 +232,7 @@ var update = function (modifier) {
 			clipOffsetY = 0;
 		}
 		if(direction==='down'){
-			clipWidth = 20;
+			clipWidth = 10;
 			clipHeight = 5;
 			clipOffsetX = 6;
 			clipOffsetY = 42;
@@ -301,8 +300,32 @@ $('#canvas').on('click', mousePos);
 
 //-----------------------------------------------------------
 
+//---------------------------------------------------------------------------
+//===========================================================================
+//                       Fog of War
+//===========================================================================
+//---------------------------------------------------------------------------
+
+var overlay = "rgba(0, 0, 0, 1)";
 
 
+fog = function(){
+	// ctx.fillStyle = overlay;
+	// ctx.fillRect(0, 0, 500, 500);
+
+	// ctx.globalCompositeOperation = 'destination-out';
+	// ctx.fillRect(guy.x-15, guy.y-15, 50, 50);
+
+
+
+
+}
+
+
+
+
+
+//---------------------------------------------------------------------------
 
 
 
@@ -318,7 +341,7 @@ $('#canvas').on('click', mousePos);
 
 var render = function () {
 
-			//-----level switcher------------
+	//-----level switcher------------
 
 	switch(currentLevel){
 		case 0:
@@ -327,7 +350,7 @@ var render = function () {
 				&&
 				(guy.y > stairs.y-30 && guy.y < stairs.y+20)
 			){
-				currentLevel = 1;
+				currentLevel++;
 			}
 			break;
 	};
@@ -348,22 +371,23 @@ var render = function () {
 	if(stairsReady){
 		switch(currentLevel){
 			case 0:
-				stairs.x = 447;
-				stairs.y = 438;
-				ctx.drawImage(stairsImage, stairs.x, stairs.y);
+				stairs.x = 355;
+				stairs.y = 365;
 				break;
 			case 1:
-			stairs.x = 447;
-			stairs.y = 438;
-				ctx.drawImage(stairsImage, 447, 438);
+				stairs.x = 355;
+				stairs.y = 365;
 				break;
 		};
+		ctx.drawImage(stairsImage, stairs.x, stairs.y);
 	}
 
 
 	if (guyReady) {
 		ctx.drawImage(guyImage, guy.x, guy.y);
 	}
+
+	fog();
 
 
 
