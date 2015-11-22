@@ -215,26 +215,26 @@ var update = function (modifier) {
 
   collision = function(direction){
 		if(direction==='right'){
-			clipWidth = 5;
-			clipHeight = 20;
+			clipWidth = 2;
+			clipHeight = 30;
 			clipOffsetX = 30;
 			clipOffsetY = 0;
 		}
 		if(direction==='left'){
-			clipWidth = 5;
-			clipHeight = 20;
+			clipWidth = 2;
+			clipHeight = 30;
 			clipOffsetX = 0;
-			clipOffsetY = 30;
+			clipOffsetY = 0;
 		}
 		if(direction==='up'){
-			clipWidth = 20;
-			clipHeight = 5;
-			clipOffsetX = 30;
+			clipWidth = 30;
+			clipHeight = 2;
+			clipOffsetX = 0;
 			clipOffsetY = 0;
 		}
 		if(direction==='down'){
-			clipWidth = 20;
-			clipHeight = 5;
+			clipWidth = 30;
+			clipHeight = 2;
 			clipOffsetX = 0;
 			clipOffsetY = 30;
 		}
@@ -244,19 +244,19 @@ var update = function (modifier) {
 
       for (var i = 0; i < clipLength*4; i+=4 ) {
         console.log(whatColor.data[i]);
-        if((whatColor.data[i]>250)
+        if((whatColor.data[i]===255)
 						&&
-						(whatColor.data[i+1]<20)
+						(whatColor.data[i+1]===0)
 						&&
-						(whatColor.data[i+2]<20)
+						(whatColor.data[i+2]===0)
 					){
           console.log('red!');
 					return true;
         };
-        // if(whatColor.data[i+1]>200){   \
+        // if(whatColor.data[i+1]===255){   \
         //   console.log('green!')         |
         // };                              |  looks for green and blue.
-        // if(whatColor.data[i+2]>200){    |
+        // if(whatColor.data[i+2]===255){    |
         //   console.log('blue!');         |
         // }                              /
       };
