@@ -51,7 +51,7 @@ var guyImage = new Image();
 guyImage.onload = function () {
 	guyReady = true;
 };
-guyImage.src = "/images/guy.png";
+guyImage.src = "/games/images/guy.png";
 
 
 
@@ -65,7 +65,7 @@ var bgImage = new Image();
 bgImage.onload = function () {
 	bgReady = true;
 };
-bgImage.src = "/images/bg.png";
+bgImage.src = "/games/images/bg.png";
 
 //-----------------------------------------
 
@@ -75,7 +75,7 @@ bgImage.src = "/images/bg.png";
 //===============characters------------------
 
 var guy = {
-  speed: 200,
+  speed: 300,
   charisma: 0,
   dexterity: 0,
   blabla: 0,
@@ -116,40 +116,34 @@ addEventListener("keyup", function (e) {
 
 var update = function (modifier) {
 
-	var clipWidth = 40;
-	var clipDepth = 40;
-	var clipLength = 400;
-	var clipOffset = 5;
-	var whatColor = ctx.getImageData(guy.x+clipOffset, guy.y+clipOffset, clipWidth, clipDepth);
-
-
-
 	if (keysDown[38]===true || keysDown[87]===true) { // up
+		if(collision('up')===true){
+			guy.y = guy.y;
+		} else {
 		guy.y -= guy.speed * modifier;
-    if(guy.y < 0){
-      guy.y = 0;
     }
 	}
 	if (keysDown[40]===true || keysDown[83]===true) { // down
+		if(collision('down')===true){
+			guy.y = guy.y;
+		} else {
 		guy.y += guy.speed * modifier;
-    if(guy.y> canvas.height-guyImage.height){
-      guy.y = canvas.height-guyImage.height;
-    }
+		}
 	}
 	if (keysDown[37]===true || keysDown[65]===true) { // left
+		if(collision('left')===true){
+			guy.x = guy.x;
+		} else{
 		guy.x -= guy.speed * modifier;
-    if(guy.x <0){
-      guy.x = 0;
-    };
-
+		}
 	}
-	if (keysDown[39]===true || keysDown[68]===true){ // right
-    collision();
-		guy.x += guy.speed * modifier;
-    if(guy.x > canvas.width-guyImage.width){
-      guy.x = canvas.width-guyImage.width;
-    };
-	}
+	if (keysDown[39]===true || keysDown[68]===true){ //right
+		if(collision('right')===true){
+			guy.x = guy.x;
+		} else {
+			guy.x += guy.speed * modifier;
+		}
+	};
 
 };
 
@@ -158,25 +152,47 @@ var update = function (modifier) {
 
   //=============collision=====================================
 
-  collision = function(){
-    var clipWidth = 40;
-    var clipDepth = 40;
-    var clipLength = 400;
-    var clipOffset = 5;
-    var whatColor = ctx.getImageData(guy.x+clipOffset, guy.y+clipOffset, clipWidth, clipDepth);
+  collision = function(direction){
+		if(direction==='right'){
+			clipWidth = 2;
+			clipDepth = 10;
+			clipOffsetX = 40;
+			clipOffsetY = 20;
+		}
+		if(direction==='left'){
+			clipWidth = 2;
+			clipDepth = 10;
+			clipOffsetX = 0;
+			clipOffsetY = 20;
+		}
+		if(direction==='up'){
+			clipWidth = 10;
+			clipDepth = 2;
+			clipOffsetX = 20;
+			clipOffsetY = 0;
+		}
+		if(direction==='down'){
+			clipWidth = 10;
+			clipDepth = 4;
+			clipOffsetX = 20;
+			clipOffsetY = 40;
+		}
+		clipLength = clipWidth*clipDepth;
+    var whatColor = ctx.getImageData(guy.x+clipOffsetX, guy.y+clipOffsetY, clipWidth, clipDepth);
+
       for (var i = 0; i < clipLength*4; i+=4 ) {
         console.log(whatColor.data[i]);
         if(whatColor.data[i]>250){
           console.log('red!');
-          break;
+					return true;
         };
         if(whatColor.data[i+1]>200){
           console.log('green!');
-          break;
+					return false;
         };
         if(whatColor.data[i+2]>200){
           console.log('blue!');
-          break;
+          return false;
         }
       };
 
@@ -225,8 +241,6 @@ var render = function () {
     bgImage.height = c.height();
 		ctx.drawImage(bgImage, 0, 0);
 	}
-
-
 
 	if (guyReady) {
 		ctx.drawImage(guyImage, guy.x, guy.y);
