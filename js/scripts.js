@@ -84,6 +84,7 @@ stairsImage.src = "/images/stairsL.png";
 var bgs = [
 	"/images/bg00.png",
 	"/images/bg01.png",
+	"/images/bg02.png"
 ];
 
 var currentLevel = 0;
@@ -107,7 +108,7 @@ bgImage.src = bgs[currentLevel];
 //===============characters================================
 
 var guy = {
-  speed: 200,
+  speed: 150,
   health: 100,
 	strength: 100,
   charisma: 0,
@@ -215,27 +216,27 @@ var update = function (modifier) {
   collision = function(direction){
 		if(direction==='right'){
 			clipWidth = 5;
-			clipHeight = 10;
+			clipHeight = 20;
 			clipOffsetX = 30;
-			clipOffsetY = 20;
+			clipOffsetY = 0;
 		}
 		if(direction==='left'){
 			clipWidth = 5;
-			clipHeight = 10;
+			clipHeight = 20;
 			clipOffsetX = 0;
-			clipOffsetY = 20;
+			clipOffsetY = 30;
 		}
 		if(direction==='up'){
-			clipWidth = 10;
+			clipWidth = 20;
 			clipHeight = 5;
-			clipOffsetX = 0;
+			clipOffsetX = 30;
 			clipOffsetY = 0;
 		}
 		if(direction==='down'){
-			clipWidth = 10;
+			clipWidth = 20;
 			clipHeight = 5;
-			clipOffsetX = 6;
-			clipOffsetY = 42;
+			clipOffsetX = 0;
+			clipOffsetY = 30;
 		}
 
 		clipLength = clipWidth*clipHeight;
@@ -243,7 +244,12 @@ var update = function (modifier) {
 
       for (var i = 0; i < clipLength*4; i+=4 ) {
         console.log(whatColor.data[i]);
-        if(whatColor.data[i]>250){
+        if((whatColor.data[i]>250)
+						&&
+						(whatColor.data[i+1]<20)
+						&&
+						(whatColor.data[i+2]<20)
+					){
           console.log('red!');
 					return true;
         };
@@ -350,6 +356,8 @@ var render = function () {
 				&&
 				(guy.y > stairs.y-30 && guy.y < stairs.y+20)
 			){
+				guy.x = stairs.x;
+				guy.y = stairs.y;
 				currentLevel++;
 			}
 			break;
@@ -375,8 +383,12 @@ var render = function () {
 				stairs.y = 365;
 				break;
 			case 1:
-				stairs.x = 355;
-				stairs.y = 365;
+				stairs.x = 12;
+				stairs.y = 13;
+				break;
+			case 2:
+				stairs.x = 12;
+				stairs.y = 13;
 				break;
 		};
 		ctx.drawImage(stairsImage, stairs.x, stairs.y);
