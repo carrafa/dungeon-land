@@ -16,10 +16,13 @@ document.getElementById('main').appendChild(canvas);
 
 //--------------------------------------------
 
-//======== responsive canvas function ========
+//=============== canvas variables =================
 var c = $('#canvas');
 var ct = $('#canvas').get(0).getContext('2d');
 var container = $(c).parent();
+
+
+//======== responsive canvas function ========
 var respondWidth = $(container).width();
 var respondHeight = $(container).height();
 //
@@ -208,31 +211,6 @@ var update = function (modifier) {
 
 };
 
-//==========get mouse coordinates (for debugging) ===========
-
-function mousePos(e)
-{
-    var mouseX, mouseY;
-
-    if(e.offsetX) {
-        mouseX = e.offsetX;
-        mouseY = e.offsetY;
-    }
-    else if(e.layerX) {
-        mouseX = e.layerX;
-        mouseY = e.layerY;
-    }
-		console.log("x:" + mouseX);
-		console.log("y:" + mouseY);
-
-    /* do something with mouseX/mouseY */
-}
-
-$('#canvas').on('click', mousePos);
-
-//-----------------------------------------------------------
-
-
   //=============collision=====================================
 
   collision = function(direction){
@@ -273,24 +251,12 @@ $('#canvas').on('click', mousePos);
         // if(whatColor.data[i+1]>200){   \
         //   console.log('green!')         |
         // };                              |  looks for green and blue.
-        // if(whatColor.data[i+2]>200){    |  maybe do something with it later.
+        // if(whatColor.data[i+2]>200){    |
         //   console.log('blue!');         |
         // }                              /
       };
 
   };
-
-//---------------------------------------------------------------------------
-//===========================================================================
-//                       LEVEL SWITCHER
-//===========================================================================
-//---------------------------------------------------------------------------
-
-//
-
-
-
-
 
 //---------------------------------------------------------------------------
 
@@ -313,6 +279,28 @@ $('#canvas').on('click', mousePos);
 //
 // }
 
+//==========get mouse coordinates (for debugging) ===========
+
+function mousePos(e)
+{
+    var mouseX, mouseY;
+
+    if(e.offsetX) {
+        mouseX = e.offsetX;
+        mouseY = e.offsetY;
+    }
+    else if(e.layerX) {
+        mouseX = e.layerX;
+        mouseY = e.layerY;
+    }
+		console.log("x:" + mouseX);
+		console.log("y:" + mouseY);
+}
+
+$('#canvas').on('click', mousePos);
+
+//-----------------------------------------------------------
+
 
 
 
@@ -330,6 +318,8 @@ $('#canvas').on('click', mousePos);
 
 var render = function () {
 
+			//-----level switcher------------
+
 	switch(currentLevel){
 		case 0:
 			if (
@@ -342,6 +332,7 @@ var render = function () {
 			break;
 	};
 
+		//---------draw functions--------------
 
 	if (bgReady) {
 		bgImage.src = bgs[currentLevel];
@@ -391,17 +382,8 @@ var main = function () {
 
 	then = now;
 
-	// Request to do this again ASAP
 	requestAnimationFrame(main);
 };
-
-//==================== alt game loop================
-// var FPS = 30;
-// setInterval(function() {
-//   update();
-//   render();
-// }, 1000/FPS);
-//------------------------------------------------------
 
 //------------------------------------------------
 
@@ -413,11 +395,3 @@ requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame
 
 var then = Date.now();
 main();
-
-//==================== on load =======================
-// $(document).ready(function(){
-  // respondCanvas();
-  // main();
-// });
-
-//--------------------------------------------------
