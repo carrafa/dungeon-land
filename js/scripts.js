@@ -109,11 +109,7 @@ var levels = [
 ];
 
 function levelSwitcher(){
-	if (
-		(guy.x < stairs.x+30 && stairs.x-30 < guy.x)
-		&&
-		(guy.y < stairs.y+30 && stairs.y-30 < guy.y)
-	){
+	if (rangeDetector(guy.x,guy.y,stairs.x,stairs.y)===true){
 		currentLevel++;
 		}
 	if (currentLevel>=levels.length){
@@ -128,7 +124,6 @@ function levelSwitcher(){
 //                      SETTING OBJECTS
 //===========================================================================
 //---------------------------------------------------------------------------
-
 
 //=========================characters================================
 
@@ -157,31 +152,35 @@ var guy = {
           	var nextPixelRight = this.x + this.speed * modifier;
 
           	if (keysDown[38]===true || keysDown[87]===true) { // up
-          		console.log(isItAWall(this.x, nextPixelUp));
-          		if(isItAWall(this.x, nextPixelUp) === false){
-                this.y = nextPixelUp
+          		if(collision('up') === true){
+                this.y = this.y
+              } else {
+                this.y = nextPixelUp;
               }
           	};
 
           	if (keysDown[40]===true || keysDown[83]===true) { // down
-          		console.log(isItAWall(this.x, nextPixelDown));
-          		if(isItAWall(this.x, nextPixelDown+30)===false){
+          		if(collision('down')===true){
+                this.y = this.y;
+              } else {
             		this.y = nextPixelDown;
           		}
           	};
 
           	if (keysDown[37]===true || keysDown[65]===true) { // left
-          		console.log(isItAWall(nextPixelLeft, this.y));
-          		if(isItAWall(nextPixelLeft, this.y)===true){
-              }else if ((currentLevel===1) && (this.x<ogre.x+30)){
+          		if(collision('left')===true){
+                this.x = this.x;
+              } else if ((currentLevel===1) && (this.x<ogre.x+30))
+              { this.x = this.x;
           		} else{
             		this.x = nextPixelLeft;
           		}
           	};
 
           	if (keysDown[39]===true || keysDown[68]===true){ //right
-          		console.log(isItAWall(nextPixelRight, this.y+30));
-          		if(isItAWall(nextPixelRight, this.y)===false){
+          		if(collision('right')===true){
+                this.x = this.x;
+              }else{
           			this.x = nextPixelRight;
           		}
 
@@ -231,17 +230,33 @@ function Item(x,y){
   this.y = y;
 }
 
-Item.prototype = {
-  update: function(){
-          }
-}
-
 var house = new Item(null,null);
 var stairs = new Item(355,365);
 var coin = new Item(200,375);
 var gem = new Item(320, 65);
 var guitar = new Item(null, null);
 var tiara = new Item(null,null);
+
+coin.update = function(){
+  if(
+      (currentLevel===1)
+      &&
+      (rangeDetector(guy.x,guy.y,this.x,this.y)===true)){
+    this.y = -100;
+    this.x = -100;
+  }
+}
+
+gem.update = function(){
+    if(
+      (currentLevel===2)
+      &&
+      (rangeDetector(guy.x,guy.y,this.x,this.y)===true)){
+        this.y = -100;
+        this.x = -100;
+    }
+
+}
 
 //========weapons===============
 
@@ -270,6 +285,31 @@ canvas.height = 500;
 canvas.setAttribute('id', 'canvas');
 document.getElementById('main').appendChild(canvas);
 
+var fogCanvas = document.createElement('canvas');
+var fogCtx = fogCanvas.getContext('2d');
+fogCanvas.width = 500;
+fogCanvas.height = 500;
+fogCanvas.setAttribute('id', 'fogCanvas');
+document.getElementById('main').appendChild(fogCanvas);
+
+
+
+
+//=================collision stuff==========
+
+
+function rangeDetector(firstX,firstY,secondX,secondY){
+  if(
+    (firstX<secondX+20 && secondX-20 < firstX)
+    &&
+    (firstY<secondY+20 && secondY-20 <firstY)
+  ){
+    return true;
+  } else {
+    return false;
+  }
+}
+
 //===================getImageData=============================
 
 //get the background image data for the whole canvas as soon as it's set up, set values to an array.
@@ -277,57 +317,47 @@ document.getElementById('main').appendChild(canvas);
 
 //============ collision detection, take 2 =====================
 
-function colorHover(){
-  var img = new Image();
-  img.src = '/images/bg01.png';
-  var canvas = document.getElementById('canvas');
-  var ctx = canvas.getContext('2d');
-  img.onload = function() {
-    ctx.drawImage(img, 0, 0);
-    img.style.display = 'none';
-  };
-  var color = document.getElementById('color');
-  function pick(event) {
-    var x = event.layerX;
-    var y = event.layerY;
-    var pixel = ctx.getImageData(x, y, 1, 1);
-    var data = pixel.data;
-    var rgba = 'rgba(' + data[0] + ',' + data[1] +
-               ',' + data[2] + ',' + data[3] + ')';
-    console.log(rgba);
-  }
-  canvas.addEventListener('mousemove', pick);
-}
+collision = function(direction){
+		if(direction==='right'){
+			clipWidth = 2;
+			clipHeight = 10;
+			clipOffsetX = 30;
+			clipOffsetY = 0;
+		}
+		if(direction==='left'){
+			clipWidth = 2;
+			clipHeight = 10;
+			clipOffsetX = 0;
+			clipOffsetY = 0;
+		}
+		if(direction==='up'){
+			clipWidth = 10;
+			clipHeight = 2;
+			clipOffsetX = 0;
+			clipOffsetY = 0;
+		}
+		if(direction==='down'){
+			clipWidth = 10;
+			clipHeight = 2;
+			clipOffsetX = 0;
+			clipOffsetY = 30;
+		}
 
-function colorLooker(){
-  var pixel = ctx.getImageData(guy.x, guy.y, 1, 1);
-  var data = pixel.data;
-  var rgba = 'rgba(' + data[0] + ',' + data[1] +
-             ',' + data[2] + ',' + data[3] + ')';
-  console.log(rgba);
-};
+		var clipLength = clipWidth*clipHeight;
+    var whatColor = ctx.getImageData(guy.x+clipOffsetX, guy.y+clipOffsetY, clipWidth, clipHeight);
 
-function getImageDataExternalSource(taco){
-  var canvas = document.createElement('canvas');
-  var context = canvas.getContext('2d');
-  context.drawImage(taco, 0, 0 );
-  var myData = context.getImageData(0, 0, 500, 500);
-  var data = myData.data;
-  for(i=0; i<data.length;i+=4){
-      if (data[i]>245
-          && data[i+1]<10
-          && data[i+2]<10){
-      currentBoard[i] = true;
-      currentBoard[i+1] = false;
-      currentBoard[i+2] = false;
-      currentBoard[i+3] = 'taco';
-    } else {
-      currentBoard[i] = false;
-      currentBoard[i+1] = false;
-      currentBoard[i+2] = false;
-      currentBoard[i+3] = 'burrito';
-    };
-  }
+      for (var i = 0; i < clipLength*4; i+=4 ) {
+        console.log(whatColor.data[i]);
+        if((whatColor.data[i]===255)
+						&&
+						(whatColor.data[i+1]===0)
+						&&
+						(whatColor.data[i+2]===0)
+					){
+          console.log('red!');
+					return true;
+        };
+      }
 }
 
 
@@ -399,33 +429,6 @@ addEventListener("keyup", function (e) {
 	delete keysDown[e.keyCode];
 }, false);
 
-
-//---------------------------------------------------------------------------
-//===========================================================================
-//                UPDATE
-//===========================================================================
-//---------------------------------------------------------------------------
-
-var update = function (modifier) {
-
-  guy.update(modifier);
-  ogre.update(modifier);
-
-  if((currentLevel===1)
-    &&((guy.x < coin.x +20) && (guy.y < coin.y+20))){
-    coin.y = -100;
-    coin.x = -100;
-  }
-
-  if((currentLevel===2)&&((guy.x < gem.x +20) && (guy.y < gem.y+20))){
-    gem.y = -100;
-    gem.x = -100;
-  }
-
-  levelSwitcher();
-
-};
-
 //---------------------------------------------------------------------------
 //===========================================================================
 //                       COORDINATES
@@ -457,10 +460,30 @@ $('#canvas').on('click', logMouseCoordinates);
 //===========================================================================
 //---------------------------------------------------------------------------
 
+
+
+
 //???????????????????????????????????????????????????????????????????????????
 //???????????????????????????????????????????????????????????????????????????
 //???????????????????????????????????????????????????????????????????????????
 //???????????????????????????????????????????????????????????????????????????
+
+//---------------------------------------------------------------------------
+//===========================================================================
+//                UPDATE
+//===========================================================================
+//---------------------------------------------------------------------------
+
+var update = function (modifier) {
+
+  guy.update(modifier);
+  ogre.update(modifier);
+  coin.update();
+  gem.update();
+  levelSwitcher();
+
+};
+
 
 //---------------------------------------------------------------------------
 //===========================================================================
@@ -501,7 +524,7 @@ var render = function () {
 		ctx.drawImage(guyImage, guy.x, guy.y);
 	}
 
-	//fog() goes here
+  // drawFog();
 
 };
 

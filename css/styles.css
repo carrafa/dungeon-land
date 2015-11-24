@@ -15,6 +15,15 @@ canvas{
     height:40%;
 }
 
+#canas{
+  display: block;
+}
+
+#canvas2{
+  display: block;
+  margin-top: 500px;
+}
+
 /*#mr-guy{
   height: 20px;
   width: 20px;
