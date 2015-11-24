@@ -2,63 +2,104 @@ console.log('ow, my browser');
 
 //---------------------------------------------------------------------------
 //===========================================================================
-//                SETTING UP CANVAS
-//===========================================================================
-//---------------------------------------------------------------------------
-
-//============== create canvas ===============
-var canvas = document.createElement('canvas');
-var ctx = canvas.getContext('2d');
-canvas.width = 500;
-canvas.height = 500;
-canvas.setAttribute('id', 'canvas');
-document.getElementById('main').appendChild(canvas);
-
-//--------------------------------------------
-
-//=============== canvas variables =================
-var c = $('#canvas');
-var ct = $('#canvas').get(0).getContext('2d');
-var container = $(c).parent();
-
-//======== responsive canvas function ========
-var respondWidth = $(container).width();
-var respondHeight = $(container).height();
-//
-// $(window).resize(function(){
-//   respondCanvas();
-//   render();
-//   update();
-//   }
-// );
-//
-// function respondCanvas(){
-//   c.attr( 'width', $(container).width() );
-//   c.attr( 'height', $(container).width() );
-// };
-//--------------------------------------------------------------------------
-
-
-
-//---------------------------------------------------------------------------
-//===========================================================================
 //                SETTING IMAGES
 //===========================================================================
 //---------------------------------------------------------------------------
 
-//======character images===================
+//===============characters================================
 
-var guyReady = false;
-var guyImage = new Image();
-guyImage.onload = function () {
-	guyReady = true;
+var guy = {
+  speed: 250,
+  health: 100,
+	strength: 100,
+  charisma: "haha",
+  x: 20,
+  y: 60,
+  xp: 0,
+  yp: 0,
+  attack: function(){
+    console.log('hyaaaa');
+    guyImage.src = "/images/dragon.png"
+    setTimeout(function(){guyImage.src="/images/guy3030.png"}, 100);
+    if((guy.x < ogre.x+30)&&(guyImage.src="/images/dragon.png")){
+      ogre.health = ogre.health-5
+    }
+
+  },
 };
-guyImage.src = "/images/guy3030.png";
+
+//==========enemies==============================
+
+function Enemy(health, strength, x, y){
+  this.health = health;
+  this.strength = strength;
+  this.x = x;
+  this.y = y;
+}
+
+Enemy.prototype = {
+  attack: function(){
+    console.log('takethat');
+  },
+  danceAround: function(){
+    console.log('lalala');
+  }
+}
+
+var bat = new Enemy(20,20,null,null)
+var skeleton = new Enemy(30,30,null,null);
+var ogre = new Enemy(50,50,50,225);
+var dragon = new Enemy(150,150,null,null);
+
+//---------------------------------------------------------------------------
+
+//======================objects==============================
+
+function Item(x,y){
+  this.x = x;
+  this.y = y;
+}
+
+var house = new Item(null,null);
+var stairs = new Item(355,365);
+var coin = new Item(200,375);
+var gem = new Item(320, 65);
+var guitar = new Item(null, null);
+var tiara = new Item(null,null);
+
+//========weapons===============
+
+function Weapon(power, x, y){
+  this.power = power;
+  this.x = x;
+  this.y = y;
+}
+
+var sword = new Weapon(10, null, null);
+var axe = new Weapon(15, null, null);
+var bow = new Weapon(10, null, null);
+
+//-----------------------------------------------------------
+
+//===========background image =============
+
+var bgs = [
+	"/images/bg00.png",
+	"/images/bg01.png",
+	"/images/bg02.png"
+];
+
+var currentLevel = 0;
+
+var bgReady = false;
+var bgImage = new Image();
+bgImage.onload = function () {
+	bgReady = true;
+};
+bgImage.src = bgs[currentLevel];
 
 
-
-//----------------------------------------------
-
+//---------------------------------------------------
 
 //======building/item images===================
 
@@ -76,84 +117,217 @@ stairsImage.onload = function () {
 };
 stairsImage.src = "/images/stairsL.png";
 
+var coinReady = false;
+var coinImage = new Image();
+coinImage.onload = new function(){
+		coinReady = true;
+};
+coinImage.src = "/images/coin.png"
+
+var gemReady = false;
+var gemImage = new Image();
+gemImage.onload = new function(){
+		gemReady = true;
+};
+gemImage.src = "/images/gem.png"
+
+//----------------------------------------------
+
+//======character images===================
+
+var guyReady = false;
+var guyImage = new Image();
+guyImage.onload = function () {
+	guyReady = true;
+};
+guyImage.src = "/images/guy3030.png";
+
 //----------------------------------------------
 
 
-//===========background image =============
+//======enemy images===================
 
-var bgs = [
-	"/images/bg00.png",
-	"/images/bg01.png",
-	"/images/bg02.png"
-];
-
-var currentLevel = 0;
-
-
-var bgReady = false;
-var bgImage = new Image();
-bgImage.onload = function () {
-	bgReady = true;
-};
-bgImage.src = bgs[currentLevel];
-
-
-
-
-//---------------------------------------------------
-
-
-
-
-//===============characters================================
-
-var guy = {
-  speed: 150,
-  health: 100,
-	strength: 100,
-  charisma: 0,
-  x: 20,
-  y: 60,
-  xp: 0,
-  yp: 0,
-};
-
-var ogre = {
-	health: 20,
-	strength: 20,
+var ogreReady = false;
+var ogreImage = new Image();
+ogreImage.onload = function () {
+	ogreReady = true;
 }
+ogreImage.src = "/images/ogre.png";
 
-var dragon = {
-  health: 100,
-	strength: 100,
-}
+//----------------------------------------------
+
+
+
+
+//------------------level switcher-------------------
+
+currentBoard = [];
+
+
+function levelSwitcher(){
+
+	if(stairsReady){
+		switch(currentLevel){
+			case 0:
+				stairs.x = 355;
+				stairs.y = 365;
+				break;
+			case 1:
+				stairs.x = 12;
+				stairs.y = 13;
+				break;
+			case 2:
+				stairs.x = 250;
+				stairs.y = 200;
+				break;
+			case 3:
+				stairs.x = 355;
+				stairs.y = 365;
+				currentLevel = 0;
+		};
+
+
+			if (
+				(guy.x < stairs.x+30 && stairs.x-30 < guy.x)
+				&&
+				(guy.y < stairs.y+30 && stairs.y-30 < guy.y)
+			){
+				// guy.x = stairs.x;
+				// guy.y = stairs.y;
+				currentLevel++;
+			}
+	};
+};
+
 
 //---------------------------------------------------------------------------
+//===========================================================================
+//                SETTING UP CANVAS
+//===========================================================================
+//---------------------------------------------------------------------------
 
-//======================objects==============================
+//============== create canvas ===============
+var canvas = document.createElement('canvas');
+var ctx = canvas.getContext('2d');
+canvas.width = 500;
+canvas.height = 500;
+canvas.setAttribute('id', 'canvas');
+document.getElementById('main').appendChild(canvas);
 
-var house = {
-	speed: 0,
-	x: null,
-	y: null,
+//--------------------------------------------
+
+//=============== canvas variables =================
+var c = $('#canvas');
+
+//======== responsive canvas function =====================
+// var ct = $('#canvas').get(0).getContext('2d');
+// var respondWidth = $(container).width();
+// var respondHeight = $(container).height();
+// var container = $(c).parent();
+//
+// $(window).resize(function(){
+//   respondCanvas();
+//   render();
+//   update();
+//   }
+// );
+//
+// function respondCanvas(){
+//   c.attr( 'width', $(container).width() );
+//   c.attr( 'height', $(container).width() );
+// };
+//--------------------------------------------------------------------------
+
+
+//===================getImageData=============================
+
+//get the background image data for the whole canvas as soon as it's set up, set values to an array.
+//this way you can check the array on keydown instead of running getImageData every time the collision function runs.
+
+//============ collision detection, take 2 =====================
+
+function getImageDataExternalSource(){
+  var canvas = document.createElement('canvas');
+  var context = canvas.getContext('2d');
+  var bgImg = new Image();
+  bgImg.src = "/images/bg01.png";
+  context.drawImage(bgImg, 0, 0 );
+  var myData = context.getImageData(0, 0, 500, 500);
+  var data = myData.data;
+  for(i=0; i<data.length;i+=4){
+      if (data[i]===245
+          && data[i+1]<10
+          && data[i+2]<10){
+      currentBoard[i] = true;
+      currentBoard[i+1] = false;
+      currentBoard[i+2] = false;
+      currentBoard[i+3] = false;
+    } else {
+      currentBoard[i] = false;
+      currentBoard[i+1] = false;
+      currentBoard[i+2] = false;
+      currentBoard[i+3] = false;
+    };
+  }
 }
 
-var stairsDown = {
-	speed: 0,
-	x: null,
-	y: null,
+
+function populateBoardWithTrueForRed(){
+	var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+	var data = imageData.data;
+	for(i=0; i<data.length;i+=4){
+			if (data[i]>250 &&
+        (data[i+1]<10 && data[i+2]<10)){
+			currentBoard[i] = true;
+      currentBoard[i+1] = false;
+      currentBoard[i+2] = false;
+      currentBoard[i+3] = "taco";
+		} else {
+			currentBoard[i] = false;
+			currentBoard[i+1] = false;
+			currentBoard[i+2] = false;
+			currentBoard[i+3] = "burrito";
+		}
+	};
+};
+
+
+
+function isItAWall(x, y){
+	var x = parseInt(x);
+	var y = parseInt(y);
+	var isItRed = currentBoard[convertCoordinatesToArrayIndex(x,y)];
+	if(isItRed===true){
+		return true;
+	} else {
+		return false;
+	};
+};
+
+//================for testing==============================
+
+var imageDataTester = ctx.getImageData(0, 0, canvas.width, canvas.height);
+var dataTest = imageDataTester.data;
+
+function convertCoordinatesToArrayIndex(x, y) {
+	return parseInt(x)*(canvas.width*4)+parseInt(y)*4
+};
+
+function arrayChecker(array1, array2){
+	if (array1.length ===array2.length){
+		console.log('nice');
+	};
+	for (i = 0; i<array1.length; i++){
+		if(array1[i]===255 && array2[i]!=true){
+			console.log("aaaaaah!!!");
+		}
+	}
+	console.log('dun');
+};
+
+function currentLevelArrayChecker(){
+  arrayChecker(ctx.getImageData(0, 0, canvas.width, canvas.height).data, currentBoard);
 }
-
-var stairs = {
-	speed: 0,
-	x: null,
-	y: null,
-}
-//-----------------------------------------------------------
-
-
-
-
 
 //---------------------------------------------------------------------------
 //===========================================================================
@@ -180,88 +354,109 @@ addEventListener("keyup", function (e) {
 
 var update = function (modifier) {
 
+	var nextPixelUp = guy.y - guy.speed * modifier;
+	var nextPixelDown = guy.y-30 + guy.speed * modifier;
+	var nextPixelLeft = guy.x - guy.speed * modifier;
+	var nextPixelRight = guy.x+30 + guy.speed * modifier;
+
 	if (keysDown[38]===true || keysDown[87]===true) { // up
-		if(collision('up')===true){
+		console.log(isItAWall(guy.x, nextPixelUp));
+		if(isItAWall(guy.x, nextPixelUp) === true){
 			guy.y = guy.y;
 		} else {
-		guy.y -= guy.speed * modifier;
+			guy.y -= guy.speed * modifier;
     }
 	}
 	if (keysDown[40]===true || keysDown[83]===true) { // down
-		if(collision('down')===true){
-			guy.y = guy.y;
+		console.log(isItAWall(guy.x, nextPixelDown));
+		if(isItAWall(guy.x, nextPixelDown)===true){
 		} else {
 		guy.y += guy.speed * modifier;
 		}
 	}
 	if (keysDown[37]===true || keysDown[65]===true) { // left
-		if(collision('left')===true){
+		console.log(isItAWall(nextPixelLeft, guy.y));
+		if(isItAWall(nextPixelLeft, guy.y)===true){
 			guy.x = guy.x;
+    }else if (guy.x<ogre.x+30){
+        guy.x = guy.x;
 		} else{
 		guy.x -= guy.speed * modifier;
 		}
 	}
 	if (keysDown[39]===true || keysDown[68]===true){ //right
-		if(collision('right')===true){
+		console.log(isItAWall(nextPixelRight, guy.y));
+		if(isItAWall(nextPixelRight, guy.y)===true){
 			guy.x = guy.x;
-		} else {
+    }else{
 			guy.x += guy.speed * modifier;
 		}
+
 	};
 
+  if(keysDown[32]===true){
+    guy.attack();
+  };
+
+  if(ogre.health<0){
+    ogre.x = null;
+    ogre.y = null;
+    ogreReady=false;
+}
+
+
+  levelSwitcher();
 };
 
-  //=============collision=====================================
+  //============= old collision function=====================================
 
-  collision = function(direction){
-		if(direction==='right'){
-			clipWidth = 2;
-			clipHeight = 30;
-			clipOffsetX = 30;
-			clipOffsetY = 0;
-		}
-		if(direction==='left'){
-			clipWidth = 2;
-			clipHeight = 30;
-			clipOffsetX = 0;
-			clipOffsetY = 0;
-		}
-		if(direction==='up'){
-			clipWidth = 30;
-			clipHeight = 2;
-			clipOffsetX = 0;
-			clipOffsetY = 0;
-		}
-		if(direction==='down'){
-			clipWidth = 30;
-			clipHeight = 2;
-			clipOffsetX = 0;
-			clipOffsetY = 30;
-		}
-
-		clipLength = clipWidth*clipHeight;
-    var whatColor = ctx.getImageData(guy.x+clipOffsetX, guy.y+clipOffsetY, clipWidth, clipHeight);
-
-      for (var i = 0; i < clipLength*4; i+=4 ) {
-        console.log(whatColor.data[i]);
-        if((whatColor.data[i]===255)
-						&&
-						(whatColor.data[i+1]===0)
-						&&
-						(whatColor.data[i+2]===0)
-					){
-          console.log('red!');
-					return true;
-        };
-        // if(whatColor.data[i+1]===255){   \
-        //   console.log('green!')         |
-        // };                              |  looks for green and blue.
-        // if(whatColor.data[i+2]===255){    |
-        //   console.log('blue!');         |
-        // }                              /
-      };
-
-  };
+  // collision = function(direction){
+	// 	if(direction==='right'){
+	// 		clipWidth = 2;
+	// 		clipHeight = 30;
+	// 		clipOffsetX = 30;
+	// 		clipOffsetY = 0;
+	// 	}
+	// 	if(direction==='left'){
+	// 		clipWidth = 2;
+	// 		clipHeight = 30;
+	// 		clipOffsetX = 0;
+	// 		clipOffsetY = 0;
+	// 	}
+	// 	if(direction==='up'){
+	// 		clipWidth = 30;
+	// 		clipHeight = 2;
+	// 		clipOffsetX = 0;
+	// 		clipOffsetY = 0;
+	// 	}
+	// 	if(direction==='down'){
+	// 		clipWidth = 30;
+	// 		clipHeight = 2;
+	// 		clipOffsetX = 0;
+	// 		clipOffsetY = 30;
+	// 	}
+	//
+	// 	clipLength = clipWidth*clipHeight;
+  //   var whatColor = ctx.getImageData(guy.x+clipOffsetX, guy.y+clipOffsetY, clipWidth, clipHeight);
+	//
+  //     for (var i = 0; i < clipLength*4; i+=4 ) {
+  //       console.log(whatColor.data[i]);
+  //       if((whatColor.data[i]===255)
+	// 					&&
+	// 					(whatColor.data[i+1]===0)
+	// 					&&
+	// 					(whatColor.data[i+2]===0)
+	// 				){
+  //         console.log('red!');
+	// 				return true;
+  //       };
+        // if(whatColor.data[i+1]===255){  <----------green
+        // };
+        // if(whatColor.data[i+2]===255){  <----------blue
+        // }
+  //     };
+	//
+  // };
 
 //---------------------------------------------------------------------------
 
@@ -286,8 +481,7 @@ var update = function (modifier) {
 
 //==========get mouse coordinates (for debugging) ===========
 
-function mousePos(e)
-{
+function logMouseCoordinates(e){
     var mouseX, mouseY;
 
     if(e.offsetX) {
@@ -302,7 +496,7 @@ function mousePos(e)
 		console.log("y:" + mouseY);
 }
 
-$('#canvas').on('click', mousePos);
+$('#canvas').on('click', logMouseCoordinates);
 
 //-----------------------------------------------------------
 
@@ -312,28 +506,9 @@ $('#canvas').on('click', mousePos);
 //===========================================================================
 //---------------------------------------------------------------------------
 
-var overlay = "rgba(0, 0, 0, 1)";
-
-
-fog = function(){
-	// ctx.fillStyle = overlay;
-	// ctx.fillRect(0, 0, 500, 500);
-
-	// ctx.globalCompositeOperation = 'destination-out';
-	// ctx.fillRect(guy.x-15, guy.y-15, 50, 50);
-
-
-
-
-}
-
-
-
 
 
 //---------------------------------------------------------------------------
-
-
 
 
 //---------------------------------------------------------------------------
@@ -347,24 +522,6 @@ fog = function(){
 
 var render = function () {
 
-	//-----level switcher------------
-
-	switch(currentLevel){
-		case 0:
-			if (
-				(guy.x > stairs.x-30 && guy.x < stairs.x)
-				&&
-				(guy.y > stairs.y-30 && guy.y < stairs.y+20)
-			){
-				guy.x = stairs.x;
-				guy.y = stairs.y;
-				currentLevel++;
-			}
-			break;
-	};
-
-		//---------draw functions--------------
-
 	if (bgReady) {
 		bgImage.src = bgs[currentLevel];
     bgImage.width = c.width;
@@ -372,36 +529,31 @@ var render = function () {
 		ctx.drawImage(bgImage, 0, 0);
 	}
 
-	if(houseReady&&(currentLevel===0)){
+	if(houseReady&&currentLevel===0){
 		ctx.drawImage(houseImage, 10, 10);
 	}
 
-	if(stairsReady){
-		switch(currentLevel){
-			case 0:
-				stairs.x = 355;
-				stairs.y = 365;
-				break;
-			case 1:
-				stairs.x = 12;
-				stairs.y = 13;
-				break;
-			case 2:
-				stairs.x = 12;
-				stairs.y = 13;
-				break;
-		};
+	if (stairsReady){
 		ctx.drawImage(stairsImage, stairs.x, stairs.y);
 	}
 
+	if (coinReady&&currentLevel===1){
+		ctx.drawImage(coinImage, coin.x, coin.y)
+	}
+
+	if (gemReady&&currentLevel===2){
+		ctx.drawImage(gemImage, gem.x, gem.y)
+	}
+
+	if (ogreReady&&currentLevel===1){
+		ctx.drawImage(ogreImage, ogre.x, ogre.y)
+	}
 
 	if (guyReady) {
 		ctx.drawImage(guyImage, guy.x, guy.y);
 	}
 
-	fog();
-
-
+	//fog() goes here
 
 };
 
@@ -425,7 +577,10 @@ var main = function () {
 
 // Cross-browser support for requestAnimationFrame
 var w = window;
-requestAnimationFrame = w.requestAnimationFrame || w.webkitRequestAnimationFrame || w.msRequestAnimationFrame || w.mozRequestAnimationFrame;
+requestAnimationFrame = w.requestAnimationFrame ||
+												w.webkitRequestAnimationFrame ||
+												w.msRequestAnimationFrame ||
+												w.mozRequestAnimationFrame;
 
 
 
