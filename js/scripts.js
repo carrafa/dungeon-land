@@ -292,17 +292,20 @@ fogCanvas.height = 500;
 fogCanvas.setAttribute('id', 'fogCanvas');
 document.getElementById('main').appendChild(fogCanvas);
 
+//---------------------------------------------------------------------------
+//===========================================================================
+//                      COLLISION
+//===========================================================================
+//---------------------------------------------------------------------------
 
+//=============object detection===================
 
-
-//=================collision stuff==========
-
-
-function rangeDetector(firstX,firstY,secondX,secondY){
+function rangeDetector(firstX,firstY,secondX,secondY, distance){
+  var distance = 20
   if(
-    (firstX<secondX+20 && secondX-20 < firstX)
+    (firstX<secondX+distance && secondX-distance < firstX)
     &&
-    (firstY<secondY+20 && secondY-20 <firstY)
+    (firstY<secondY+distance && secondY-distance <firstY)
   ){
     return true;
   } else {
@@ -315,7 +318,7 @@ function rangeDetector(firstX,firstY,secondX,secondY){
 //get the background image data for the whole canvas as soon as it's set up, set values to an array.
 //this way you can check the array on keydown instead of running getImageData every time the collision function runs.
 
-//============ collision detection, take 2 =====================
+//============ wall detection =====================
 
 collision = function(direction){
 		if(direction==='right'){
@@ -416,6 +419,9 @@ function arrayChecker(array1, array2){
 function currentLevelArrayChecker(){
   arrayChecker(ctx.getImageData(0, 0, canvas.width, canvas.height).data, currentBoard);
 }
+
+
+
 
 //==============setting up keyboard============
 
