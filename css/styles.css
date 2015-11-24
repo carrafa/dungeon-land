@@ -1,6 +1,8 @@
 body{
   background-color: dodgerblue;
   margin: 0;
+  min-width: 950px;
+  font-family: 'Press Start 2P', cursive;
 }
 
 canvas{
@@ -8,22 +10,45 @@ canvas{
   position: absolute;
 }
 
+header{
+  font-size: 2em;
+  color: snow;
+  text-align: center;
+}
+
 #main{
     display:block;
     width:90%;
     padding:20px 3%;
     height:40%;
+    min-width: 1000;
+}
+#canvas-container{
+    display:inline-block;
+    width:60%;
+    padding:20px 3%;
+    height:40%;
 }
 
-#canas{
-  display: block;
+#item-list{
+  list-style: none;
 }
 
-#canvas2{
-  display: block;
-  margin-top: 500px;
+#menu{
+  margin-top: 20px;
+  padding: 5px;
+  padding-left: 20px;
+  height: 40%;
+  float: right;
+  width: 30%;
+  height: 500px;
+  background-color: snow;
 }
 
+ul{
+  list-style-type: none;
+  margin-left: -40px;
+}
 /*#mr-guy{
   height: 20px;
   width: 20px;

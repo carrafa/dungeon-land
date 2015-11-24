@@ -261,6 +261,9 @@ var guy = {
             if( (rangeDetector(guy.x,guy.y,ogre.x,ogre.y, 30)===true)&&(guyImage.src==="http://localhost:8080" + guy.imageLAttack)){
               ogre.health = ogre.health-5
             };
+            if( (rangeDetector(guy.x,guy.y,bat.x,bat.y, 30)===true)&&(guyImage.src==="http://localhost:8080" + guy.imageLAttack)){
+              bat.health = bat.health-5
+            };
           },
   update: function(modifier){
 
@@ -350,28 +353,50 @@ Enemy.prototype = {
           }
   }
 
-var bat = new Enemy(20,20,390,250);
-var skeleton = new Enemy(30,30,null,null);
 var ogre = new Enemy(50,50,50,225);
-var dragon = new Enemy(150,150,null,null);
+var bat = new Enemy(100,100,250,400);
+var skeleton = new Enemy(150,150,null,null);
+var dragon = new Enemy(500,500,null,null);
 
 // global counter
 var n  = 0;
+function updateN(){
+  n++;
+  if(n>50){
+    n = 0;
+  };
+};
+
 ogre.update = function(modifier){
   if(this.health<0){
     this.x = -100;
     this.y = -100;
   };
-  if(n<Math.random(10)*20+20){
+  if(n<Math.random(10)*20+10){
     ogreImage.src = "/images/ogreAttack.png";
   } else {
     ogreImage.src = "/images/ogre.png";
-  }
-  n++;
-  if(n>50){
-    n = 0;
+  };
+  if(
+    (rangeDetector(guy.x,guy.y,ogre.x,ogre.y,40)===true)
+    &&
+    (ogreImage.src==="http://localhost:8080/images/ogreAttack.png")
+    ){
+      guy.health -= 5;
+      console.log("your health is " + guy.health + "!");
+    };
+};
+
+bat.update = function(modifier){
+  if(this.health<100){
+    this.x = -100;
+    this.y = -100;
+  };
+  if(rangeDetector(guy.x,guy.y,bat.x,bat.y,20)===true){
+    guy.health -= 5;
   }
 };
+
 
 //======================items==============================
 
@@ -394,6 +419,9 @@ coin.update = function(){
       (rangeDetector(guy.x,guy.y,this.x,this.y)===true)){
     this.y = -100;
     this.x = -100;
+    var $coin = $('<li>');
+    $("#item-list").append($coin);
+    $coin.text("look, a coin.");
   }
 }
 
@@ -404,6 +432,9 @@ gem.update = function(){
       (rangeDetector(guy.x,guy.y,this.x,this.y)===true)){
         this.y = -100;
         this.x = -100;
+      var $gem = $('<li>');
+      $("#item-list").append($gem);
+      $gem.text("heyyyyyyy gem.");
     }
 }
 
@@ -428,6 +459,9 @@ sword.update = function(){
       this.y=-100;
       this.x=-100;
       guy.equipSword();
+      var $sword = $('<li>');
+      $("#item-list").append($sword);
+      $sword.text("nice sword!");
     }
 }
 
@@ -443,14 +477,14 @@ var ctx = canvas.getContext('2d');
 canvas.width = 500;
 canvas.height = 500;
 canvas.setAttribute('id', 'canvas');
-document.getElementById('main').appendChild(canvas);
+document.getElementById('canvas-container').appendChild(canvas);
 
 var fogCanvas = document.createElement('canvas');
 var fogCtx = fogCanvas.getContext('2d');
 fogCanvas.width = 500;
 fogCanvas.height = 500;
 fogCanvas.setAttribute('id', 'fogCanvas');
-document.getElementById('main').appendChild(fogCanvas);
+document.getElementById('canvas-container').appendChild(fogCanvas);
 
 //---------------------------------------------------------------------------
 //===========================================================================
@@ -631,6 +665,31 @@ $('#canvas').on('click', logMouseCoordinates);
 //???????????????????????????????????????????????????????????????????????????
 //???????????????????????????????????????????????????????????????????????????
 //???????????????????????????????????????????????????????????????????????????
+//---------------------------------------------------------------------------
+//===========================================================================
+//                      MENU UPDATE
+//===========================================================================
+//---------------------------------------------------------------------------
+
+function updateMenu(){
+  var kills = function(){
+    if(ogre.x < 0){
+      return 1;
+    }
+  };
+
+  $('#level').text(function(){
+    if(currentLevel===0){
+      return 'home';
+    } else{
+      return currentLevel;
+    };
+  });
+
+  $('#health').text(guy.health);
+
+  $('#kills').text(kills);
+}
 
 //---------------------------------------------------------------------------
 //===========================================================================
@@ -647,6 +706,8 @@ var update = function (modifier) {
   gem.update();
   sword.update();
   levelSwitcher();
+  updateN();
+  updateMenu();
 
 };
 
