@@ -210,7 +210,7 @@ var guy = {
   health: 100,
 	strength: 100,
   charisma: "haha",
-  weapon: "none",
+  weapon: "unarmed",
   imageL: "/images/guyL.png",
   imageR: "/images/guyR.png",
   imageLAttack: "/images/guyAttackL.png",
@@ -243,8 +243,8 @@ var guy = {
             console.log('hyaaaa!');
             if (guyImage.src==="http://localhost:8080" + guy.imageL){
               guyImage.src = guy.imageLAttack;
-                guy.offsetX = -30
-                guy.offsetY = -9;
+                guy.offsetX = -30;
+                guy.offsetY = -10;
               setTimeout(function(){
                 guyImage.src=guy.imageL;
                 guy.offsetX = 0;
@@ -252,13 +252,13 @@ var guy = {
                 }, 100);
             }else if (guyImage.src ==="http://localhost:8080" + guy.imageR){
               guyImage.src = guy.imageRAttack;
-              this.offsetY = -9;
+              this.offsetY = -10;
               setTimeout(function(){
                 guyImage.src=guy.imageR;
                 guy.offsetY = 0;
                 }, 100);
             };
-            if((guy.x < ogre.x+30)&&(guyImage.src=guy.imageRAttack)){
+            if( (rangeDetector(guy.x,guy.y,ogre.x,ogre.y, 30)===true)&&(guyImage.src==="http://localhost:8080" + guy.imageLAttack)){
               ogre.health = ogre.health-5
             };
           },
@@ -340,6 +340,7 @@ Enemy.prototype = {
           },
   danceAround: function(){
                 console.log('lalala');
+                this.health ++;
               },
   update: function(modifier){
             if(this.health<0){
@@ -353,6 +354,24 @@ var bat = new Enemy(20,20,390,250);
 var skeleton = new Enemy(30,30,null,null);
 var ogre = new Enemy(50,50,50,225);
 var dragon = new Enemy(150,150,null,null);
+
+// global counter
+var n  = 0;
+ogre.update = function(modifier){
+  if(this.health<0){
+    this.x = -100;
+    this.y = -100;
+  };
+  if(n<Math.random(10)*20+20){
+    ogreImage.src = "/images/ogreAttack.png";
+  } else {
+    ogreImage.src = "/images/ogre.png";
+  }
+  n++;
+  if(n>50){
+    n = 0;
+  }
+};
 
 //======================items==============================
 
