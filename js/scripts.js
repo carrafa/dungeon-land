@@ -28,6 +28,70 @@ var bgs = [
 	loadLevel("/images/bg02.png")
 ];
 
+allImages = {
+  guyR: {
+    image: "/images/guyR.png",
+    ready: false,
+  },
+  guyL: {
+    image: "/images/guyL.png",
+    ready: false
+  },
+  guyAttackL: {
+    image: "/images/guyAttackL.png",
+    ready: false,
+  },
+  guyAttackR: {
+    image: "/images/guyAttackR.png",
+    ready: false,
+  },
+  guySwordR:{
+    image: "/images/guySwordR.png",
+    ready: false,
+  },
+  guySwordL:{
+    image: "/images/guySwordL.png",
+    ready: false,
+  },
+  guySwordAttackR:{
+    image: "/images/guySwordAttackR.png",
+    ready: false,
+  },
+  guySwordAttackL:{
+    image: "/images/guySwordAttackL.png",
+    ready: false,
+  },
+  guyWizardR: {
+    image: "/images/guyWizardR.png",
+    ready: false,
+  },
+  guyWizardL: {
+    image: "/images/guyWizardL.png",
+    ready: false
+  },
+  guyWizardAttackR: {
+    image: "/images/guyWizardR.png",
+    ready: false,
+  },
+  guyWizardAttackL: {
+    image: "/images/guyWizardL.png",
+    ready: false
+  }
+};
+
+function loadImage(url){
+  var image = new Image;
+  var thing = {
+    image: image,
+    ready: false
+  };
+  image.onlaod = function(){
+    thing.ready = true;
+  };
+  image.src = url;
+  return thing;
+}
+
 //---------------------------------------------------
 
 //======building/item images===================
@@ -105,6 +169,13 @@ ogreImage.onload = function () {
 }
 ogreImage.src = "/images/ogre.png";
 
+var batReady = false;
+var batImage = new Image();
+batImage.onload = function () {
+	batReady = true;
+}
+batImage.src = "/images/bat01.png";
+
 //------------------level switcher-------------------
 
 currentBoard = [];
@@ -146,6 +217,8 @@ var guy = {
   imageRAttack: "/images/guyAttackR.png",
   x: 20,
   y: 60,
+  offsetX: 0,
+  offsetY: 0,
   xp: 0,
   yp: 0,
   equipSword: function(){
@@ -168,8 +241,23 @@ var guy = {
               },
   attack: function(){
             console.log('hyaaaa!');
-            guyImage.src = guy.imageRAttack;
-            setTimeout(function(){guyImage.src=guy.imageR}, 100);
+            if (guyImage.src==="http://localhost:8080" + guy.imageL){
+              guyImage.src = guy.imageLAttack;
+                guy.offsetX = -30
+                guy.offsetY = -9;
+              setTimeout(function(){
+                guyImage.src=guy.imageL;
+                guy.offsetX = 0;
+                guy.offsetY = 0;
+                }, 100);
+            }else if (guyImage.src ==="http://localhost:8080" + guy.imageR){
+              guyImage.src = guy.imageRAttack;
+              this.offsetY = -9;
+              setTimeout(function(){
+                guyImage.src=guy.imageR;
+                guy.offsetY = 0;
+                }, 100);
+            };
             if((guy.x < ogre.x+30)&&(guyImage.src=guy.imageRAttack)){
               ogre.health = ogre.health-5
             };
@@ -199,6 +287,8 @@ var guy = {
 
           	if (keysDown[37]===true || keysDown[65]===true) { // left
               guyImage.src = guy.imageL;
+              guy.offsetX = 0;
+              guy.offsetY = 0;
           		if(collision('left')===true){
                 this.x = this.x;
               } else if ((currentLevel===1) && (this.x<ogre.x+30))
@@ -210,6 +300,8 @@ var guy = {
 
           	if (keysDown[39]===true || keysDown[68]===true){ //right
               guyImage.src = guy.imageR;
+              guy.offsetX = 0;
+              guy.offsetY = 0;
           		if(collision('right')===true){
                 this.x = this.x;
               }else{
@@ -257,7 +349,7 @@ Enemy.prototype = {
           }
   }
 
-var bat = new Enemy(20,20,null,null);
+var bat = new Enemy(20,20,390,250);
 var skeleton = new Enemy(30,30,null,null);
 var ogre = new Enemy(50,50,50,225);
 var dragon = new Enemy(150,150,null,null);
@@ -401,7 +493,6 @@ collision = function(direction){
     var whatColor = ctx.getImageData(guy.x+clipOffsetX, guy.y+clipOffsetY, clipWidth, clipHeight);
 
       for (var i = 0; i < clipLength*4; i+=4 ) {
-        console.log(whatColor.data[i]);
         if((whatColor.data[i]===255)
 						&&
 						(whatColor.data[i+1]===0)
@@ -517,9 +608,6 @@ $('#canvas').on('click', logMouseCoordinates);
 //===========================================================================
 //---------------------------------------------------------------------------
 
-
-
-
 //???????????????????????????????????????????????????????????????????????????
 //???????????????????????????????????????????????????????????????????????????
 //???????????????????????????????????????????????????????????????????????????
@@ -534,6 +622,7 @@ $('#canvas').on('click', logMouseCoordinates);
 var update = function (modifier) {
 
   guy.update(modifier);
+  bat.update(modifier);
   ogre.update(modifier);
   coin.update();
   gem.update();
@@ -582,8 +671,12 @@ var render = function () {
 		ctx.drawImage(ogreImage, ogre.x, ogre.y)
 	}
 
-	if (guyReady) {
-		ctx.drawImage(guyImage, guy.x, guy.y);
+  if(batReady&&currentLevel===2){
+    ctx.drawImage(batImage, bat.x, bat.y);
+  }
+
+	if (guyReady){
+		ctx.drawImage(guyImage, guy.x+guy.offsetX, guy.y+guy.offsetY);
 	}
 
   // drawFog();
