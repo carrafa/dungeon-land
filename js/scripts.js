@@ -80,6 +80,13 @@ gemImage.onload = new function(){
 };
 gemImage.src = "/images/gem.png"
 
+var swordReady = false;
+var swordImage = new Image();
+swordImage.onload = new function(){
+		swordReady = true;
+};
+swordImage.src = "/images/sword.png"
+
 //======character images===================
 
 var guyReady = false;
@@ -109,7 +116,7 @@ var levels = [
 ];
 
 function levelSwitcher(){
-	if (rangeDetector(guy.x,guy.y,stairs.x,stairs.y)===true){
+	if (rangeDetector(guy.x,guy.y,stairs.x,stairs.y, 10)===true){
 		currentLevel++;
 		}
 	if (currentLevel>=levels.length){
@@ -132,15 +139,38 @@ var guy = {
   health: 100,
 	strength: 100,
   charisma: "haha",
+  sword: false,
+  wizard: false,
+  imageL: "/images/guyL.png",
+  imageR: "/images/guyR.png",
+  imageLAttack: "/images/guyAttackL.png",
+  imageRAttack: "/images/guyAttackR.png",
   x: 20,
   y: 60,
   xp: 0,
   yp: 0,
+  equipSword: function(){
+                if(guy.sword===true){
+                  guy.imageL = "/images/guySwordL.png";
+                  guy.imageR = "/images/guySwordR.png";
+                  guy.imageLAttack = "/images/guySwordAttackL.png";
+                  guy.imageRAttack = "/images/guySwordAttackR.png";
+                }
+              },
+  becomeWizard: function(){
+                guy.wizard = true;
+                if(guy.wizard===true){
+                  guy.imageL = "/images/guyWizardL.png";
+                  guy.imageR = "/images/guyWizardR.png";
+                  guy.imageLAttack = "/images/guyWizardAttackL.png";
+                  guy.imageRAttack = "/images/guyWizardAttackR.png";
+                }
+              },
   attack: function(){
             console.log('hyaaaa!');
-            guyImage.src = "/images/guyAttackL.png";
-            setTimeout(function(){guyImage.src="/images/guyR.png"}, 100);
-            if((guy.x < ogre.x+30)&&(guyImage.src="/images/guyAttackL.png")){
+            guyImage.src = guy.imageRAttack;
+            setTimeout(function(){guyImage.src=guy.imageR}, 100);
+            if((guy.x < ogre.x+30)&&(guyImage.src=guy.imageRAttack)){
               ogre.health = ogre.health-5
             };
           },
@@ -168,6 +198,7 @@ var guy = {
           	};
 
           	if (keysDown[37]===true || keysDown[65]===true) { // left
+              guyImage.src = guy.imageL;
           		if(collision('left')===true){
                 this.x = this.x;
               } else if ((currentLevel===1) && (this.x<ogre.x+30))
@@ -178,6 +209,7 @@ var guy = {
           	};
 
           	if (keysDown[39]===true || keysDown[68]===true){ //right
+              guyImage.src = guy.imageR;
           		if(collision('right')===true){
                 this.x = this.x;
               }else{
@@ -189,6 +221,10 @@ var guy = {
             if(keysDown[32]===true){
               this.attack();
             };
+
+            if(keysDown[77]==true){
+              this.becomeWizard();
+            }
 
 
         }
@@ -255,7 +291,6 @@ gem.update = function(){
         this.y = -100;
         this.x = -100;
     }
-
 }
 
 //========weapons===============
@@ -266,10 +301,22 @@ function Weapon(power, x, y){
   this.y = y;
 }
 
-var sword = new Weapon(10, null, null);
+var sword = new Weapon(10, 375, 165);
 var axe = new Weapon(15, null, null);
 var bow = new Weapon(10, null, null);
 
+
+sword.update = function(){
+  if(
+    (currentLevel===1)
+    &&
+    ((rangeDetector(guy.x,guy.y,sword.x,sword.y)===true))){
+      this.y=-100;
+      this.x=-100;
+      guy.sword = true;
+    }
+    guy.equipSword();
+}
 
 //---------------------------------------------------------------------------
 //===========================================================================
@@ -301,7 +348,9 @@ document.getElementById('main').appendChild(fogCanvas);
 //=============object detection===================
 
 function rangeDetector(firstX,firstY,secondX,secondY, distance){
-  var distance = 20
+  if(distance === undefined){
+    distance = 20
+  };
   if(
     (firstX<secondX+distance && secondX-distance < firstX)
     &&
@@ -486,6 +535,7 @@ var update = function (modifier) {
   ogre.update(modifier);
   coin.update();
   gem.update();
+  sword.update();
   levelSwitcher();
 
 };
@@ -521,6 +571,10 @@ var render = function () {
 	if (gemReady&&currentLevel===2){
 		ctx.drawImage(gemImage, gem.x, gem.y)
 	}
+
+  if (swordReady&&currentLevel===1){
+    ctx.drawImage(swordImage, sword.x, sword.y)
+  }
 
 	if (ogreReady&&currentLevel===1){
 		ctx.drawImage(ogreImage, ogre.x, ogre.y)
