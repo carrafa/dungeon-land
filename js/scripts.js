@@ -18,10 +18,10 @@ var guy = {
   xp: 0,
   yp: 0,
   attack: function(){
-    console.log('hyaaaa');
-    guyImage.src = "/images/dragon.png"
-    setTimeout(function(){guyImage.src="/images/guy3030.png"}, 100);
-    if((guy.x < ogre.x+30)&&(guyImage.src="/images/dragon.png")){
+    console.log('hyaaaa!');
+    guyImage.src = "/images/guyAttackL.png"
+    setTimeout(function(){guyImage.src="/images/guyL.png"}, 100);
+    if((guy.x < ogre.x+30)&&(guyImage.src="/images/guyAttackL.png")){
       ogre.health = ogre.health-5
     }
 
@@ -82,6 +82,7 @@ var bow = new Weapon(10, null, null);
 //-----------------------------------------------------------
 
 //===========background image =============
+var currentLevel = 0;
 
 var bgs = [
 	"/images/bg00.png",
@@ -89,15 +90,12 @@ var bgs = [
 	"/images/bg02.png"
 ];
 
-var currentLevel = 0;
-
 var bgReady = false;
 var bgImage = new Image();
-bgImage.onload = function () {
-	bgReady = true;
-};
+  bgImage.onload = function () {
+    bgReady = true;
+  }
 bgImage.src = bgs[currentLevel];
-
 
 //---------------------------------------------------
 
@@ -140,7 +138,7 @@ var guyImage = new Image();
 guyImage.onload = function () {
 	guyReady = true;
 };
-guyImage.src = "/images/guy3030.png";
+guyImage.src = "/images/guyL.png";
 
 //----------------------------------------------
 
@@ -163,40 +161,25 @@ ogreImage.src = "/images/ogre.png";
 
 currentBoard = [];
 
+var levels = [
+  {x: 355, y: 365},
+  {x: 12, y: 13},
+  {x: 250, y: 200}
+];
 
 function levelSwitcher(){
-
-	if(stairsReady){
-		switch(currentLevel){
-			case 0:
-				stairs.x = 355;
-				stairs.y = 365;
-				break;
-			case 1:
-				stairs.x = 12;
-				stairs.y = 13;
-				break;
-			case 2:
-				stairs.x = 250;
-				stairs.y = 200;
-				break;
-			case 3:
-				stairs.x = 355;
-				stairs.y = 365;
+	if (
+		(guy.x < stairs.x+30 && stairs.x-30 < guy.x)
+		&&
+		(guy.y < stairs.y+30 && stairs.y-30 < guy.y)
+	){
+		currentLevel++;
+		}
+	if (currentLevel>=levels.length){
 				currentLevel = 0;
-		};
-
-
-			if (
-				(guy.x < stairs.x+30 && stairs.x-30 < guy.x)
-				&&
-				(guy.y < stairs.y+30 && stairs.y-30 < guy.y)
-			){
-				// guy.x = stairs.x;
-				// guy.y = stairs.y;
-				currentLevel++;
-			}
-	};
+  };
+  stairs.x = levels[currentLevel].x;
+  stairs.y = levels[currentLevel].y;
 };
 
 
@@ -245,28 +228,25 @@ var c = $('#canvas');
 //this way you can check the array on keydown instead of running getImageData every time the collision function runs.
 
 //============ collision detection, take 2 =====================
-
 function getImageDataExternalSource(){
   var canvas = document.createElement('canvas');
   var context = canvas.getContext('2d');
-  var bgImg = new Image();
-  bgImg.src = "/images/bg01.png";
   context.drawImage(bgImg, 0, 0 );
   var myData = context.getImageData(0, 0, 500, 500);
   var data = myData.data;
   for(i=0; i<data.length;i+=4){
-      if (data[i]===245
+      if (data[i]>245
           && data[i+1]<10
           && data[i+2]<10){
       currentBoard[i] = true;
       currentBoard[i+1] = false;
       currentBoard[i+2] = false;
-      currentBoard[i+3] = false;
+      currentBoard[i+3] = 'taco';
     } else {
       currentBoard[i] = false;
       currentBoard[i+1] = false;
       currentBoard[i+2] = false;
-      currentBoard[i+3] = false;
+      currentBoard[i+3] = 'burrito';
     };
   }
 }
@@ -291,12 +271,11 @@ function populateBoardWithTrueForRed(){
 	};
 };
 
-
-
 function isItAWall(x, y){
-	var x = parseInt(x);
-	var y = parseInt(y);
+	var x = Math.floor(x);
+	var y = Math.floor(y);
 	var isItRed = currentBoard[convertCoordinatesToArrayIndex(x,y)];
+  console.log('red', isItRed);
 	if(isItRed===true){
 		return true;
 	} else {
@@ -310,7 +289,7 @@ var imageDataTester = ctx.getImageData(0, 0, canvas.width, canvas.height);
 var dataTest = imageDataTester.data;
 
 function convertCoordinatesToArrayIndex(x, y) {
-	return parseInt(x)*(canvas.width*4)+parseInt(y)*4
+	return Math.floor(x)*(canvas.width*4)+Math.floor(y)*4
 };
 
 function arrayChecker(array1, array2){
@@ -355,41 +334,34 @@ addEventListener("keyup", function (e) {
 var update = function (modifier) {
 
 	var nextPixelUp = guy.y - guy.speed * modifier;
-	var nextPixelDown = guy.y-30 + guy.speed * modifier;
+	var nextPixelDown = guy.y + guy.speed * modifier;
 	var nextPixelLeft = guy.x - guy.speed * modifier;
-	var nextPixelRight = guy.x+30 + guy.speed * modifier;
+	var nextPixelRight = guy.x + guy.speed * modifier;
 
 	if (keysDown[38]===true || keysDown[87]===true) { // up
 		console.log(isItAWall(guy.x, nextPixelUp));
-		if(isItAWall(guy.x, nextPixelUp) === true){
-			guy.y = guy.y;
-		} else {
-			guy.y -= guy.speed * modifier;
+		if(isItAWall(guy.x, nextPixelUp) === false){
+      guy.y = nextPixelUp
     }
-	}
+	};
 	if (keysDown[40]===true || keysDown[83]===true) { // down
 		console.log(isItAWall(guy.x, nextPixelDown));
-		if(isItAWall(guy.x, nextPixelDown)===true){
-		} else {
-		guy.y += guy.speed * modifier;
+		if(isItAWall(guy.x, nextPixelDown+30)===false){
+  		guy.y = nextPixelDown;
 		}
 	}
 	if (keysDown[37]===true || keysDown[65]===true) { // left
 		console.log(isItAWall(nextPixelLeft, guy.y));
 		if(isItAWall(nextPixelLeft, guy.y)===true){
-			guy.x = guy.x;
-    }else if (guy.x<ogre.x+30){
-        guy.x = guy.x;
+    }else if ((currentLevel===1) && (guy.x<ogre.x+30)){
 		} else{
-		guy.x -= guy.speed * modifier;
+  		guy.x = nextPixelLeft;
 		}
 	}
 	if (keysDown[39]===true || keysDown[68]===true){ //right
-		console.log(isItAWall(nextPixelRight, guy.y));
-		if(isItAWall(nextPixelRight, guy.y)===true){
-			guy.x = guy.x;
-    }else{
-			guy.x += guy.speed * modifier;
+		console.log(isItAWall(nextPixelRight, guy.y+30));
+		if(isItAWall(nextPixelRight, guy.y)===false){
+			guy.x = nextPixelRight;
 		}
 
 	};
@@ -399,10 +371,21 @@ var update = function (modifier) {
   };
 
   if(ogre.health<0){
-    ogre.x = null;
-    ogre.y = null;
+    ogre.x = -100;
+    ogre.y = -100;
     ogreReady=false;
-}
+  }
+
+  if((currentLevel===1)
+    &&((guy.x < coin.x +20) && (guy.y < coin.y+20))){
+    coin.y = -100;
+    coin.x = -100;
+  }
+
+  if((currentLevel===2)&&((guy.x < gem.x +20) && (guy.y < gem.y+20))){
+    gem.y = -100;
+    gem.x = -100;
+  }
 
 
   levelSwitcher();
