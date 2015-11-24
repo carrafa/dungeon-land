@@ -6,100 +6,51 @@ console.log('ow, my browser');
 //===========================================================================
 //---------------------------------------------------------------------------
 
-//===============characters================================
-
-var guy = {
-  speed: 250,
-  health: 100,
-	strength: 100,
-  charisma: "haha",
-  x: 20,
-  y: 60,
-  xp: 0,
-  yp: 0,
-  attack: function(){
-    console.log('hyaaaa!');
-    guyImage.src = "/images/guyAttackL.png"
-    setTimeout(function(){guyImage.src="/images/guyL.png"}, 100);
-    if((guy.x < ogre.x+30)&&(guyImage.src="/images/guyAttackL.png")){
-      ogre.health = ogre.health-5
-    }
-
-  },
-};
-
-//==========enemies==============================
-
-function Enemy(health, strength, x, y){
-  this.health = health;
-  this.strength = strength;
-  this.x = x;
-  this.y = y;
-}
-
-Enemy.prototype = {
-  attack: function(){
-    console.log('takethat');
-  },
-  danceAround: function(){
-    console.log('lalala');
-  }
-}
-
-var bat = new Enemy(20,20,null,null)
-var skeleton = new Enemy(30,30,null,null);
-var ogre = new Enemy(50,50,50,225);
-var dragon = new Enemy(150,150,null,null);
-
-//---------------------------------------------------------------------------
-
-//======================objects==============================
-
-function Item(x,y){
-  this.x = x;
-  this.y = y;
-}
-
-var house = new Item(null,null);
-var stairs = new Item(355,365);
-var coin = new Item(200,375);
-var gem = new Item(320, 65);
-var guitar = new Item(null, null);
-var tiara = new Item(null,null);
-
-//========weapons===============
-
-function Weapon(power, x, y){
-  this.power = power;
-  this.x = x;
-  this.y = y;
-}
-
-var sword = new Weapon(10, null, null);
-var axe = new Weapon(15, null, null);
-var bow = new Weapon(10, null, null);
-
-//-----------------------------------------------------------
-
 //===========background image =============
 var currentLevel = 0;
 
-var bgs = [
-	"/images/bg00.png",
-	"/images/bg01.png",
-	"/images/bg02.png"
-];
+function loadLevel(url){
+  var image = new Image();
+  var level = {
+    image: image,
+    ready: false,
+  };
+  image.onload = function(){
+    level.ready = true;
+  };
+  image.src = url;
+  return level;
+};
 
-var bgReady = false;
-var bgImage = new Image();
-  bgImage.onload = function () {
-    bgReady = true;
-  }
-bgImage.src = bgs[currentLevel];
+var bgs = [
+	loadLevel("/images/bg00.png"),
+	loadLevel("/images/bg01.png"),
+	loadLevel("/images/bg02.png")
+];
 
 //---------------------------------------------------
 
 //======building/item images===================
+
+// var itemImages = {
+//   house: "/images/house.png",
+//   stairs: "/images/stairsL.png",
+//   coin: "/images/coin.png",
+//   gem: "/images/gem.png"
+// }
+//
+// function loadItems(url){
+//   var image = new Image();
+//   var item = {
+//     image: image,
+//     ready: false,
+//   }
+//   image.onload = function(){
+//     item.ready = true;
+//   }
+//   item.src = url;
+//
+// }
 
 var houseReady = false;
 var houseImage = new Image();
@@ -129,8 +80,6 @@ gemImage.onload = new function(){
 };
 gemImage.src = "/images/gem.png"
 
-//----------------------------------------------
-
 //======character images===================
 
 var guyReady = false;
@@ -138,10 +87,7 @@ var guyImage = new Image();
 guyImage.onload = function () {
 	guyReady = true;
 };
-guyImage.src = "/images/guyL.png";
-
-//----------------------------------------------
-
+guyImage.src = "/images/guyR.png";
 
 //======enemy images===================
 
@@ -151,11 +97,6 @@ ogreImage.onload = function () {
 	ogreReady = true;
 }
 ogreImage.src = "/images/ogre.png";
-
-//----------------------------------------------
-
-
-
 
 //------------------level switcher-------------------
 
@@ -182,6 +123,138 @@ function levelSwitcher(){
   stairs.y = levels[currentLevel].y;
 };
 
+//---------------------------------------------------------------------------
+//===========================================================================
+//                      SETTING OBJECTS
+//===========================================================================
+//---------------------------------------------------------------------------
+
+
+//=========================characters================================
+
+var guy = {
+  speed: 250,
+  health: 100,
+	strength: 100,
+  charisma: "haha",
+  x: 20,
+  y: 60,
+  xp: 0,
+  yp: 0,
+  attack: function(){
+            console.log('hyaaaa!');
+            guyImage.src = "/images/guyAttackL.png";
+            setTimeout(function(){guyImage.src="/images/guyR.png"}, 100);
+            if((guy.x < ogre.x+30)&&(guyImage.src="/images/guyAttackL.png")){
+              ogre.health = ogre.health-5
+            };
+          },
+  update: function(modifier){
+
+            var nextPixelUp = this.y - this.speed * modifier;
+          	var nextPixelDown = this.y + this.speed * modifier;
+          	var nextPixelLeft = this.x - this.speed * modifier;
+          	var nextPixelRight = this.x + this.speed * modifier;
+
+          	if (keysDown[38]===true || keysDown[87]===true) { // up
+          		console.log(isItAWall(this.x, nextPixelUp));
+          		if(isItAWall(this.x, nextPixelUp) === false){
+                this.y = nextPixelUp
+              }
+          	};
+
+          	if (keysDown[40]===true || keysDown[83]===true) { // down
+          		console.log(isItAWall(this.x, nextPixelDown));
+          		if(isItAWall(this.x, nextPixelDown+30)===false){
+            		this.y = nextPixelDown;
+          		}
+          	};
+
+          	if (keysDown[37]===true || keysDown[65]===true) { // left
+          		console.log(isItAWall(nextPixelLeft, this.y));
+          		if(isItAWall(nextPixelLeft, this.y)===true){
+              }else if ((currentLevel===1) && (this.x<ogre.x+30)){
+          		} else{
+            		this.x = nextPixelLeft;
+          		}
+          	};
+
+          	if (keysDown[39]===true || keysDown[68]===true){ //right
+          		console.log(isItAWall(nextPixelRight, this.y+30));
+          		if(isItAWall(nextPixelRight, this.y)===false){
+          			this.x = nextPixelRight;
+          		}
+
+          	};
+
+            if(keysDown[32]===true){
+              this.attack();
+            };
+
+
+        }
+};
+
+//============================enemies==============================
+
+function Enemy(health, strength, x, y){
+  this.health = health;
+  this.strength = strength;
+  this.x = x;
+  this.y = y;
+}
+
+Enemy.prototype = {
+  attack: function(){
+            console.log('takethat');
+          },
+  danceAround: function(){
+                console.log('lalala');
+              },
+  update: function(modifier){
+            if(this.health<0){
+              this.x = -100;
+              this.y = -100;
+            };
+          }
+  }
+
+var bat = new Enemy(20,20,null,null);
+var skeleton = new Enemy(30,30,null,null);
+var ogre = new Enemy(50,50,50,225);
+var dragon = new Enemy(150,150,null,null);
+
+//======================items==============================
+
+function Item(x,y){
+  this.x = x;
+  this.y = y;
+}
+
+Item.prototype = {
+  update: function(){
+          }
+}
+
+var house = new Item(null,null);
+var stairs = new Item(355,365);
+var coin = new Item(200,375);
+var gem = new Item(320, 65);
+var guitar = new Item(null, null);
+var tiara = new Item(null,null);
+
+//========weapons===============
+
+function Weapon(power, x, y){
+  this.power = power;
+  this.x = x;
+  this.y = y;
+}
+
+var sword = new Weapon(10, null, null);
+var axe = new Weapon(15, null, null);
+var bow = new Weapon(10, null, null);
+
 
 //---------------------------------------------------------------------------
 //===========================================================================
@@ -197,41 +270,47 @@ canvas.height = 500;
 canvas.setAttribute('id', 'canvas');
 document.getElementById('main').appendChild(canvas);
 
-//--------------------------------------------
-
-//=============== canvas variables =================
-var c = $('#canvas');
-
-//======== responsive canvas function =====================
-// var ct = $('#canvas').get(0).getContext('2d');
-// var respondWidth = $(container).width();
-// var respondHeight = $(container).height();
-// var container = $(c).parent();
-//
-// $(window).resize(function(){
-//   respondCanvas();
-//   render();
-//   update();
-//   }
-// );
-//
-// function respondCanvas(){
-//   c.attr( 'width', $(container).width() );
-//   c.attr( 'height', $(container).width() );
-// };
-//--------------------------------------------------------------------------
-
-
 //===================getImageData=============================
 
 //get the background image data for the whole canvas as soon as it's set up, set values to an array.
 //this way you can check the array on keydown instead of running getImageData every time the collision function runs.
 
 //============ collision detection, take 2 =====================
-function getImageDataExternalSource(){
+
+function colorHover(){
+  var img = new Image();
+  img.src = '/images/bg01.png';
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+  img.onload = function() {
+    ctx.drawImage(img, 0, 0);
+    img.style.display = 'none';
+  };
+  var color = document.getElementById('color');
+  function pick(event) {
+    var x = event.layerX;
+    var y = event.layerY;
+    var pixel = ctx.getImageData(x, y, 1, 1);
+    var data = pixel.data;
+    var rgba = 'rgba(' + data[0] + ',' + data[1] +
+               ',' + data[2] + ',' + data[3] + ')';
+    console.log(rgba);
+  }
+  canvas.addEventListener('mousemove', pick);
+}
+
+function colorLooker(){
+  var pixel = ctx.getImageData(guy.x, guy.y, 1, 1);
+  var data = pixel.data;
+  var rgba = 'rgba(' + data[0] + ',' + data[1] +
+             ',' + data[2] + ',' + data[3] + ')';
+  console.log(rgba);
+};
+
+function getImageDataExternalSource(taco){
   var canvas = document.createElement('canvas');
   var context = canvas.getContext('2d');
-  context.drawImage(bgImg, 0, 0 );
+  context.drawImage(taco, 0, 0 );
   var myData = context.getImageData(0, 0, 500, 500);
   var data = myData.data;
   for(i=0; i<data.length;i+=4){
@@ -308,14 +387,7 @@ function currentLevelArrayChecker(){
   arrayChecker(ctx.getImageData(0, 0, canvas.width, canvas.height).data, currentBoard);
 }
 
-//---------------------------------------------------------------------------
-//===========================================================================
-//                SETTING UP KEYBOARD
-//===========================================================================
-//---------------------------------------------------------------------------
-
-
-//==============keyboard listeners============
+//==============setting up keyboard============
 
 var keysDown = {};
 
@@ -327,54 +399,17 @@ addEventListener("keyup", function (e) {
 	delete keysDown[e.keyCode];
 }, false);
 
-//--------------------------------------------
 
-//=============== movement =====================
+//---------------------------------------------------------------------------
+//===========================================================================
+//                UPDATE
+//===========================================================================
+//---------------------------------------------------------------------------
 
 var update = function (modifier) {
 
-	var nextPixelUp = guy.y - guy.speed * modifier;
-	var nextPixelDown = guy.y + guy.speed * modifier;
-	var nextPixelLeft = guy.x - guy.speed * modifier;
-	var nextPixelRight = guy.x + guy.speed * modifier;
-
-	if (keysDown[38]===true || keysDown[87]===true) { // up
-		console.log(isItAWall(guy.x, nextPixelUp));
-		if(isItAWall(guy.x, nextPixelUp) === false){
-      guy.y = nextPixelUp
-    }
-	};
-	if (keysDown[40]===true || keysDown[83]===true) { // down
-		console.log(isItAWall(guy.x, nextPixelDown));
-		if(isItAWall(guy.x, nextPixelDown+30)===false){
-  		guy.y = nextPixelDown;
-		}
-	}
-	if (keysDown[37]===true || keysDown[65]===true) { // left
-		console.log(isItAWall(nextPixelLeft, guy.y));
-		if(isItAWall(nextPixelLeft, guy.y)===true){
-    }else if ((currentLevel===1) && (guy.x<ogre.x+30)){
-		} else{
-  		guy.x = nextPixelLeft;
-		}
-	}
-	if (keysDown[39]===true || keysDown[68]===true){ //right
-		console.log(isItAWall(nextPixelRight, guy.y+30));
-		if(isItAWall(nextPixelRight, guy.y)===false){
-			guy.x = nextPixelRight;
-		}
-
-	};
-
-  if(keysDown[32]===true){
-    guy.attack();
-  };
-
-  if(ogre.health<0){
-    ogre.x = -100;
-    ogre.y = -100;
-    ogreReady=false;
-  }
+  guy.update(modifier);
+  ogre.update(modifier);
 
   if((currentLevel===1)
     &&((guy.x < coin.x +20) && (guy.y < coin.y+20))){
@@ -387,80 +422,15 @@ var update = function (modifier) {
     gem.x = -100;
   }
 
-
   levelSwitcher();
+
 };
-
-  //============= old collision function=====================================
-
-  // collision = function(direction){
-	// 	if(direction==='right'){
-	// 		clipWidth = 2;
-	// 		clipHeight = 30;
-	// 		clipOffsetX = 30;
-	// 		clipOffsetY = 0;
-	// 	}
-	// 	if(direction==='left'){
-	// 		clipWidth = 2;
-	// 		clipHeight = 30;
-	// 		clipOffsetX = 0;
-	// 		clipOffsetY = 0;
-	// 	}
-	// 	if(direction==='up'){
-	// 		clipWidth = 30;
-	// 		clipHeight = 2;
-	// 		clipOffsetX = 0;
-	// 		clipOffsetY = 0;
-	// 	}
-	// 	if(direction==='down'){
-	// 		clipWidth = 30;
-	// 		clipHeight = 2;
-	// 		clipOffsetX = 0;
-	// 		clipOffsetY = 30;
-	// 	}
-	//
-	// 	clipLength = clipWidth*clipHeight;
-  //   var whatColor = ctx.getImageData(guy.x+clipOffsetX, guy.y+clipOffsetY, clipWidth, clipHeight);
-	//
-  //     for (var i = 0; i < clipLength*4; i+=4 ) {
-  //       console.log(whatColor.data[i]);
-  //       if((whatColor.data[i]===255)
-	// 					&&
-	// 					(whatColor.data[i+1]===0)
-	// 					&&
-	// 					(whatColor.data[i+2]===0)
-	// 				){
-  //         console.log('red!');
-	// 				return true;
-  //       };
-        // if(whatColor.data[i+1]===255){  <----------green
-        // };
-        // if(whatColor.data[i+2]===255){  <----------blue
-        // }
-  //     };
-	//
-  // };
-
-//---------------------------------------------------------------------------
 
 //---------------------------------------------------------------------------
 //===========================================================================
 //                       COORDINATES
 //===========================================================================
 //---------------------------------------------------------------------------
-
-// getPCoords = function(object){
-//
-//   var xWidth = $('#canvas').width();
-//   var yheight = $('#canvas').height();
-//
-//
-//   percentageCOordsX = (object.x/500);
-//   percentageCoordsY = (object.y/500);
-//
-//   percentageCOordsX*xWidth
-//
-// }
 
 //==========get mouse coordinates (for debugging) ===========
 
@@ -481,18 +451,16 @@ function logMouseCoordinates(e){
 
 $('#canvas').on('click', logMouseCoordinates);
 
-//-----------------------------------------------------------
-
 //---------------------------------------------------------------------------
 //===========================================================================
 //                       Fog of War
 //===========================================================================
 //---------------------------------------------------------------------------
 
-
-
-//---------------------------------------------------------------------------
-
+//???????????????????????????????????????????????????????????????????????????
+//???????????????????????????????????????????????????????????????????????????
+//???????????????????????????????????????????????????????????????????????????
+//???????????????????????????????????????????????????????????????????????????
 
 //---------------------------------------------------------------------------
 //===========================================================================
@@ -505,11 +473,8 @@ $('#canvas').on('click', logMouseCoordinates);
 
 var render = function () {
 
-	if (bgReady) {
-		bgImage.src = bgs[currentLevel];
-    bgImage.width = c.width;
-    bgImage.height = c.height();
-		ctx.drawImage(bgImage, 0, 0);
+	if (bgs[currentLevel]) {
+		ctx.drawImage(bgs[currentLevel].image, 0, 0);
 	}
 
 	if(houseReady&&currentLevel===0){
@@ -540,9 +505,11 @@ var render = function () {
 
 };
 
-//------------------------------------------------
-
-//================ main game loop ==============
+//---------------------------------------------------------------------------
+//===========================================================================
+//                       MAIN GAME LOOP
+//===========================================================================
+//---------------------------------------------------------------------------
 
 var main = function () {
 	var now = Date.now();
