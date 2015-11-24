@@ -139,8 +139,7 @@ var guy = {
   health: 100,
 	strength: 100,
   charisma: "haha",
-  sword: false,
-  wizard: false,
+  weapon: "none",
   imageL: "/images/guyL.png",
   imageR: "/images/guyR.png",
   imageLAttack: "/images/guyAttackL.png",
@@ -150,7 +149,8 @@ var guy = {
   xp: 0,
   yp: 0,
   equipSword: function(){
-                if(guy.sword===true){
+                guy.weapon = "sword";
+                if(guy.weapon==="sword"){
                   guy.imageL = "/images/guySwordL.png";
                   guy.imageR = "/images/guySwordR.png";
                   guy.imageLAttack = "/images/guySwordAttackL.png";
@@ -158,8 +158,8 @@ var guy = {
                 }
               },
   becomeWizard: function(){
-                guy.wizard = true;
-                if(guy.wizard===true){
+                guy.weapon = "wizard";
+                if(guy.weapon==="wizard"){
                   guy.imageL = "/images/guyWizardL.png";
                   guy.imageR = "/images/guyWizardR.png";
                   guy.imageLAttack = "/images/guyWizardAttackL.png";
@@ -222,8 +222,11 @@ var guy = {
               this.attack();
             };
 
-            if(keysDown[77]==true){
+            if(keysDown[77]===true){
               this.becomeWizard();
+            };
+            if(keysDown[78]===true){
+              this.equipSword();
             }
 
 
@@ -313,9 +316,8 @@ sword.update = function(){
     ((rangeDetector(guy.x,guy.y,sword.x,sword.y)===true))){
       this.y=-100;
       this.x=-100;
-      guy.sword = true;
+      guy.equipSword();
     }
-    guy.equipSword();
 }
 
 //---------------------------------------------------------------------------
