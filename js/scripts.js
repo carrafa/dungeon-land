@@ -1,5 +1,6 @@
 console.log('ow, my browser');
 
+powerOn = false;
 
 //------------------level switcher-------------------
 
@@ -499,19 +500,29 @@ $('#canvas').on('click', logMouseCoordinates);
 //===========================================================================
 //---------------------------------------------------------------------------
 
-$('#show-status').on('click', function(){
-  $('#controls').css('display','none');
-  $('#show-controls').css('background-color','lightgray');
-  $('#status').css('display', 'block');
-  $('#show-status').css('background-color','snow');
-});
+function showStatus(){
+    $('#controls').css('display','none');
+    $('#show-controls').css('background-color','lightgray');
+    $('#status').css('display', 'block');
+    $('#show-status').css('background-color','snow');
+};
 
-$('#show-controls').on('click', function(){
+function showControls(){
   $('#status').css('display','none');
   $('#show-status').css('background-color','lightgray');
   $('#controls').css('display', 'block');
   $('#show-controls').css('background-color','snow');
-});
+};
+
+function power(){
+  showStatus();
+  powerOn = true;
+}
+
+$('#power').on('click',power);
+
+$('#show-status').on('click', showStatus);
+$('#show-controls').on('click', showControls);
 
 $('#reset').on('click', function(){
   location.reload();
@@ -613,6 +624,16 @@ var render = function () {
 	}
 
   // drawFog();
+
+  if(deadReady===true&&guy.health<0){
+    ctx.drawImage(deadImage, 0, 0);
+    setTimeout(showControls, 2000);
+    };
+
+
+  if(powerOn===false){
+      ctx.fillRect(10,10,480,480);
+  }
 
 };
 
