@@ -4,7 +4,7 @@
 //===========================================================================
 //---------------------------------------------------------------------------
 
-//===========background image =============
+//===========background images =============
 
 function loadLevel(url){
   var image = new Image();
@@ -70,6 +70,30 @@ guyImage.onload = function () {
 	guyReady = true;
 };
 guyImage.src = "/images/guyR.png";
+
+var guyLReady = false;
+var guyLImage = new Image();
+guyLImage.onload = function () {
+	guyLReady = true;
+};
+guyLImage.src = "/images/guyL.png";
+
+var guyWizardLReady = false;
+var guyWizardLImage = new Image();
+guyWizardLImage.onload = function () {
+	guyWizardLReady = true;
+};
+guyWizardLImage.src = "/images/guyWizardL.png";
+
+var guyWizardRReady = false;
+var guyWizardRImage = new Image();
+guyWizardRImage.onload = function () {
+	guyWizardRReady = true;
+};
+guyWizardRImage.src = "/images/guyWizardR.png";
+
+
+
 
 //======enemy images===================
 
