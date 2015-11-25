@@ -37,6 +37,7 @@ var guy = {
   speed: 250,
   health: 100,
 	strength: 100,
+  power: 1,
   charisma: "haha",
   weapon: "unarmed",
   imageL: "/images/guyL.png",
@@ -49,7 +50,6 @@ var guy = {
   offsetY: 0,
   xp: 0,
   yp: 0,
-
   equipSword: function(){
                 guy.weapon = "sword";
                 if(guy.weapon==="sword"){
@@ -58,6 +58,7 @@ var guy = {
                   guy.imageLAttack = "/images/guySwordAttackL.png";
                   guy.imageRAttack = "/images/guySwordAttackR.png";
                 }
+                guy.power = 5;
               },
   becomeWizard: function(){
                 guy.weapon = "wizard";
@@ -67,6 +68,7 @@ var guy = {
                   guy.imageLAttack = "/images/guyWizardAttackL.png";
                   guy.imageRAttack = "/images/guyWizardAttackR.png";
                 }
+                guy.power = 100;
               },
   attack: function(){
             console.log('hyaaaa!');
@@ -88,10 +90,10 @@ var guy = {
                 }, 100);
             };
             if( (rangeDetector(guy.x,guy.y,ogre.x,ogre.y, 30)===true)&&(guyImage.src==="http://localhost:8080" + guy.imageLAttack)){
-              ogre.health = ogre.health-5
+              ogre.health = ogre.health-guy.power;
             };
-            if( (rangeDetector(guy.x,guy.y,bat.x,bat.y, 30)===true)&&(guyImage.src==="http://localhost:8080" + guy.imageLAttack)){
-              bat.health = bat.health-5
+            if( (rangeDetector(guy.x,guy.y,bat.x,bat.y, 40)===true)&&(guyImage.src==="http://localhost:8080" + guy.imageLAttack)){
+              bat.health = bat.health-guy.power;
             };
           },
   update: function(modifier){
@@ -207,11 +209,11 @@ ogre.update = function(modifier){
     ogreImage.src = "/images/ogre.png";
   };
   if(
-    (rangeDetector(guy.x,guy.y,ogre.x,ogre.y,40)===true)
+    (rangeDetector(guy.x,guy.y,ogre.x,ogre.y,30)===true)
     &&
     (ogreImage.src==="http://localhost:8080/images/ogreAttack.png")
     ){
-      guy.health -= 5;
+      guy.health -= 1;
       console.log("your health is " + guy.health + "!");
     };
 };
