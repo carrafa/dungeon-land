@@ -28,93 +28,29 @@ var bgs = [
 	loadLevel("/images/bg02.png")
 ];
 
-allImages = {
-  guyR: {
-    image: "/images/guyR.png",
-    ready: false,
-  },
-  guyL: {
-    image: "/images/guyL.png",
-    ready: false
-  },
-  guyAttackL: {
-    image: "/images/guyAttackL.png",
-    ready: false,
-  },
-  guyAttackR: {
-    image: "/images/guyAttackR.png",
-    ready: false,
-  },
-  guySwordR:{
-    image: "/images/guySwordR.png",
-    ready: false,
-  },
-  guySwordL:{
-    image: "/images/guySwordL.png",
-    ready: false,
-  },
-  guySwordAttackR:{
-    image: "/images/guySwordAttackR.png",
-    ready: false,
-  },
-  guySwordAttackL:{
-    image: "/images/guySwordAttackL.png",
-    ready: false,
-  },
-  guyWizardR: {
-    image: "/images/guyWizardR.png",
-    ready: false,
-  },
-  guyWizardL: {
-    image: "/images/guyWizardL.png",
-    ready: false
-  },
-  guyWizardAttackR: {
-    image: "/images/guyWizardR.png",
-    ready: false,
-  },
-  guyWizardAttackL: {
-    image: "/images/guyWizardL.png",
-    ready: false
+function loadImages(sources) {
+  var images = {};
+  var loadedImages = 0;
+  var numImages = 0;
+  // get num of sources
+  for(var src in sources) {
+    numImages++;
   }
-};
-
-function loadImage(url){
-  var image = new Image;
-  var thing = {
-    image: image,
-    ready: false
-  };
-  image.onlaod = function(){
-    thing.ready = true;
-  };
-  image.src = url;
-  return thing;
+  for(var src in sources) {
+    images[src] = new Image();
+    images[src].onload = function() {
+      if(++loadedImages >= numImages) {
+        console.log(images[src].src)
+      }
+    };
+    images[src].ready = true
+    images[src].src = sources[src];
+  }
 }
 
 //---------------------------------------------------
 
 //======building/item images===================
-
-// var itemImages = {
-//   house: "/images/house.png",
-//   stairs: "/images/stairsL.png",
-//   coin: "/images/coin.png",
-//   gem: "/images/gem.png"
-// }
-//
-// function loadItems(url){
-//   var image = new Image();
-//   var item = {
-//     image: image,
-//     ready: false,
-//   }
-//   image.onload = function(){
-//     item.ready = true;
-//   }
-//   item.src = url;
-//
-// }
 
 var houseReady = false;
 var houseImage = new Image();
@@ -221,6 +157,7 @@ var guy = {
   offsetY: 0,
   xp: 0,
   yp: 0,
+
   equipSword: function(){
                 guy.weapon = "sword";
                 if(guy.weapon==="sword"){
@@ -372,7 +309,7 @@ ogre.update = function(modifier){
     this.x = -100;
     this.y = -100;
   };
-  if(n<Math.random(10)*20+10){
+  if((n>10&&n<25)||(n>45)){
     ogreImage.src = "/images/ogreAttack.png";
   } else {
     ogreImage.src = "/images/ogre.png";
@@ -752,7 +689,7 @@ var render = function () {
 		ctx.drawImage(bgs[currentLevel].image, 0, 0);
 	}
 
-	if(houseReady&&currentLevel===0){
+	if(currentLevel===0){
 		ctx.drawImage(houseImage, 10, 10);
 	}
 

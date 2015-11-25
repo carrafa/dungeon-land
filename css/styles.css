@@ -2,6 +2,7 @@ body{
   background-color: dodgerblue;
   margin: 0;
   min-width: 950px;
+  cursor: pointer;
   font-family: 'Press Start 2P', cursive;
 }
 
@@ -20,8 +21,10 @@ header{
     display:block;
     width:90%;
     padding:20px 3%;
+    margin: 0 auto;
     height:40%;
     min-width: 850px;
+    max-width: 1000px;
 }
 #canvas-container{
     display:inline-block;
@@ -86,7 +89,7 @@ ul{
 }
 
 #on-off-container{
-  margin-top: 20px;
+  margin-top: 50px;
   text-align: center;
   width: 100%;
   height: 50px;
@@ -105,18 +108,24 @@ ul{
   color: red;
 }
 
-#key-container{
-  margin-top: 100px;
+.key-container{
   width: 300px;
+  margin-top: 30px;
   margin-left: 20%;;
 }
 
+#or{
+  width: 300px;
+  margin-left: 40%;
+  margin-top: 30px;
+}
 
 .keys{
   display: inline-block;
   background-color: lightgray;
   font-size: 1.3em;
   border: 2px solid black;
+  padding-top: 2px;
   height: 25px;
   width: 30px;
   text-align: center;
@@ -137,6 +146,24 @@ ul{
   height: 25px;
   font-size: 1em;
 }
+
+#up{
+  background-image: url(/images/up.gif);
+  background-size: cover;
+}
+#down{
+  background-image: url(/images/down.gif);
+  background-size: cover;
+}
+#left{
+  background-image: url(/images/left.gif);
+  background-size: cover;
+}
+#right{
+  background-image: url(/images/right.gif);
+  background-size: cover;
+}
+
 
 #status{
   display: none;
