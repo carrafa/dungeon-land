@@ -313,7 +313,7 @@ var guy = {
 
           	};
 
-            if(keysDown[32]===true){
+            if(keysDown[32]===true||keysDown[67]===true){
               this.attack();
             };
 

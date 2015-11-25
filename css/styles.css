@@ -78,8 +78,42 @@ ul{
 }
 
 #controls{
+  padding-left: 10px;
+  margin-top: 10px;
+}
+
+#key-container{
+
+}
+
+.keys{
+  display: inline-block;
+  background-color: lightgray;
+  font-size: 1.3em;
+  border: 2px solid black;
+  height: 30px;
+  width: 30px;
+  text-align: center;
+  margin-top: 5px;
+}
+
+#spacebar{
+  display: block;
+  width: 130px;
+  height: 25px;
+  font-size: 1em;
+}
+
+.hidden-key{
+  background-color: rgba(0,0,0,0);
+  border: none;
+  margin: 2px;
 }
 
 #status{
   display: none;
+  margin-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: right;
 }
