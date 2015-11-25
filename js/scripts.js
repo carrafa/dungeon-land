@@ -671,10 +671,29 @@ $('#canvas').on('click', logMouseCoordinates);
 //===========================================================================
 //---------------------------------------------------------------------------
 
+$('#show-status').on('click', function(){
+  $('#controls').css('display','none');
+  $('#show-controls').css('background-color','lightgray');
+  $('#status').css('display', 'block');
+  $('#show-status').css('background-color','snow');
+});
+
+$('#show-controls').on('click', function(){
+  $('#status').css('display','none');
+  $('#show-status').css('background-color','lightgray');
+  $('#controls').css('display', 'block');
+  $('#show-controls').css('background-color','snow');
+});
+
+var kills   = 0
+
 function updateMenu(){
-  var kills = function(){
+  var killCount = function(){
     if(ogre.x < 0){
-      return 1;
+      kills++;
+    }
+    if (bat.x<0){
+      kills++;
     }
   };
 
