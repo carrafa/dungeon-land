@@ -434,7 +434,7 @@ gem.update = function(){
         this.x = -100;
       var $gem = $('<li>');
       $("#item-list").append($gem);
-      $gem.text("heyyyyyyy gem.");
+      $gem.text("heyyyy a gem.");
     }
 }
 
@@ -685,6 +685,10 @@ $('#show-controls').on('click', function(){
   $('#show-controls').css('background-color','snow');
 });
 
+$('#reset').on('click', function(){
+  location.reload();
+})
+
 var kills   = 0
 
 function updateMenu(){
@@ -704,6 +708,8 @@ function updateMenu(){
       return currentLevel;
     };
   });
+
+  $('#health-bar').css('width', guy.health + '%');
 
   $('#health').text(guy.health);
 

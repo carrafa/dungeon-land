@@ -21,7 +21,7 @@ header{
     width:90%;
     padding:20px 3%;
     height:40%;
-    min-width: 1000;
+    min-width: 850px;
 }
 #canvas-container{
     display:inline-block;
@@ -39,6 +39,7 @@ header{
   margin-left: 20px;
   display: inline-block;
   width: 30%;
+  min-width:280px;
   height: 510px;
   background-color: snow;
   position: absolute;
@@ -75,6 +76,8 @@ h1{
 ul{
   list-style-type: none;
   margin-left: -40px;
+  overflow: scroll;
+  height: 150px;
 }
 
 #controls{
@@ -82,38 +85,83 @@ ul{
   margin-top: 10px;
 }
 
-#key-container{
-
+#on-off-container{
+  margin-top: 20px;
+  text-align: center;
+  width: 100%;
+  height: 50px;
 }
+
+.on-off{
+  position: relative;
+  display: inline-block;
+  padding: 3px;
+  background-color: lightgray;
+  border: 1px solid black;
+  font-size: 1em;
+}
+
+#power{
+  color: red;
+}
+
+#key-container{
+  margin-top: 100px;
+  width: 300px;
+  margin-left: 20%;;
+}
+
 
 .keys{
   display: inline-block;
   background-color: lightgray;
   font-size: 1.3em;
   border: 2px solid black;
-  height: 30px;
+  height: 25px;
   width: 30px;
   text-align: center;
   margin-top: 5px;
-}
-
-#spacebar{
-  display: block;
-  width: 130px;
-  height: 25px;
-  font-size: 1em;
 }
 
 .hidden-key{
   background-color: rgba(0,0,0,0);
   border: none;
   margin: 2px;
+  color: rgba(0,0,0,0);
+}
+
+#spacebar{
+  margin-top: 5px;
+  display: block;
+  width: 130px;
+  height: 25px;
+  font-size: 1em;
 }
 
 #status{
   display: none;
-  margin-top: 20px;
+  margin-top: 50px;
   padding-left: 10px;
   padding-right: 10px;
   text-align: right;
+}
+
+#status h1{
+  margin-bottom: -15px;
+}
+
+#health-bar-container{
+  border: 1px solid black;
+  height: 10px;
+  width: 200px;
+  float:right;
+  margin-top: -15px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+#health-bar{
+  background-color: red;
+  height: 100%;
+  width: 100%;
 }
