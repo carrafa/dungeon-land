@@ -147,23 +147,39 @@ ul{
   font-size: 1em;
 }
 
+#music-controls{
+  width: 100%;
+  text-align: center;
+}
+
+.music-buttons{
+  display: inline-block;
+  background-color: lightgray;
+  font-size: 1.3em;
+  border: 2px solid black;
+  padding-top: 2px;
+  height: 25px;
+  width: 30px;
+  text-align: center;
+  margin-top: 5px;
+}
+
 #up{
-  background-image: url(/images/up.gif);
+  background-image: url(/images/icons/up.gif);
   background-size: cover;
 }
 #down{
-  background-image: url(/images/down.gif);
+  background-image: url(/images/icons/down.gif);
   background-size: cover;
 }
 #left{
-  background-image: url(/images/left.gif);
+  background-image: url(/images/icons/left.gif);
   background-size: cover;
 }
 #right{
-  background-image: url(/images/right.gif);
+  background-image: url(/images/icons/right.gif);
   background-size: cover;
 }
-
 
 #status{
   display: none;

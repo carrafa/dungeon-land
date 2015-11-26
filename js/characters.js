@@ -13,6 +13,8 @@ var guy = {
   power: 1,
   charisma: "haha",
   weapon: "unarmed",
+  attackRange: 30,
+  direction: "right",
   imageL: "/images/guy/guyL.png",
   imageR: "/images/guy/guyR.png",
   imageLAttack: "/images/guy/guyAttackL.png",
@@ -25,54 +27,58 @@ var guy = {
   xp: 0,
   yp: 0,
   equipSword: function() {
-    guy.weapon = "sword";
-    if (guy.weapon === "sword") {
-      guy.imageL = "/images/guy/guySwordL.png";
-      guy.imageR = "/images/guy/guySwordR.png";
-      guy.imageLAttack = "/images/guySwordAttackL.png";
-      guy.imageRAttack = "/images/guySwordAttackR.png";
+    this.weapon = "sword";
+    if (this.weapon === "sword") {
+      this.imageL = "/images/guy/guySwordL.png";
+      this.imageR = "/images/guy/guySwordR.png";
+      this.imageLAttack = "/images/guySwordAttackL.png";
+      this.imageRAttack = "/images/guySwordAttackR.png";
     }
-    guy.power = 5;
+    this.power = 5;
+    this.attackRange = 40
   },
   becomeWizard: function() {
-    guy.weapon = "wizard";
-    if (guy.weapon === "wizard") {
-      guy.imageL = "/images/guy/guyWizardL.png";
-      guy.imageR = "/images/guy/guyWizardR.png";
-      guy.imageLAttack = "/images/guy/guyWizardAttackL.png";
-      guy.imageRAttack = "/images/guy/guyWizardAttackR.png";
+    this.weapon = "wizard";
+    if (this.weapon === "wizard") {
+      this.imageL = "/images/guy/guyWizardL.png";
+      this.imageR = "/images/guy/guyWizardR.png";
+      this.imageLAttack = "/images/guy/guyWizardAttackL.png";
+      this.imageRAttack = "/images/guy/guyWizardAttackR.png";
     };
-    guy.power = 100;
+    this.power = 100;
+    this.attackRange = 50;
   },
   attack: function() {
     console.log('hyaaaa!');
-    if (guyImage.src === "http://localhost:8080" + guy.imageL) {
+    if (this.direction === "left") {
       guyImage.src = guy.imageLAttack;
-      guy.offsetX = -30;
-      guy.offsetY = -10;
+      this.offsetX = 0;
+      this.offsetY = 0;
       setTimeout(function() {
         guyImage.src = guy.imageL;
-        guy.offsetX = 0;
-        guy.offsetY = 0;
+        this.offsetX = 0;
+        this.offsetY = 0;
       }, 100);
-    } else if (guyImage.src === "http://localhost:8080" + guy.imageR) {
-      guyImage.src = guy.imageRAttack;
+    } else if (this.direction === "right") {
+      guyImage.src = this.imageRAttack;
       this.offsetY = -10;
       setTimeout(function() {
         guyImage.src = guy.imageR;
         guy.offsetY = 0;
       }, 100);
     };
-    if ((rangeDetector(guy.x, guy.y, ogre.x, ogre.y, 30) === true) &&
+    if ((rangeDetector(this.x, this.y, ogre.x, ogre.y, this.attackRange) ===
+        true) &&
       (guyImage.src === "http://localhost:8080" + guy.imageLAttack)
     ) {
       punchSound.play();
-      ogre.health = ogre.health - guy.power;
+      ogre.health = ogre.health - this.power;
     };
-    if ((rangeDetector(guy.x, guy.y, bat.x, bat.y, 40) === true) &&
-      (guyImage.src === "http://localhost:8080" + guy.imageLAttack)
+    if ((rangeDetector(guy.x, guy.y, bat.x, bat.y, this.attackRange) ===
+        true) &&
+      (guyImage.src === "http://localhost:8080" + this.imageLAttack)
     ) {
-      bat.health = bat.health - guy.power;
+      bat.health = bat.health - this.power;
     };
   },
 
@@ -100,6 +106,7 @@ var guy = {
     }
 
     if (keysDown[37] === true || keysDown[65] === true) { // left
+      this.direction = "left";
       guyImage.src = guy.imageL;
       guy.offsetX = 0;
       guy.offsetY = 0;
@@ -113,6 +120,7 @@ var guy = {
     }
 
     if (keysDown[39] === true || keysDown[68] === true) { //right
+      this.direction = "right";
       guyImage.src = guy.imageR;
       guy.offsetX = 0;
       guy.offsetY = 0;
@@ -121,10 +129,15 @@ var guy = {
       } else {
         this.x = nextPixelRight;
       }
-
     }
 
     if (keysDown[32] === true || keysDown[67] === true) {
+      this.attacking = true;
+    } else {
+      this.attacking = false;
+    }
+
+    if (this.attacking === true) {
       this.attack();
     }
 
@@ -137,10 +150,6 @@ var guy = {
   }
 };
 
-if (guy.health < 0) {
-  theme.pause();
-  guyDeadTheme.play();
-}
 
 //============================enemies==============================
 

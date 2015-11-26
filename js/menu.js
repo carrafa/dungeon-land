@@ -21,6 +21,8 @@ function showControls() {
 function power() {
   if (powerOn === true) {
     powerOn = false;
+    theme.pause();
+    theme.currentTime = 0;
   } else if (powerOn === false) {
     powerOn = true;
     showStatus();

@@ -233,7 +233,6 @@ var render = function() {
     setTimeout(showControls, 2000);
   };
 
-
   if (powerOn === false) {
     ctx.fillRect(10, 10, 480, 480);
   }
