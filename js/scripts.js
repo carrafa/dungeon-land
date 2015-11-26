@@ -59,11 +59,11 @@ function updateN() {
 
 //---------------------------------------------------------------------------
 //===========================================================================
-//                SETTING UP CANVAS
+//                         SETTING UP CANVAS
 //===========================================================================
 //---------------------------------------------------------------------------
 
-//============== create canvas ===============
+//========================= create canvas ===================================
 var canvas = document.createElement('canvas');
 var ctx = canvas.getContext('2d');
 canvas.width = 500;
@@ -80,7 +80,7 @@ document.getElementById('canvas-container').appendChild(fogCanvas);
 
 //---------------------------------------------------------------------------
 //===========================================================================
-//                      COLLISION
+//                           COLLISION
 //===========================================================================
 //---------------------------------------------------------------------------
 
@@ -100,13 +100,7 @@ function rangeDetector(firstX, firstY, secondX, secondY, distance) {
   }
 };
 
-//===================getImageData=============================
-
-//get the background image data for the whole canvas as soon as it's set up, set values to an array.
-//this way you can check the array on keydown instead of running getImageData every time the collision function runs.
-
 //============ wall detection =====================
-
 
 collision = function(x, y, w, h) {
   var whatColor = ctx.getImageData(x, y, w, h);

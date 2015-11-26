@@ -13,10 +13,10 @@ var guy = {
   power: 1,
   charisma: "haha",
   weapon: "unarmed",
-  imageL: "/images/guyL.png",
-  imageR: "/images/guyR.png",
-  imageLAttack: "/images/guyAttackL.png",
-  imageRAttack: "/images/guyAttackR.png",
+  imageL: "/images/guy/guyL.png",
+  imageR: "/images/guy/guyR.png",
+  imageLAttack: "/images/guy/guyAttackL.png",
+  imageRAttack: "/images/guy/guyAttackR.png",
   attacking: false,
   x: 20,
   y: 60,
@@ -27,8 +27,8 @@ var guy = {
   equipSword: function() {
     guy.weapon = "sword";
     if (guy.weapon === "sword") {
-      guy.imageL = "/images/guySwordL.png";
-      guy.imageR = "/images/guySwordR.png";
+      guy.imageL = "/images/guy/guySwordL.png";
+      guy.imageR = "/images/guy/guySwordR.png";
       guy.imageLAttack = "/images/guySwordAttackL.png";
       guy.imageRAttack = "/images/guySwordAttackR.png";
     }
@@ -37,10 +37,10 @@ var guy = {
   becomeWizard: function() {
     guy.weapon = "wizard";
     if (guy.weapon === "wizard") {
-      guy.imageL = "/images/guyWizardL.png";
-      guy.imageR = "/images/guyWizardR.png";
-      guy.imageLAttack = "/images/guyWizardAttackL.png";
-      guy.imageRAttack = "/images/guyWizardAttackR.png";
+      guy.imageL = "/images/guy/guyWizardL.png";
+      guy.imageR = "/images/guy/guyWizardR.png";
+      guy.imageLAttack = "/images/guy/guyWizardAttackL.png";
+      guy.imageRAttack = "/images/guy/guyWizardAttackR.png";
     };
     guy.power = 100;
   },
@@ -203,9 +203,9 @@ ogre.attack = function() {
     this.attacking = false;
   }
   if (this.attacking === true) {
-    ogreImage.src = "/images/ogreAttack.png";
+    ogreImage.src = "/images/enemies/ogreAttack.png";
   } else {
-    ogreImage.src = "/images/ogre.png";
+    ogreImage.src = "/images/enemies/ogre.png";
   }
 };
 
