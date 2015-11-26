@@ -148,7 +148,9 @@ var allEnemies = [];
 
 var START_ENEMIES = 5;
 
-var kills = START_ENEMIES - allEnemies.length;
+function kills() {
+  return START_ENEMIES - allEnemies.length;
+};
 
 function Enemy(name, health, power, attackRange, x, y) {
   this.name = name;
@@ -174,11 +176,15 @@ Enemy.prototype = {
       (this.attacking === true)
     ) {
       guy.health -= this.power;
-    };
+    }
     if (this.health < 0) {
       this.x = -100;
       this.y = -100;
-    };
+      var index = allEnemies.indexOf(this);
+      if (index > -1) {
+        allEnemies.splice(index, 1);
+      }
+    }
     this.attack();
   }
 };
@@ -189,22 +195,28 @@ var skeleton = new Enemy('skeleton', 150, 150, null, null, null);
 var greenDragon = new Enemy('greenDragon', 500, 500, null, null, null);
 var redDragon = new Enemy('redDragon', 1000, 1000, null, null, null);
 
+
 ogre.attack = function() {
   if ((n > 10 && n < 25) || (n > 45)) {
     this.attacking = true;
   } else {
     this.attacking = false;
-  };
+  }
   if (this.attacking === true) {
     ogreImage.src = "/images/ogreAttack.png";
   } else {
     ogreImage.src = "/images/ogre.png";
-  };
-}
+  }
+};
 
 bat.attack = function() {
-  this.attacking = true;
+  if (currentLevel === 2) {
+    this.attacking = true;
+  } else {
+    this.attacking = false;
+  }
 };
+
 
 
 //======================items==============================
@@ -263,9 +275,9 @@ function Weapon(name, power, level, x, y) {
     ) {
       this.x = -100;
       this.y = -100;
-      ßthis.equip();
-    };
-  }
+      this.equip();
+    }
+  };
 }
 
 var sword = new Weapon('sword', 10, 1, 375, 165);

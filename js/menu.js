@@ -39,15 +39,6 @@ $('#reset').on('click', function() {
 });
 
 function updateMenu() {
-  var killCount = function() {
-    if (ogre.x < 0) {
-      kills++;
-    }
-    if (bat.x < 0) {
-      kills++;
-    }
-  };
-
   $('#level').text(function() {
     if (currentLevel === 0) {
       return 'home';
@@ -60,5 +51,5 @@ function updateMenu() {
 
   $('#health').text(guy.health);
 
-  $('#kills').text(kills);
+  $('#kills').text(kills());
 }

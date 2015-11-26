@@ -8,7 +8,7 @@ var currentLevel = 0;
 
 currentBoard = [];
 
-var levels = [{
+var stairLocation = [{
   x: 355,
   y: 365
 }, {
@@ -29,11 +29,11 @@ function levelSwitcher() {
   if (rangeDetector(guy.x, guy.y, stairs.x, stairs.y, 10) === true) {
     currentLevel++;
   }
-  if (currentLevel >= levels.length) {
+  if (currentLevel >= stairLocation.length) {
     currentLevel = 0;
   };
-  stairs.x = levels[currentLevel].x;
-  stairs.y = levels[currentLevel].y;
+  stairs.x = stairLocation[currentLevel].x;
+  stairs.y = stairLocation[currentLevel].y;
 };
 
 //---------------------------------------------------------------------------
@@ -96,7 +96,7 @@ function rangeDetector(firstX, firstY, secondX, secondY, distance) {
   } else {
     return false;
   }
-}
+};
 
 //===================getImageData=============================
 
