@@ -173,6 +173,13 @@ ogreImage.onload = function () {
 }
 ogreImage.src = "/images/ogre.png";
 
+var ogreAttackReady = false;
+var ogreAttackImage = new Image();
+ogreAttackImage.onload = function () {
+	ogreAttackReady = true;
+}
+ogreAttackImage.src = "/images/ogreAttack.png";
+
 var batReady = false;
 var batImage = new Image();
 batImage.onload = function () {

@@ -1,6 +1,6 @@
 console.log('ow, my browser');
 
-powerOn = false;
+powerOn = true;
 
 //------------------level switcher-------------------
 
@@ -27,274 +27,21 @@ function levelSwitcher(){
 
 //---------------------------------------------------------------------------
 //===========================================================================
-//                      SETTING OBJECTS
+//                          GLOBAL VARIABLES
 //===========================================================================
 //---------------------------------------------------------------------------
 
-//=========================characters================================
-
-var guy = {
-  speed: 250,
-  health: 100,
-	strength: 100,
-  power: 1,
-  charisma: "haha",
-  weapon: "unarmed",
-  imageL: "/images/guyL.png",
-  imageR: "/images/guyR.png",
-  imageLAttack: "/images/guyAttackL.png",
-  imageRAttack: "/images/guyAttackR.png",
-  x: 20,
-  y: 60,
-  offsetX: 0,
-  offsetY: 0,
-  xp: 0,
-  yp: 0,
-  equipSword: function(){
-                guy.weapon = "sword";
-                if(guy.weapon==="sword"){
-                  guy.imageL = "/images/guySwordL.png";
-                  guy.imageR = "/images/guySwordR.png";
-                  guy.imageLAttack = "/images/guySwordAttackL.png";
-                  guy.imageRAttack = "/images/guySwordAttackR.png";
-                }
-                guy.power = 5;
-              },
-  becomeWizard: function(){
-                guy.weapon = "wizard";
-                if(guy.weapon==="wizard"){
-                  guy.imageL = "/images/guyWizardL.png";
-                  guy.imageR = "/images/guyWizardR.png";
-                  guy.imageLAttack = "/images/guyWizardAttackL.png";
-                  guy.imageRAttack = "/images/guyWizardAttackR.png";
-                }
-                guy.power = 100;
-              },
-  attack: function(){
-            console.log('hyaaaa!');
-            if (guyImage.src==="http://localhost:8080" + guy.imageL){
-              guyImage.src = guy.imageLAttack;
-                guy.offsetX = -30;
-                guy.offsetY = -10;
-              setTimeout(function(){
-                guyImage.src=guy.imageL;
-                guy.offsetX = 0;
-                guy.offsetY = 0;
-                }, 100);
-            }else if (guyImage.src ==="http://localhost:8080" + guy.imageR){
-              guyImage.src = guy.imageRAttack;
-              this.offsetY = -10;
-              setTimeout(function(){
-                guyImage.src=guy.imageR;
-                guy.offsetY = 0;
-                }, 100);
-            };
-            if( (rangeDetector(guy.x,guy.y,ogre.x,ogre.y, 30)===true)&&(guyImage.src==="http://localhost:8080" + guy.imageLAttack)){
-              ogre.health = ogre.health-guy.power;
-            };
-            if( (rangeDetector(guy.x,guy.y,bat.x,bat.y, 40)===true)&&(guyImage.src==="http://localhost:8080" + guy.imageLAttack)){
-              bat.health = bat.health-guy.power;
-            };
-          },
-  update: function(modifier){
-
-            var nextPixelUp = this.y - this.speed * modifier;
-          	var nextPixelDown = this.y + this.speed * modifier;
-          	var nextPixelLeft = this.x - this.speed * modifier;
-          	var nextPixelRight = this.x + this.speed * modifier;
-
-          	if (keysDown[38]===true || keysDown[87]===true) { // up
-          		if(collision('up') === true){
-                this.y = this.y
-              } else {
-                this.y = nextPixelUp;
-              }
-          	};
-
-          	if (keysDown[40]===true || keysDown[83]===true) { // down
-          		if(collision('down')===true){
-                this.y = this.y;
-              } else {
-            		this.y = nextPixelDown;
-          		}
-          	};
-
-          	if (keysDown[37]===true || keysDown[65]===true) { // left
-              guyImage.src = guy.imageL;
-              guy.offsetX = 0;
-              guy.offsetY = 0;
-          		if(collision('left')===true){
-                this.x = this.x;
-              } else if ((currentLevel===1) && (this.x<ogre.x+30))
-              { this.x = this.x;
-          		} else{
-            		this.x = nextPixelLeft;
-          		}
-          	};
-
-          	if (keysDown[39]===true || keysDown[68]===true){ //right
-              guyImage.src = guy.imageR;
-              guy.offsetX = 0;
-              guy.offsetY = 0;
-          		if(collision('right')===true){
-                this.x = this.x;
-              }else{
-          			this.x = nextPixelRight;
-          		}
-
-          	};
-
-            if(keysDown[32]===true||keysDown[67]===true){
-              this.attack();
-            };
-
-            if(keysDown[77]===true){
-              this.becomeWizard();
-            };
-            if(keysDown[78]===true){
-              this.equipSword();
-            }
 
 
-        }
-};
+// global counter for animating
 
-//============================enemies==============================
-
-function Enemy(health, strength, x, y){
-  this.health = health;
-  this.strength = strength;
-  this.x = x;
-  this.y = y;
-}
-
-Enemy.prototype = {
-  attack: function(){
-            console.log('takethat');
-          },
-  danceAround: function(){
-                console.log('lalala');
-                this.health ++;
-              },
-  update: function(modifier){
-            if(this.health<0){
-              this.x = -100;
-              this.y = -100;
-            };
-          }
-  }
-
-var ogre = new Enemy(50,50,50,225);
-var bat = new Enemy(100,100,250,400);
-var skeleton = new Enemy(150,150,null,null);
-var dragon = new Enemy(500,500,null,null);
-
-// global counter
 var n  = 0;
 function updateN(){
   n++;
-  if(n>50){
+  if(n>100){
     n = 0;
   };
 };
-
-ogre.update = function(modifier){
-  if(this.health<0){
-    this.x = -100;
-    this.y = -100;
-  };
-  if((n>10&&n<25)||(n>45)){
-    ogreImage.src = "/images/ogreAttack.png";
-  } else {
-    ogreImage.src = "/images/ogre.png";
-  };
-  if(
-    (rangeDetector(guy.x,guy.y,ogre.x,ogre.y,30)===true)
-    &&
-    (ogreImage.src==="http://localhost:8080/images/ogreAttack.png")
-    ){
-      guy.health -= 1;
-      console.log("your health is " + guy.health + "!");
-    };
-};
-
-bat.update = function(modifier){
-  if(this.health<100){
-    this.x = -100;
-    this.y = -100;
-  };
-  if(rangeDetector(guy.x,guy.y,bat.x,bat.y,20)===true){
-    guy.health -= 5;
-  }
-};
-
-
-//======================items==============================
-
-function Item(x,y){
-  this.x = x;
-  this.y = y;
-}
-
-var house = new Item(null,null);
-var stairs = new Item(355,365);
-var coin = new Item(200,375);
-var gem = new Item(320, 65);
-var guitar = new Item(null, null);
-var tiara = new Item(null,null);
-
-coin.update = function(){
-  if(
-      (currentLevel===1)
-      &&
-      (rangeDetector(guy.x,guy.y,this.x,this.y)===true)){
-    this.y = -100;
-    this.x = -100;
-    var $coin = $('<li>');
-    $("#item-list").append($coin);
-    $coin.text("look, a coin.");
-  }
-}
-
-gem.update = function(){
-    if(
-      (currentLevel===2)
-      &&
-      (rangeDetector(guy.x,guy.y,this.x,this.y)===true)){
-        this.y = -100;
-        this.x = -100;
-      var $gem = $('<li>');
-      $("#item-list").append($gem);
-      $gem.text("heyyyy a gem.");
-    }
-}
-
-//========weapons===============
-
-function Weapon(power, x, y){
-  this.power = power;
-  this.x = x;
-  this.y = y;
-}
-
-var sword = new Weapon(10, 375, 165);
-var axe = new Weapon(15, null, null);
-var bow = new Weapon(10, null, null);
-
-
-sword.update = function(){
-  if(
-    (currentLevel===1)
-    &&
-    ((rangeDetector(guy.x,guy.y,sword.x,sword.y)===true))){
-      this.y=-100;
-      this.x=-100;
-      guy.equipSword();
-      var $sword = $('<li>');
-      $("#item-list").append($sword);
-      $sword.text("nice sword!");
-    }
-}
 
 //---------------------------------------------------------------------------
 //===========================================================================
@@ -467,7 +214,7 @@ addEventListener("keyup", function (e) {
 //===========================================================================
 //---------------------------------------------------------------------------
 
-//==========get mouse coordinates (for debugging) ===========
+//==========get mouse coordinates (for testing) ===========
 
 function logMouseCoordinates(e){
     var mouseX, mouseY;
@@ -496,66 +243,6 @@ $('#canvas').on('click', logMouseCoordinates);
 //???????????????????????????????????????????????????????????????????????????
 //???????????????????????????????????????????????????????????????????????????
 //???????????????????????????????????????????????????????????????????????????
-//---------------------------------------------------------------------------
-//===========================================================================
-//                      MENU UPDATE
-//===========================================================================
-//---------------------------------------------------------------------------
-
-function showStatus(){
-    $('#controls').css('display','none');
-    $('#show-controls').css('background-color','lightgray');
-    $('#status').css('display', 'block');
-    $('#show-status').css('background-color','snow');
-};
-
-function showControls(){
-  $('#status').css('display','none');
-  $('#show-status').css('background-color','lightgray');
-  $('#controls').css('display', 'block');
-  $('#show-controls').css('background-color','snow');
-};
-
-function power(){
-  showStatus();
-  powerOn = true;
-}
-
-$('#power').on('click',power);
-
-$('#show-status').on('click', showStatus);
-$('#show-controls').on('click', showControls);
-
-$('#reset').on('click', function(){
-  location.reload();
-})
-
-var kills   = 0
-
-function updateMenu(){
-  var killCount = function(){
-    if(ogre.x < 0){
-      kills++;
-    }
-    if (bat.x<0){
-      kills++;
-    }
-  };
-
-  $('#level').text(function(){
-    if(currentLevel===0){
-      return 'home';
-    } else{
-      return currentLevel;
-    };
-  });
-
-  $('#health-bar').css('width', guy.health + '%');
-
-  $('#health').text(guy.health);
-
-  $('#kills').text(kills);
-}
 
 //---------------------------------------------------------------------------
 //===========================================================================

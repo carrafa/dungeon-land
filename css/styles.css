@@ -23,7 +23,7 @@ header{
     padding:20px 3%;
     margin: 0 auto;
     height:40%;
-    min-width: 850px;
+    /*min-width: 850px;*/
     max-width: 1000px;
 }
 #canvas-container{
@@ -100,7 +100,7 @@ ul{
   display: inline-block;
   padding: 3px;
   background-color: lightgray;
-  border: 1px solid black;
+  border: 2px solid black;
   font-size: 1em;
 }
 
@@ -191,4 +191,62 @@ ul{
   background-color: red;
   height: 100%;
   width: 100%;
+}
+
+
+@media screen
+  and (max-width: 650px){
+
+  #menu-container{
+    display: block;
+    margin-top: 500px;
+    width: 500px;
+    height: 420px;
+  }
+
+  .key-container{
+    width: 100%;
+    margin-top: 30px;
+    margin-left: 20%;;
+  }
+
+  .alt{
+    display: none;
+  }
+
+  #or{
+    display: none;
+  }
+
+  .keys{
+    display: inline-block;
+    background-color: lightgray;
+    font-size: 1.3em;
+    border: 2px solid black;
+    padding-top: 2px;
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    margin-top: 0px;
+  }
+
+  .hidden-key{
+    background-color: rgba(0,0,0,0);
+    border: none;
+    margin: 2px;
+    color: rgba(0,0,0,0);
+  }
+
+  #up{
+    margin-bottom: -60px;
+  }
+
+  #spacebar{
+    width: 340px;
+    height: 60px;
+    margin-top: 20px;
+  }
+
+
+
 }
