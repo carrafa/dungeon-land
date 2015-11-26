@@ -2,7 +2,11 @@ console.log('ow, my browser');
 
 powerOn = true;
 
-//------------------level switcher-------------------
+//---------------------------------------------------------------------------
+//===========================================================================
+//                          LEVEL SWITCHER
+//===========================================================================
+//---------------------------------------------------------------------------
 
 var currentLevel = 0;
 
@@ -41,8 +45,6 @@ function levelSwitcher() {
 //                          GLOBAL VARIABLES
 //===========================================================================
 //---------------------------------------------------------------------------
-
-
 
 // global counter for animating
 
@@ -105,104 +107,19 @@ function rangeDetector(firstX, firstY, secondX, secondY, distance) {
 
 //============ wall detection =====================
 
-collision = function(direction) {
-  if (direction === 'right') {
-    clipWidth = 2;
-    clipHeight = 10;
-    clipOffsetX = 30;
-    clipOffsetY = 0;
-  }
-  if (direction === 'left') {
-    clipWidth = 2;
-    clipHeight = 10;
-    clipOffsetX = 0;
-    clipOffsetY = 0;
-  }
-  if (direction === 'up') {
-    clipWidth = 10;
-    clipHeight = 2;
-    clipOffsetX = 0;
-    clipOffsetY = 0;
-  }
-  if (direction === 'down') {
-    clipWidth = 10;
-    clipHeight = 2;
-    clipOffsetX = 0;
-    clipOffsetY = 30;
-  }
 
-  var clipLength = clipWidth * clipHeight;
-  var whatColor = ctx.getImageData(guy.x + clipOffsetX, guy.y + clipOffsetY,
-    clipWidth, clipHeight);
-
-  for (var i = 0; i < clipLength * 4; i += 4) {
+collision = function(x, y, w, h) {
+  var whatColor = ctx.getImageData(x, y, w, h);
+  for (var i = 0; i < w * h * 4; i += 4) {
     if ((whatColor.data[i] === 255) &&
       (whatColor.data[i + 1] === 0) &&
       (whatColor.data[i + 2] === 0)
     ) {
       console.log('red!');
       return true;
-    };
-  }
-}
-
-
-function populateBoardWithTrueForRed() {
-  var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  var data = imageData.data;
-  for (i = 0; i < data.length; i += 4) {
-    if (data[i] > 250 &&
-      (data[i + 1] < 10 && data[i + 2] < 10)) {
-      currentBoard[i] = true;
-      currentBoard[i + 1] = false;
-      currentBoard[i + 2] = false;
-      currentBoard[i + 3] = "taco";
-    } else {
-      currentBoard[i] = false;
-      currentBoard[i + 1] = false;
-      currentBoard[i + 2] = false;
-      currentBoard[i + 3] = "burrito";
-    }
-  };
-};
-
-function isItAWall(x, y) {
-  var x = Math.floor(x);
-  var y = Math.floor(y);
-  var isItRed = currentBoard[convertCoordinatesToArrayIndex(x, y)];
-  console.log('red', isItRed);
-  if (isItRed === true) {
-    return true;
-  } else {
-    return false;
-  };
-};
-
-//================for testing==============================
-
-var imageDataTester = ctx.getImageData(0, 0, canvas.width, canvas.height);
-var dataTest = imageDataTester.data;
-
-function convertCoordinatesToArrayIndex(x, y) {
-  return Math.floor(x) * (canvas.width * 4) + Math.floor(y) * 4
-};
-
-function arrayChecker(array1, array2) {
-  if (array1.length === array2.length) {
-    console.log('nice');
-  };
-  for (i = 0; i < array1.length; i++) {
-    if (array1[i] === 255 && array2[i] != true) {
-      console.log("aaaaaah!!!");
     }
   }
-  console.log('dun');
 };
-
-function currentLevelArrayChecker() {
-  arrayChecker(ctx.getImageData(0, 0, canvas.width, canvas.height).data,
-    currentBoard);
-}
 
 //==============setting up keyboard============
 
@@ -271,15 +188,11 @@ var update = function(modifier) {
 
 };
 
-
 //---------------------------------------------------------------------------
 //===========================================================================
 //                       RENDERING
 //===========================================================================
 //---------------------------------------------------------------------------
-
-
-//================ render things =====================
 
 var render = function() {
 

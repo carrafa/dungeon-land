@@ -84,53 +84,53 @@ var guy = {
     var nextPixelRight = this.x + this.speed * modifier;
 
     if (keysDown[38] === true || keysDown[87] === true) { // up
-      if (collision('up') === true) {
-        this.y = this.y
+      if (collision(this.x, nextPixelUp, 30, 30) === true) {
+        this.y = this.y;
       } else {
         this.y = nextPixelUp;
       }
-    };
+    }
 
     if (keysDown[40] === true || keysDown[83] === true) { // down
-      if (collision('down') === true) {
+      if (collision(this.x, nextPixelDown, 30, 30) === true) {
         this.y = this.y;
       } else {
         this.y = nextPixelDown;
       }
-    };
+    }
 
     if (keysDown[37] === true || keysDown[65] === true) { // left
       guyImage.src = guy.imageL;
       guy.offsetX = 0;
       guy.offsetY = 0;
-      if (collision('left') === true) {
+      if (collision(nextPixelLeft, this.y, 30, 30) === true) {
         this.x = this.x;
       } else if ((currentLevel === 1) && (this.x < ogre.x + 30)) {
         this.x = this.x;
       } else {
         this.x = nextPixelLeft;
       }
-    };
+    }
 
     if (keysDown[39] === true || keysDown[68] === true) { //right
       guyImage.src = guy.imageR;
       guy.offsetX = 0;
       guy.offsetY = 0;
-      if (collision('right') === true) {
+      if (collision(nextPixelRight, this.y, 30, 30) === true) {
         this.x = this.x;
       } else {
         this.x = nextPixelRight;
       }
 
-    };
+    }
 
     if (keysDown[32] === true || keysDown[67] === true) {
       this.attack();
-    };
+    }
 
     if (keysDown[77] === true) {
       this.becomeWizard();
-    };
+    }
     if (keysDown[78] === true) {
       this.equipSword();
     }
