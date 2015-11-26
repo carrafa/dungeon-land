@@ -210,67 +210,77 @@ bat.attack = function(){
 
 //======================items==============================
 
-function Item(x,y){
+function Item(level, x,y){
   this.x = x;
   this.y = y;
+  this.level = level;
+  this.update = function(){
+                  if((currentLevel===this.level)
+                  &&
+                  (rangeDetector(guy.x,guy.y,this.x,this.y)===true)){
+                    this.x = -100;
+                    this.y = -100;
+                    this.removeItem();
+                  }
+                };
 };
 
-var house = new Item(null,null);
-var stairs = new Item(355,365);
-var coin = new Item(200,375);
-var gem = new Item(320, 65);
-var guitar = new Item(null, null);
-var tiara = new Item(null,null);
+var house = new Item(0, null,null);
+var stairs = new Item(0, 355,365);
+var coin = new Item(1, 200,375);
+var gem = new Item(2, 320, 65);
+var guitar = new Item(3, null, null);
+var tiara = new Item(4, null,null);
 
-coin.update = function(){
-  if(
-      (currentLevel===1)
-      &&
-      (rangeDetector(guy.x,guy.y,this.x,this.y)===true)){
-    this.y = -100;
-    this.x = -100;
-    var $coin = $('<li>');
-    $("#item-list").append($coin);
-    $coin.text("look, a coin.");
-  }
-}
+coin.removeItem = function(){
+                    var $coin = $('<li>');
+                    $("#item-list").append($coin);
+                    $coin.text("look, a coin.");
+                  };
 
 gem.update = function(){
-    if(
-      (currentLevel===2)
-      &&
-      (rangeDetector(guy.x,guy.y,this.x,this.y)===true)){
-        this.y = -100;
-        this.x = -100;
-      var $gem = $('<li>');
-      $("#item-list").append($gem);
-      $gem.text("heyyyy a gem.");
-    }
-}
+                if(
+                  (currentLevel===2)
+                  &&
+                  (rangeDetector(guy.x,guy.y,this.x,this.y)===true)){
+                    this.y = -100;
+                    this.x = -100;
+                  var $gem = $('<li>');
+                  $("#item-list").append($gem);
+                  $gem.text("heyyyy a gem.");
+                }
+              };
 
 //========weapons===============
 
-function Weapon(power, x, y){
+var allWeapons = [];
+
+function Weapon(name, power, level, x, y){
   this.power = power;
   this.x = x;
   this.y = y;
+  this.update = function(){
+                  if(
+                    (currentLevel===level)
+                    &&
+                    (rangeDetector(guy.x,guy.y,this.x,this.y)===true)
+                    ){
+                      this.x = -100;
+                      this.y = -100;
+                      this.equip();
+                  };
+                }
 }
 
-var sword = new Weapon(10, 375, 165);
-var axe = new Weapon(15, null, null);
-var bow = new Weapon(10, null, null);
+var sword = new Weapon('sword', 10, 1, 375, 165);
+var axe = new Weapon('axe', 50, 3, null, null);
+var staff = new Weapon('staff', 5, 100, null, null);
 
 
-sword.update = function(){
-  if(
-    (currentLevel===1)
-    &&
-    ((rangeDetector(guy.x,guy.y,sword.x,sword.y)===true))){
-      this.y=-100;
-      this.x=-100;
-      guy.equipSword();
-      var $sword = $('<li>');
-      $("#item-list").append($sword);
-      $sword.text("nice sword!");
-    }
-}
+sword.equip = function(){
+                    guy.equipSword();
+                    var $sword = $('<li>');
+                    $("#item-list").append($sword);
+                    $sword.text("nice sword!");
+                    allWeapons.push(this);
+               };
