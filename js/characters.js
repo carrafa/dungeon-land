@@ -31,8 +31,8 @@ var guy = {
     if (this.weapon === "sword") {
       this.imageL = "/images/guy/guySwordL.png";
       this.imageR = "/images/guy/guySwordR.png";
-      this.imageLAttack = "/images/guySwordAttackL.png";
-      this.imageRAttack = "/images/guySwordAttackR.png";
+      this.imageLAttack = "/images/guy/guySwordAttackL.png";
+      this.imageRAttack = "/images/guy/guySwordAttackR.png";
     }
     this.power = 5;
     this.attackRange = 40

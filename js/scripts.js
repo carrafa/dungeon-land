@@ -127,6 +127,46 @@ addEventListener("keyup", function(e) {
   delete keysDown[e.keyCode];
 }, false);
 
+function clickControlsDown(num) {
+  keysDown[num] = true;
+};
+
+function clickControlsUp(num) {
+  keysDown[num] = false;
+};
+
+//==============setting up mouse controls======================
+$('#up').mousedown(function() {
+  clickControlsDown(87);
+});
+$('#up').mouseup(function() {
+  clickControlsUp(87);
+});
+$('#down').mousedown(function() {
+  clickControlsDown(83);
+});
+$('#down').mouseup(function() {
+  clickControlsUp(83);
+});
+$('#left').mousedown(function() {
+  clickControlsDown(65);
+});
+$('#left').mouseup(function() {
+  clickControlsUp(65);
+});
+$('#right').mousedown(function() {
+  clickControlsDown(68);
+});
+$('#right').mouseup(function() {
+  clickControlsUp(68);
+});
+$('#spacebar').mousedown(function() {
+  clickControlsDown(32);
+});
+$('#spacebar').mouseup(function() {
+  clickControlsUp(32);
+});
+
 //---------------------------------------------------------------------------
 //===========================================================================
 //                       COORDINATES

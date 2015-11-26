@@ -31,14 +31,15 @@ function power() {
   };
 }
 
+
 $('#power').on('click', power);
 
 $('#show-status').on('click', showStatus);
 $('#show-controls').on('click', showControls);
-
 $('#reset').on('click', function() {
   location.reload();
 });
+
 
 function updateMenu() {
   $('#level').text(function() {
