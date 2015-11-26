@@ -17,6 +17,12 @@ var levels = [{
 }, {
   x: 250,
   y: 200
+}, {
+  x: 12,
+  y: 13
+}, {
+  x: 250,
+  y: 200
 }];
 
 function levelSwitcher() {
