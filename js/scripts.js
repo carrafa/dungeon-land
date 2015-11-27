@@ -71,12 +71,12 @@ canvas.height = 500;
 canvas.setAttribute('id', 'canvas');
 document.getElementById('canvas-container').appendChild(canvas);
 
-var fogCanvas = document.createElement('canvas');
-var fogCtx = fogCanvas.getContext('2d');
-fogCanvas.width = 500;
-fogCanvas.height = 500;
-fogCanvas.setAttribute('id', 'fogCanvas');
-document.getElementById('canvas-container').appendChild(fogCanvas);
+// var fogCanvas = document.createElement('canvas');
+// var fogCtx = fogCanvas.getContext('2d');
+// fogCanvas.width = 500;
+// fogCanvas.height = 500;
+// fogCanvas.setAttribute('id', 'fogCanvas');
+// document.getElementById('canvas-container').appendChild(fogCanvas);
 
 //---------------------------------------------------------------------------
 //===========================================================================
@@ -173,7 +173,7 @@ $('#spacebar').mouseup(function() {
 //===========================================================================
 //---------------------------------------------------------------------------
 
-//==========get mouse coordinates (for testing) ===========
+//==========get mouse coordinates (for testing/level design) ===========
 
 function logMouseCoordinates(e) {
   var mouseX, mouseY;
@@ -211,8 +211,8 @@ $('#canvas').on('click', logMouseCoordinates);
 var update = function(modifier) {
 
   guy.update(modifier);
-  bat.update(modifier);
   ogre.update(modifier);
+  bat.update(modifier);
   coin.update();
   gem.update();
   sword.update();

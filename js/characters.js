@@ -67,16 +67,20 @@ var guy = {
         guy.offsetY = 0;
       }, 100);
     };
-    if ((rangeDetector(this.x, this.y, ogre.x, ogre.y, this.attackRange) ===
+    if (
+      (currentLevel === ogre.level) &&
+      (rangeDetector(this.x, this.y, ogre.x, ogre.y, this.attackRange) ===
         true) &&
-      (guyImage.src === "http://localhost:8080" + guy.imageLAttack)
+      (this.attacking === true)
     ) {
       punchSound.play();
       ogre.health = ogre.health - this.power;
     };
-    if ((rangeDetector(guy.x, guy.y, bat.x, bat.y, this.attackRange) ===
+    if (
+      (currentLevel === bat.level) &&
+      (rangeDetector(guy.x, guy.y, bat.x, bat.y, this.attackRange) ===
         true) &&
-      (guyImage.src === "http://localhost:8080" + this.imageLAttack)
+      (this.attacking === true)
     ) {
       bat.health = bat.health - this.power;
     };
@@ -161,8 +165,9 @@ function kills() {
   return START_ENEMIES - allEnemies.length;
 };
 
-function Enemy(name, health, power, attackRange, x, y) {
+function Enemy(name, level, health, power, attackRange, x, y) {
   this.name = name;
+  this.level = level;
   this.health = health;
   this.power = power;
   this.attackRange = attackRange;
@@ -180,6 +185,7 @@ Enemy.prototype = {
   },
   update: function(modifier) {
     if (
+      (currentLevel === this.level) &&
       (rangeDetector(guy.x, guy.y, this.x, this.y, this.attackRange) ===
         true) &&
       (this.attacking === true)
@@ -198,11 +204,11 @@ Enemy.prototype = {
   }
 };
 
-var ogre = new Enemy('ogre', 50, 2, 30, 50, 225);
-var bat = new Enemy('bat', 100, 4, 20, 250, 400);
-var skeleton = new Enemy('skeleton', 150, 150, null, null, null);
-var greenDragon = new Enemy('greenDragon', 500, 500, null, null, null);
-var redDragon = new Enemy('redDragon', 1000, 1000, null, null, null);
+var ogre = new Enemy('ogre', 1, 50, 2, 30, 50, 225);
+var bat = new Enemy('bat', 2, 100, 4, 20, 250, 400);
+var skeleton = new Enemy('skeleton', 3, 150, 150, null, null, null);
+var greenDragon = new Enemy('greenDragon', 4, 500, 500, null, null, null);
+var redDragon = new Enemy('redDragon', 5, 1000, 1000, null, null, null);
 
 
 ogre.attack = function() {
