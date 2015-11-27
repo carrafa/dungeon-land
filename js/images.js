@@ -160,12 +160,15 @@ gemImage.onload = new function() {
 };
 gemImage.src = "/images/items/gem.png"
 
+
+//======weapon images===================
+
 var swordReady = false;
 var swordImage = new Image();
 swordImage.onload = new function() {
   swordReady = true;
 };
-swordImage.src = "/images/items/sword.png"
+swordImage.src = "/images/weapons/sword.png"
 
 //======enemy images===================
 
@@ -189,3 +192,17 @@ batImage.onload = function() {
   batReady = true;
 }
 batImage.src = "/images/enemies/bat01.png";
+
+var bat02Ready = false;
+var bat02Image = new Image();
+bat02Image.onload = function() {
+  bat02Ready = true;
+}
+bat02Image.src = "/images/enemies/bat02.png";
+
+var bat03Ready = false;
+var bat03Image = new Image();
+bat03Image.onload = function() {
+  bat03Ready = true;
+}
+bat03Image.src = "/images/enemies/bat03.png";

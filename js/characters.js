@@ -230,6 +230,15 @@ bat.attack = function() {
   } else {
     this.attacking = false;
   }
+  if (n < 25) {
+    batImage.src = "/images/enemies/bat01.png";
+  }
+  if ((n > 25 && n < 50) || (n > 75)) {
+    batImage.src = "/images/enemies/bat02.png";
+  }
+  if (n > 50 && n < 75) {
+    batImage.src = "/images/enemies/bat03.png";
+  }
 };
 
 
