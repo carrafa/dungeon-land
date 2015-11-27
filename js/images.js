@@ -102,6 +102,34 @@ guySwordAttackRImage.onload = function() {
 };
 guySwordAttackRImage.src = "/images/guy/guySwordAttackR.png";
 
+var guyAxeLReady = false;
+var guyAxeLImage = new Image();
+guyAxeLImage.onload = function() {
+  guyAxeLReady = true;
+};
+guyAxeLImage.src = "/images/guy/guyAxeL.png";
+
+var guyAxeRReady = false;
+var guyAxeRImage = new Image();
+guyAxeRImage.onload = function() {
+  guyAxeRReady = true;
+};
+guyAxeRImage.src = "/images/guy/guyAxeR.png";
+
+var guyAxeAttackLReady = false;
+var guyAxeAttackLImage = new Image();
+guyAxeAttackLImage.onload = function() {
+  guyAxeAttackLReady = true;
+};
+guyAxeAttackLImage.src = "/images/guy/guyAxeAttackL.png";
+
+var guyAxeAttackRReady = false;
+var guyAxeAttackRImage = new Image();
+guyAxeAttackRImage.onload = function() {
+  guyAxeAttackRReady = true;
+};
+guyAxeAttackRImage.src = "/images/guy/guyAxeAttackR.png";
+
 var guyWizardLReady = false;
 var guyWizardLImage = new Image();
 guyWizardLImage.onload = function() {
@@ -169,6 +197,13 @@ swordImage.onload = new function() {
   swordReady = true;
 };
 swordImage.src = "/images/weapons/sword.png"
+
+var axeReady = false;
+var axeImage = new Image();
+axeImage.onload = new function() {
+  axeReady = true;
+};
+axeImage.src = "/images/weapons/axe.png"
 
 //======enemy images===================
 

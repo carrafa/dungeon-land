@@ -37,6 +37,17 @@ var guy = {
     this.power = 5;
     this.attackRange = 40
   },
+  equipAxe: function() {
+    this.weapon = "Axe";
+    if (this.weapon === "Axe") {
+      this.imageL = "/images/guy/guyAxeL.png";
+      this.imageR = "/images/guy/guyAxeR.png";
+      this.imageLAttack = "/images/guy/guyAxeAttackL.png";
+      this.imageRAttack = "/images/guy/guyAxeAttackR.png";
+    }
+    this.power = 5;
+    this.attackRange = 40
+  },
   becomeWizard: function() {
     this.weapon = "wizard";
     if (this.weapon === "wizard") {
@@ -150,6 +161,9 @@ var guy = {
     }
     if (keysDown[78] === true) {
       this.equipSword();
+    }
+    if (keysDown[66] === true) {
+      this.equipAxe();
     }
   }
 };
