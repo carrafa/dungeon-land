@@ -268,7 +268,7 @@ var tiara = new Item(4, null, null);
 
 coin.removeItem = function() {
   var $coin = $('<li>');
-  $("#item-list").append($coin);
+  $("#status ul").append($coin);
   $coin.text("look, a coin.");
 };
 
@@ -279,7 +279,7 @@ gem.update = function() {
     this.y = -100;
     this.x = -100;
     var $gem = $('<li>');
-    $("#item-list").append($gem);
+    $("#status ul").append($gem);
     $gem.text("heyyyy a gem.");
   }
 };
@@ -312,7 +312,7 @@ var staff = new Weapon('staff', 5, 100, null, null);
 sword.equip = function() {
   guy.equipSword();
   var $sword = $('<li>');
-  $("#item-list").append($sword);
+  $("#status ul").append($sword);
   $sword.text("nice sword!");
   allWeapons.push(this);
 };

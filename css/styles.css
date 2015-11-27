@@ -1,4 +1,4 @@
-body{
+body {
   background-color: dodgerblue;
   margin: 0;
   min-width: 950px;
@@ -6,18 +6,18 @@ body{
   font-family: 'Press Start 2P', cursive;
 }
 
-canvas{
+canvas {
   border: 5px solid snow;
   position: absolute;
 }
 
-header{
+header {
   font-size: 3em;
   color: snow;
   text-align: center;
 }
 
-#main{
+#main {
     display:block;
     width:90%;
     padding:20px 3%;
@@ -26,7 +26,7 @@ header{
     /*min-width: 850px;*/
     max-width: 1000px;
 }
-#canvas-container{
+#canvas-container {
     display:inline-block;
     width:60%;
     padding:20px 3%;
@@ -34,10 +34,19 @@ header{
 }
 
 #item-list{
-  list-style: none;
+
 }
 
-#menu-container{
+ul{
+  list-style-type: none;
+  float: right;
+  margin-left: -40px;
+  width: 80%;
+  max-height: 120px;
+  overflow: auto;
+}
+
+#menu-container {
   margin-top: 20px;
   margin-left: 20px;
   display: inline-block;
@@ -48,14 +57,14 @@ header{
   position: absolute;
 }
 
-#menu-bar{
+#menu-bar {
   background-color: deeppink;
   width: 100%;
   margin: 0;
   height: 40px;
 }
 
-.menu-bar-button{
+.menu-bar-button {
   width: 50%;
   height: 100%;
   display: inline-block;
@@ -64,38 +73,34 @@ header{
   font-size: 1em;
 }
 
-#show-controls{
-  background-color: snow;
+#show-controls {
+  background-color: lightgray;
   float: right;
 }
 
-#show-status{
-  background-color: lightgray;
+#show-status {
+  background-color: snow;
 }
 
-h1{
+h1 {
   font-size: 2em;
 }
-ul{
-  list-style-type: none;
-  margin-left: -40px;
-  overflow: scroll;
-  height: 150px;
-}
 
-#controls{
+
+#controls {
+  display:none;
   padding-left: 10px;
   margin-top: 10px;
 }
 
-#on-off-container{
+#on-off-container {
   margin-top: 50px;
   text-align: center;
   width: 100%;
   height: 50px;
 }
 
-.on-off{
+.on-off {
   position: relative;
   display: inline-block;
   padding: 3px;
@@ -104,23 +109,23 @@ ul{
   font-size: 1em;
 }
 
-#power{
+#power {
   color: red;
 }
 
-.key-container{
+.key-container {
   width: 300px;
   margin-top: 30px;
   margin-left: 20%;;
 }
 
-#or{
+#or {
   width: 300px;
   margin-left: 40%;
   margin-top: 30px;
 }
 
-.keys{
+.keys {
   display: inline-block;
   background-color: lightgray;
   font-size: 1.3em;
@@ -132,14 +137,14 @@ ul{
   margin-top: 5px;
 }
 
-.hidden-key{
+.hidden-key {
   background-color: rgba(0,0,0,0);
   border: none;
   margin: 2px;
   color: rgba(0,0,0,0);
 }
 
-#spacebar{
+#spacebar {
   margin-top: 5px;
   display: block;
   width: 130px;
@@ -147,12 +152,20 @@ ul{
   font-size: 1em;
 }
 
-#music-controls{
+#c {
+  margin-top: 5px;
+  display: block;
+  width: 130px;
+  height: 25px;
+  font-size: 1em;
+}
+
+#music-controls {
   width: 100%;
   text-align: center;
 }
 
-.music-buttons{
+.music-buttons {
   display: inline-block;
   background-color: lightgray;
   font-size: 1.3em;
@@ -164,36 +177,36 @@ ul{
   margin-top: 5px;
 }
 
-#up{
+#up {
   background-image: url(/images/icons/up.gif);
   background-size: cover;
 }
-#down{
+#down {
   background-image: url(/images/icons/down.gif);
   background-size: cover;
 }
-#left{
+#left  {
   background-image: url(/images/icons/left.gif);
   background-size: cover;
 }
-#right{
+#right {
   background-image: url(/images/icons/right.gif);
   background-size: cover;
 }
 
-#status{
-  display: none;
+#status {
+  display: block;
   margin-top: 50px;
   padding-left: 10px;
   padding-right: 10px;
   text-align: right;
 }
 
-#status h1{
+#status h1 {
   margin-bottom: -15px;
 }
 
-#health-bar-container{
+#health-bar-container {
   border: 1px solid black;
   height: 10px;
   width: 200px;
@@ -203,7 +216,7 @@ ul{
   display: block;
 }
 
-#health-bar{
+#health-bar {
   background-color: red;
   height: 100%;
   width: 100%;
@@ -211,30 +224,30 @@ ul{
 
 
 @media screen
-  and (max-width: 650px){
+  and (max-width: 650px) {
 
-  #menu-container{
+  #menu-container {
     display: block;
     margin-top: 500px;
     width: 500px;
     height: 420px;
   }
 
-  .key-container{
+  .key-container {
     width: 100%;
     margin-top: 30px;
     margin-left: 20%;;
   }
 
-  .alt{
+  .alt {
     display: none;
   }
 
-  #or{
+  #or {
     display: none;
   }
 
-  .keys{
+  .keys {
     display: inline-block;
     background-color: lightgray;
     font-size: 1.3em;
@@ -246,28 +259,25 @@ ul{
     margin-top: 0px;
   }
 
-  .hidden-key{
+  .hidden-key {
     background-color: rgba(0,0,0,0);
     border: none;
     margin: 2px;
     color: rgba(0,0,0,0);
   }
 
-  #up{
+  #up {
     margin-bottom: -60px;
   }
 
-  #c{
+  #c {
     width: 340px;
     height: 60px;
     margin-top: 20px;
   }
-  #spacebar{
+  #spacebar {
     width: 340px;
     height: 60px;
     margin-top: 20px;
   }
-
-
-
 }

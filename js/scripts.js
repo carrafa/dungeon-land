@@ -306,7 +306,9 @@ requestAnimationFrame = w.requestAnimationFrame ||
   w.msRequestAnimationFrame ||
   w.mozRequestAnimationFrame;
 
-
+$(function() {
+  theme.play();
+});
 
 var then = Date.now();
 main();

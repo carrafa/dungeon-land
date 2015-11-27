@@ -18,18 +18,18 @@ function showControls() {
   $('#show-controls').css('background-color', 'snow');
 };
 
-function power() {
-  if (powerOn === true) {
-    powerOn = false;
-    theme.pause();
-    theme.currentTime = 0;
-  } else if (powerOn === false) {
-    powerOn = true;
-    showStatus();
-    main();
-    theme.play();
-  };
-}
+// function power() {
+//   if (powerOn === true) {
+//     powerOn = false;
+//     theme.pause();
+//     theme.currentTime = 0;
+//   } else if (powerOn === false) {
+//     powerOn = true;
+//     showStatus();
+//     main();
+//     theme.play();
+//   }
+// };
 
 
 $('#power').on('click', power);
@@ -38,6 +38,18 @@ $('#show-status').on('click', showStatus);
 $('#show-controls').on('click', showControls);
 $('#reset').on('click', function() {
   location.reload();
+});
+
+$('#pause').on('click', function() {
+  if (theme.paused === false) {
+    theme.pause();
+  } else {
+    theme.play();
+  }
+});
+
+$('#play').on('click', function() {
+  theme.play();
 });
 
 
@@ -55,4 +67,4 @@ function updateMenu() {
   $('#health').text(guy.health);
 
   $('#kills').text(kills());
-}
+};
