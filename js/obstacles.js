@@ -27,40 +27,60 @@ function flashyWalls() {
 
 //=======================flames===========================
 
-function FlameCreator(x, y) {
+function FlameCreator(level, r, x, y) {
+  this.r = r;
+  this.level = level;
   this.x = x;
   this.y = y;
   this.image = ["/images/traps/flame01.png",
     "/images/traps/flame02.png",
     "/images/traps/flame03.png",
     "/images/traps/flame02.png",
-    ""
+    "", "", "", "", "", "", ""
   ];
   this.killer = false;
 }
 
 FlameCreator.prototype = {
   update: function() {
-    flameImage.src = this.image[Math.floor(n / 21)];
-    if (Math.floor(n / 21) < 4) {
-      this.killer = true;
+    flameImage.src = this.image[Math.floor(n / this.r)];
+    if ((Math.floor(n / this.r) < 4)) {
+      if (this.level === currentLevel) {
+        this.killer = true;
+      }
     } else {
       this.killer = false;
     }
     if (
       rangeDetector(guy.x, guy.y, this.x, this.y, 20) === true &&
       this.killer === true
-
     ) {
       guy.health -= 50;
     }
   }
 };
 
-var flame01 = new FlameCreator(300, 135);
+//level 1 flames
+var flame01 = new FlameCreator(1, 10, 300, 135);
+
+//level 2 flames
+var flame02 = new FlameCreator(2, 10, 150, 465)
+
+//level 3 flames
+var flame03 = new FlameCreator(3, 10, 390, 350)
+var flame04 = new FlameCreator(3, 10, 325, 350)
+var flame05 = new FlameCreator(3, 10, 260, 350)
+var flame06 = new FlameCreator(3, 10, 200, 350)
+var flame07 = new FlameCreator(3, 10, 130, 350)
 
 updateAllFlames = function() {
   flame01.update();
+  flame02.update();
+  flame03.update();
+  flame04.update();
+  flame05.update();
+  flame06.update();
+  flame07.update();
 }
 
 
@@ -68,6 +88,16 @@ function drawFlames() {
   if (flameReady) {
     if (currentLevel === 1) {
       ctx.drawImage(flameImage, flame01.x, flame01.y);
+    }
+    if (currentLevel === 2) {
+      ctx.drawImage(flameImage, flame02.x, flame02.y);
+    }
+    if (currentLevel === 3) {
+      ctx.drawImage(flameImage, flame03.x, flame03.y);
+      ctx.drawImage(flameImage, flame04.x, flame04.y);
+      ctx.drawImage(flameImage, flame05.x, flame05.y);
+      ctx.drawImage(flameImage, flame06.x, flame06.y);
+      ctx.drawImage(flameImage, flame07.x, flame07.y);
     }
   }
 };
