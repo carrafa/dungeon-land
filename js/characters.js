@@ -267,6 +267,10 @@ bat.attack = function() {
   }
 };
 
+function updateEnemies() {
+  ogre.update();
+  bat.update();
+}
 
 
 //======================items==============================
@@ -310,6 +314,11 @@ gem.update = function() {
   }
 };
 
+function updateItems() {
+  coin.update();
+  gem.update();
+}
+
 //========weapons===============
 
 var allWeapons = [];
@@ -331,7 +340,7 @@ function Weapon(name, power, level, x, y) {
 }
 
 var sword = new Weapon('sword', 10, 1, 130, 125);
-var axe = new Weapon('axe', 50, 3, null, null);
+var axe = new Weapon('axe', 50, 3, 270, 115);
 var staff = new Weapon('staff', 5, 100, null, null);
 
 
@@ -342,3 +351,16 @@ sword.equip = function() {
   $sword.text("nice sword!");
   allWeapons.push(this);
 };
+
+axe.equip = function() {
+  guy.equipAxe();
+  var $axe = $('<li>');
+  $("#status ul").append($axe);
+  $axe.text("battle axe!!");
+  allWeapons.push(this);
+};
+
+function updateWeapons() {
+  sword.update();
+  axe.update();
+}

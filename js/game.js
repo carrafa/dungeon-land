@@ -259,11 +259,9 @@ var update = function(modifier) {
 
   updateAllFlames();
   guy.update(modifier);
-  ogre.update(modifier);
-  bat.update(modifier);
-  coin.update();
-  gem.update();
-  sword.update();
+  updateEnemies();
+  updateItems();
+  updateWeapons();
   levelSwitcher();
   updateN();
   updateMenu();
@@ -302,6 +300,10 @@ var render = function() {
 
   if (swordReady && currentLevel === 1) {
     ctx.drawImage(swordImage, sword.x, sword.y)
+  }
+
+  if (axeReady && currentLevel === 3) {
+    ctx.drawImage(axeImage, axe.x, axe.y);
   }
 
   if (ogreReady && currentLevel === 1) {

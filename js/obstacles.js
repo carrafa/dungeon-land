@@ -21,6 +21,14 @@ function flashyWalls() {
     createWall(310, 380, 60, 5, timingIntervals.fourTimes)
     createWall(370, 65, 5, 60, timingIntervals.percentage, 90)
   }
+  if (currentLevel === 3) {
+    createWall(430, 375, 5, 70, timingIntervals.percentage, 50);
+    createWall(365, 275, 5, 70, timingIntervals.percentage, 50);
+    createWall(300, 375, 5, 70, timingIntervals.percentage, 50);
+    createWall(230, 275, 5, 70, timingIntervals.percentage, 50);
+    createWall(170, 375, 5, 70, timingIntervals.percentage, 50);
+    createWall(105, 275, 5, 70, timingIntervals.percentage, 50);
+  }
 }
 
 
@@ -28,8 +36,8 @@ function flashyWalls() {
 //=======================flames===========================
 
 function FlameCreator(level, r, x, y) {
-  this.r = r;
   this.level = level;
+  this.r = r;
   this.x = x;
   this.y = y;
   this.image = ["/images/traps/flame01.png",
