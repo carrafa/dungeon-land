@@ -26,6 +26,17 @@ var guy = {
   offsetY: 0,
   xp: 0,
   yp: 0,
+  disarm: function() {
+    this.weapon = "unarmed";
+    if (this.weapon === "unarmed") {
+      this.imageL = "/images/guy/guyL.png";
+      this.imageR = "/images/guy/guyR.png";
+      this.imageLAttack = "/images/guy/guyAttackL.png";
+      this.imageRAttack = "/images/guy/guyAttackR.png";
+    }
+    this.power = 5;
+    this.attackRange = 40
+  },
   equipSword: function() {
     this.weapon = "sword";
     if (this.weapon === "sword") {
@@ -34,8 +45,8 @@ var guy = {
       this.imageLAttack = "/images/guy/guySwordAttackL.png";
       this.imageRAttack = "/images/guy/guySwordAttackR.png";
     }
-    this.power = 5;
-    this.attackRange = 40
+    this.power = 10;
+    this.attackRange = 50
   },
   equipAxe: function() {
     this.weapon = "Axe";
@@ -45,8 +56,8 @@ var guy = {
       this.imageLAttack = "/images/guy/guyAxeAttackL.png";
       this.imageRAttack = "/images/guy/guyAxeAttackR.png";
     }
-    this.power = 5;
-    this.attackRange = 40
+    this.power = 25;
+    this.attackRange = 50
   },
   becomeWizard: function() {
     this.weapon = "wizard";
@@ -57,24 +68,26 @@ var guy = {
       this.imageRAttack = "/images/guy/guyWizardAttackR.png";
     };
     this.power = 100;
-    this.attackRange = 50;
+    this.attackRange = 70;
   },
   attack: function() {
     console.log('hyaaaa!');
     if (this.direction === "left") {
       guyImage.src = guy.imageLAttack;
-      this.offsetX = 0;
-      this.offsetY = 0;
-      setTimeout(function() {
-        guyImage.src = guy.imageL;
-        this.offsetX = 0;
-        this.offsetY = 0;
-      }, 100);
-    } else if (this.direction === "right") {
-      guyImage.src = this.imageRAttack;
+      this.offsetX = -30;
       this.offsetY = -10;
       setTimeout(function() {
+        guy.offsetX = 0;
+        guy.offsetY = 0;
+        guyImage.src = guy.imageL;
+      }, 100);
+    } else if (this.direction === "right") {
+      this.offsetX = 0;
+      this.offsetY = -2
+      guyImage.src = this.imageRAttack;
+      setTimeout(function() {
         guyImage.src = guy.imageR;
+        guy.offsetX = 0;
         guy.offsetY = 0;
       }, 100);
     };
@@ -123,8 +136,6 @@ var guy = {
     if (keysDown[37] === true || keysDown[65] === true) { // left
       this.direction = "left";
       guyImage.src = guy.imageL;
-      guy.offsetX = 0;
-      guy.offsetY = 0;
       if (collision(nextPixelLeft, this.y, 30, 30) === true) {
         this.x = this.x;
       } else if ((currentLevel === 1) && (this.x < ogre.x + 30)) {
@@ -137,8 +148,6 @@ var guy = {
     if (keysDown[39] === true || keysDown[68] === true) { //right
       this.direction = "right";
       guyImage.src = guy.imageR;
-      guy.offsetX = 0;
-      guy.offsetY = 0;
       if (collision(nextPixelRight, this.y, 30, 30) === true) {
         this.x = this.x;
       } else {
