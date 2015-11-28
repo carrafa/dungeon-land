@@ -39,13 +39,6 @@ deadImage.onload = function() {
 };
 deadImage.src = "/images/bgs/dead.png";
 
-var resetReady = false;
-var resetImage = new Image();
-resetImage.onload = function() {
-  resetReady = true;
-};
-resetImage.src = "/images/bgs/reset.png";
-
 //======character images===================
 
 var guyReady = false;

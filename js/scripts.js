@@ -10,8 +10,6 @@ powerOn = true;
 
 var currentLevel = 0;
 
-currentBoard = [];
-
 var stairLocation = [{
   x: 355,
   y: 365
@@ -46,13 +44,22 @@ function levelSwitcher() {
   stairs.y = stairLocation[currentLevel].y;
 };
 
+//====for testing =====
+
+$('#level').on('click', function() {
+  currentLevel++;
+  if (currentLevel > 7) {
+    currentLevel = 0;
+  }
+})
+
 //---------------------------------------------------------------------------
 //===========================================================================
 //                          GLOBAL VARIABLES
 //===========================================================================
 //---------------------------------------------------------------------------
 
-// global counter for animating
+// === global counter for animating ===
 
 var n = 0;
 
@@ -61,6 +68,40 @@ function updateN() {
   if (n > 100) {
     n = 0;
   };
+};
+
+// ==== for timing stuff ====
+
+timingIntervals = {
+  twice: function() {
+    if (n > 50)
+      return true;
+  },
+  thrice: function() {
+    if (n > 66) {
+      return true;
+    }
+  },
+  fourTimes: function() {
+    if (
+      (n < 25) ||
+      (n > 50 && n < 75)
+    )
+      return true;
+  },
+  fiveTimes: function() {
+    if (
+      (n < 10) ||
+      (n > 50 && n < 70) ||
+      (n > 90)
+    )
+      return true;
+  },
+  percentage: function(num) {
+    if (n < num) {
+      return true;
+    }
+  },
 };
 
 //---------------------------------------------------------------------------
@@ -239,6 +280,8 @@ var render = function() {
   if (bgs[currentLevel]) {
     ctx.drawImage(bgs[currentLevel].image, 0, 0);
   }
+
+  drawAllWallObstacles();
 
   if (currentLevel === 0) {
     ctx.drawImage(houseImage, 10, 10);
