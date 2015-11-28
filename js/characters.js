@@ -94,6 +94,8 @@ var guy = {
     damageInflictor(ogre);
     damageInflictor(bat);
     damageInflictor(greenDragon);
+    damageInflictor(skeleton);
+    damageInflictor(redDragon);
   },
   update: function(modifier) {
 
@@ -165,15 +167,15 @@ var guy = {
   }
 };
 
-function damageInflictor(badGuy) {
+function damageInflictor(enemy) {
   if (
-    (currentLevel === badGuy.level) &&
-    (rangeDetector(guy.x, guy.y, badGuy.x, badGuy.y, guy.attackRange) ===
+    (currentLevel === enemy.level) &&
+    (rangeDetector(guy.x, guy.y, enemy.x, enemy.y, guy.attackRange) ===
       true) &&
     (guy.attacking === true)
   ) {
     punchSound.play();
-    badGuy.health = badGuy.health - guy.power;
+    enemy.health = enemy.health - guy.power;
   }
 };
 

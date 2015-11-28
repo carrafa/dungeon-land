@@ -36,27 +36,29 @@ function flashyWalls() {
 
 //=======================flames===========================
 
-function FlameCreator(level, r, x, y) {
+function FlameCreator(level, r, modifier, x, y) {
   this.level = level;
   this.r = r;
+  this.modifier = modifier;
   this.x = x;
   this.y = y;
+  this.killer = false;
   this.image = ["/images/traps/flame01.png",
     "/images/traps/flame02.png",
     "/images/traps/flame03.png",
     "/images/traps/flame02.png",
     "", "", "", "", "", "", ""
   ];
-  this.killer = false;
 }
 
 FlameCreator.prototype = {
   update: function() {
-    flameImage.src = this.image[Math.floor(n / this.r)];
-    if ((Math.floor(n / this.r) < 4)) {
-      if (this.level === currentLevel) {
-        this.killer = true;
-      }
+    flameImage.src = this.image[Math.floor((n / this.r) + this.modifier)];
+    if (
+      (Math.floor((n / this.r) + this.modifier) < 4) &&
+      (this.level === currentLevel)
+    ) {
+      this.killer = true;
     } else {
       this.killer = false;
     }
@@ -70,31 +72,58 @@ FlameCreator.prototype = {
 };
 
 //level 1 flames
-var flame01 = new FlameCreator(1, 10, 300, 135);
+var flame01 = new FlameCreator(1, 10, 0, 300, 135);
 
 //level 2 flames
-var flame02 = new FlameCreator(2, 10, 150, 465)
+var flame02 = new FlameCreator(2, 10, 0, 150, 465)
 
 //level 3 flames
-var flame03 = new FlameCreator(3, 10, 390, 350)
-var flame04 = new FlameCreator(3, 10, 325, 350)
-var flame05 = new FlameCreator(3, 10, 260, 350)
-var flame06 = new FlameCreator(3, 10, 200, 350)
-var flame07 = new FlameCreator(3, 10, 130, 350)
-var flame08 = new FlameCreator(3, 10, 225, 95)
-var flame09 = new FlameCreator(3, 10, 225, 475)
+var flame04 = new FlameCreator(3, 10, 0, 325, 350)
+var flame03 = new FlameCreator(3, 10, 0, 390, 350)
+var flame05 = new FlameCreator(3, 10, 0, 260, 350)
+var flame06 = new FlameCreator(3, 10, 0, 200, 350)
+var flame07 = new FlameCreator(3, 10, 0, 130, 350)
+var flame08 = new FlameCreator(3, 10, 0, 225, 95)
+var flame09 = new FlameCreator(3, 10, 0, 225, 475)
+
+//level 5 flames
+var flame10 = new FlameCreator(5, 10, 0, 245, 343)
+var flame11 = new FlameCreator(5, 101, 2, 245, 323)
+var flame12 = new FlameCreator(5, 101, 2, 245, 303)
+var flame13 = new FlameCreator(5, 101, 2, 245, 283)
+
+var flame14 = new FlameCreator(5, 101, 2, 177, 343)
+var flame15 = new FlameCreator(5, 101, 2, 177, 323)
+var flame16 = new FlameCreator(5, 101, 2, 177, 303)
+var flame17 = new FlameCreator(5, 101, 2, 177, 283)
 
 updateAllFlames = function() {
-  flame01.update();
-  flame02.update();
-  flame03.update();
-  flame04.update();
-  flame05.update();
-  flame06.update();
-  flame07.update();
-  flame08.update();
-  flame09.update();
-}
+  if (currentLevel === 1) {
+    flame01.update();
+  }
+  if (currentLevel === 2) {
+    flame02.update();
+  }
+  if (currentLevel === 3) {
+    flame03.update();
+    flame04.update();
+    flame05.update();
+    flame06.update();
+    flame07.update();
+    flame08.update();
+    flame09.update();
+  }
+  if (currentLevel === 5) {
+    flame10.update();
+    flame11.update();
+    flame12.update();
+    flame13.update();
+    flame14.update();
+    flame15.update();
+    flame16.update();
+    flame17.update();
+  }
+};
 
 
 function drawFlames() {
@@ -114,12 +143,21 @@ function drawFlames() {
       ctx.drawImage(flameImage, flame08.x, flame08.y);
       ctx.drawImage(flameImage, flame09.x, flame09.y);
     }
+    if (currentLevel === 5) {
+      ctx.drawImage(flameImage, flame10.x, flame10.y);
+      ctx.drawImage(flameImage, flame11.x, flame11.y);
+      ctx.drawImage(flameImage, flame12.x, flame12.y);
+      ctx.drawImage(flameImage, flame13.x, flame13.y);
+      ctx.drawImage(flameImage, flame14.x, flame14.y);
+      ctx.drawImage(flameImage, flame15.x, flame15.y);
+      ctx.drawImage(flameImage, flame16.x, flame16.y);
+      ctx.drawImage(flameImage, flame17.x, flame17.y);
+    }
   }
 };
 
 
 function drawObstacles() {
   flashyWalls();
-  drawFlames(250, 250);
-  drawFlames(100, 100);
+  drawFlames();
 }
