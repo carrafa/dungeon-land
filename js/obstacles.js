@@ -63,7 +63,7 @@ FlameCreator.prototype = {
       this.killer = false;
     }
     if (
-      rangeDetector(guy.x, guy.y, this.x, this.y, 20) === true &&
+      rangeDetector(guy.x, guy.y, this.x, this.y, 10) === true &&
       this.killer === true
     ) {
       guy.health -= 50;

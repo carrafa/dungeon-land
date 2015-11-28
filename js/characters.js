@@ -274,12 +274,29 @@ greenDragon.attack = function() {
   }
 }
 
+skeleton.image = [
+  "/images/enemies/skeleton01.png",
+  "/images/enemies/skeleton02.png",
+  "/images/enemies/skeleton03.png",
+  "/images/enemies/skeleton04.png",
+  "/images/enemies/skeleton05.png",
+  "/images/enemies/skeleton04.png",
+  "/images/enemies/skeleton03.png",
+  "/images/enemies/skeleton02.png",
+  "/images/enemies/skeleton01.png",
+  "/images/enemies/skeleton01.png",
+  "/images/enemies/skeleton01.png",
+  "/images/enemies/skeleton01.png"
+]
+
 skeleton.attack = function() {
-  if (currentLevel === 4) {
+  skeletonImage.src = skeleton.image[Math.floor(n / 9)];
+  if (currentLevel === 5) {
     this.attacking = true;
   } else {
     this.attacking = false;
   }
+
 }
 
 redDragon.attack = function() {
