@@ -46,7 +46,7 @@ var guy = {
       this.imageRAttack = "/images/guy/guySwordAttackR.png";
     }
     this.power = 10;
-    this.attackRange = 50;
+    this.attackRange = 40;
   },
   equipAxe: function() {
     this.weapon = "Axe";
@@ -91,25 +91,10 @@ var guy = {
         guy.offsetY = 0;
       }, 100);
     };
-    if (
-      (currentLevel === ogre.level) &&
-      (rangeDetector(this.x, this.y, ogre.x, ogre.y, this.attackRange) ===
-        true) &&
-      (this.attacking === true)
-    ) {
-      punchSound.play();
-      ogre.health = ogre.health - this.power;
-    };
-    if (
-      (currentLevel === bat.level) &&
-      (rangeDetector(guy.x, guy.y, bat.x, bat.y, this.attackRange) ===
-        true) &&
-      (this.attacking === true)
-    ) {
-      bat.health = bat.health - this.power;
-    };
+    damageInflictor(ogre);
+    damageInflictor(bat);
+    damageInflictor(greenDragon);
   },
-
   update: function(modifier) {
 
     var nextPixelUp = this.y - this.speed * modifier;
@@ -180,6 +165,18 @@ var guy = {
   }
 };
 
+function damageInflictor(badGuy) {
+  if (
+    (currentLevel === badGuy.level) &&
+    (rangeDetector(guy.x, guy.y, badGuy.x, badGuy.y, guy.attackRange) ===
+      true) &&
+    (guy.attacking === true)
+  ) {
+    punchSound.play();
+    badGuy.health = badGuy.health - guy.power;
+  }
+};
+
 
 //============================enemies==============================
 
@@ -232,7 +229,7 @@ Enemy.prototype = {
 
 var ogre = new Enemy('ogre', 1, 50, 2, 30, 50, 225);
 var bat = new Enemy('bat', 2, 100, 4, 20, 250, 400);
-var greenDragon = new Enemy('greenDragon', 4, 200, 500, 10, 400, 450);
+var greenDragon = new Enemy('greenDragon', 4, 200, 500, 30, 400, 450);
 var skeleton = new Enemy('skeleton', 5, 500, 150, null, null, null);
 var redDragon = new Enemy('redDragon', 6, 1000, 1000, null, null, null);
 
