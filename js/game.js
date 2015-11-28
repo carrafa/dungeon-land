@@ -257,11 +257,11 @@ $('#canvas').on('click', logMouseCoordinates);
 
 var update = function(modifier) {
 
-  updateAllFlames();
+  updateAllFlames(modifier);
   guy.update(modifier);
-  updateEnemies();
-  updateItems();
-  updateWeapons();
+  updateEnemies(modifier);
+  updateItems(modifier);
+  updateWeapons(modifier);
   levelSwitcher();
   updateN();
   updateMenu();
