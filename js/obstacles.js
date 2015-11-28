@@ -34,14 +34,24 @@ function FlameCreator(x, y) {
     "/images/traps/flame02.png",
     "/images/traps/flame03.png",
     "/images/traps/flame02.png",
-  ]
-
+    ""
+  ];
+  this.killer = false;
 }
 
 FlameCreator.prototype = {
   update: function() {
-    flameImage.src = this.image[Math.floor(n / 26)];
-    if (rangeDetector(guy.x, guy.y, this.x, this.y, 20) === true) {
+    flameImage.src = this.image[Math.floor(n / 21)];
+    if (Math.floor(n / 21) < 4) {
+      this.killer = true;
+    } else {
+      this.killer = false;
+    }
+    if (
+      rangeDetector(guy.x, guy.y, this.x, this.y, 20) === true &&
+      this.killer === true
+
+    ) {
       guy.health -= 50;
     }
   }
