@@ -257,6 +257,7 @@ $('#canvas').on('click', logMouseCoordinates);
 
 var update = function(modifier) {
 
+  updateAllFlames();
   guy.update(modifier);
   ogre.update(modifier);
   bat.update(modifier);

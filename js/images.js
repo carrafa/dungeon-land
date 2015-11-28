@@ -236,3 +236,27 @@ bat03Image.onload = function() {
   bat03Ready = true;
 }
 bat03Image.src = "/images/enemies/bat03.png";
+
+
+//=====traps=======
+
+var flameReady = false;
+var flameImage = new Image();
+flameImage.onload = function() {
+  flameReady = true;
+}
+flameImage.src = "/images/traps/flame01.png";
+
+var flame02Ready = false;
+var flame02Image = new Image();
+flame02Image.onload = function() {
+  flame02Ready = true;
+}
+flame02Image.src = "/images/traps/flame02.png";
+
+var flame03Ready = false;
+var flame03Image = new Image();
+flame03Image.onload = function() {
+  flame03Ready = true;
+}
+flame03Image.src = "/images/traps/flame03.png";
