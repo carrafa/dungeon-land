@@ -33,6 +33,7 @@ var guy = {
       this.imageR = "/images/guy/guyR.png";
       this.imageLAttack = "/images/guy/guyAttackL.png";
       this.imageRAttack = "/images/guy/guyAttackR.png";
+
     }
     this.power = 5;
     this.attackRange = 40
@@ -75,7 +76,7 @@ var guy = {
     if (this.direction === "left") {
       guyImage.src = guy.imageLAttack;
       this.offsetX = -30;
-      this.offsetY = -10;
+      this.offsetY = -2;
       setTimeout(function() {
         guy.offsetX = 0;
         guy.offsetY = 0;
@@ -173,6 +174,9 @@ var guy = {
     }
     if (keysDown[66] === true) {
       this.equipAxe();
+    }
+    if (keysDown[188] === true) {
+      this.disarm();
     }
   }
 };

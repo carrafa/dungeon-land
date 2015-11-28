@@ -25,8 +25,8 @@ var stairLocation = [{
   x: 12,
   y: 13
 }, {
-  x: 250,
-  y: 200
+  x: 450,
+  y: 450
 }];
 
 function levelSwitcher() {
@@ -109,7 +109,7 @@ collision = function(x, y, w, h) {
       (whatColor.data[i + 1] === 0) &&
       (whatColor.data[i + 2] === 0)
     ) {
-      console.log('red!');
+      console.log('wall!');
       return true;
     }
   }
