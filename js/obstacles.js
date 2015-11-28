@@ -68,6 +68,10 @@ FlameCreator.prototype = {
     ) {
       guy.health -= 50;
     }
+    if (currentLevel === 5 && skeleton.health < 0) {
+      this.x = -100;
+      this.y = -100;
+    }
   }
 };
 
@@ -97,6 +101,15 @@ var flame15 = new FlameCreator(5, 101, 2, 177, 323)
 var flame16 = new FlameCreator(5, 101, 2, 177, 303)
 var flame17 = new FlameCreator(5, 101, 2, 177, 283)
 
+var flame18 = new FlameCreator(5, 101, 2, 427, 8)
+var flame19 = new FlameCreator(5, 101, 2, 427, 23)
+var flame20 = new FlameCreator(5, 101, 2, 427, 38)
+
+var flame21 = new FlameCreator(5, 101, 2, 439, 55)
+var flame22 = new FlameCreator(5, 101, 2, 453, 55)
+var flame23 = new FlameCreator(5, 101, 2, 466, 55)
+var flame24 = new FlameCreator(5, 101, 2, 480, 55)
+
 updateAllFlames = function() {
   if (currentLevel === 1) {
     flame01.update();
@@ -113,7 +126,7 @@ updateAllFlames = function() {
     flame08.update();
     flame09.update();
   }
-  if (currentLevel === 5) {
+  if ((currentLevel === 5)) {
     flame10.update();
     flame11.update();
     flame12.update();
@@ -122,6 +135,13 @@ updateAllFlames = function() {
     flame15.update();
     flame16.update();
     flame17.update();
+    flame18.update();
+    flame19.update();
+    flame20.update();
+    flame21.update();
+    flame22.update();
+    flame23.update();
+    flame24.update();
   }
 };
 
@@ -152,6 +172,13 @@ function drawFlames() {
       ctx.drawImage(flameImage, flame15.x, flame15.y);
       ctx.drawImage(flameImage, flame16.x, flame16.y);
       ctx.drawImage(flameImage, flame17.x, flame17.y);
+      ctx.drawImage(flameImage, flame18.x, flame18.y);
+      ctx.drawImage(flameImage, flame19.x, flame19.y);
+      ctx.drawImage(flameImage, flame20.x, flame20.y);
+      ctx.drawImage(flameImage, flame21.x, flame21.y);
+      ctx.drawImage(flameImage, flame22.x, flame22.y);
+      ctx.drawImage(flameImage, flame23.x, flame23.y);
+      ctx.drawImage(flameImage, flame24.x, flame24.y);
     }
   }
 };

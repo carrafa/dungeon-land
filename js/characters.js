@@ -60,8 +60,8 @@ var guy = {
     this.attackRange = 50;
   },
   becomeWizard: function() {
-    this.weapon = "wizard";
-    if (this.weapon === "wizard") {
+    this.weapon = "staff";
+    if (this.weapon === "staff") {
       this.imageL = "/images/guy/guyWizardL.png";
       this.imageR = "/images/guy/guyWizardR.png";
       this.imageLAttack = "/images/guy/guyWizardAttackL.png";
@@ -400,13 +400,14 @@ function drawItems() {
 
 var allWeapons = [];
 
-function Weapon(name, power, level, x, y) {
+function Weapon(name, level, power, x, y) {
   this.power = power;
+  this.level = level;
   this.x = x;
   this.y = y;
   this.update = function() {
     if (
-      (currentLevel === level) &&
+      (currentLevel === this.level) &&
       (rangeDetector(guy.x, guy.y, this.x, this.y) === true)
     ) {
       this.x = -100;
@@ -416,9 +417,9 @@ function Weapon(name, power, level, x, y) {
   };
 }
 
-var sword = new Weapon('sword', 10, 1, 130, 125);
-var axe = new Weapon('axe', 50, 3, 270, 115);
-var staff = new Weapon('staff', 5, 100, null, null);
+var sword = new Weapon('sword', 1, 10, 130, 125);
+var axe = new Weapon('axe', 3, 50, 270, 115);
+var staff = new Weapon('staff', 5, 100, 465, 10);
 
 
 sword.equip = function() {
@@ -437,9 +438,18 @@ axe.equip = function() {
   allWeapons.push(this);
 };
 
+staff.equip = function() {
+  guy.becomeWizard();
+  var $staff = $('<li>');
+  $("#status ul").append($staff);
+  $staff.text("you're a wizardddd!!");
+  allWeapons.push(this);
+};
+
 function updateWeapons() {
   sword.update();
   axe.update();
+  staff.update();
 }
 
 function drawWeapons() {
@@ -449,5 +459,9 @@ function drawWeapons() {
 
   if (axeReady && currentLevel === 3) {
     ctx.drawImage(axeImage, axe.x, axe.y);
+  }
+
+  if (staffReady && currentLevel === 5) {
+    ctx.drawImage(staffImage, staff.x, staff.y);
   }
 };

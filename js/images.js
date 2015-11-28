@@ -200,6 +200,13 @@ axeImage.onload = new function() {
 };
 axeImage.src = "/images/weapons/axe.png"
 
+var staffReady = false;
+var staffImage = new Image();
+staffImage.onload = new function() {
+  staffReady = true;
+};
+staffImage.src = "/images/weapons/staff.png"
+
 //======enemy images===================
 
 var ogreReady = false;
