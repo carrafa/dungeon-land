@@ -232,7 +232,7 @@ Enemy.prototype = {
 var ogre = new Enemy('ogre', 1, 50, 2, 30, 50, 225);
 var bat = new Enemy('bat', 2, 100, 4, 20, 250, 400);
 var greenDragon = new Enemy('greenDragon', 4, 200, 500, 30, 400, 450);
-var skeleton = new Enemy('skeleton', 5, 500, 150, null, null, null);
+var skeleton = new Enemy('skeleton', 5, 500, 150, 40, 340, 295);
 var redDragon = new Enemy('redDragon', 6, 1000, 1000, null, null, null);
 
 
@@ -309,6 +309,10 @@ function drawEnemies() {
 
   if (greenDragonReady && currentLevel === 4) {
     ctx.drawImage(greenDragonImage, greenDragon.x, greenDragon.y);
+  }
+
+  if (skeletonReady && currentLevel === 5) {
+    ctx.drawImage(skeletonImage, skeleton.x, skeleton.y);
   }
 };
 

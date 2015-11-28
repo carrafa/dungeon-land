@@ -244,6 +244,13 @@ greenDragonImage.onload = function() {
 }
 greenDragonImage.src = "/images/enemies/greenDragon.png";
 
+var skeletonReady = false;
+var skeletonImage = new Image();
+skeletonImage.onload = function() {
+  skeletonReady = true;
+}
+skeletonImage.src = "/images/enemies/skeleton01.png";
+
 
 //=====traps=======
 
