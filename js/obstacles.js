@@ -16,12 +16,15 @@ function createWall(x,y,w,h, intervalFunction, num){
       createWall(445, 115, 5, 40, timingIntervals.percentage, 90);
     };
   if(currentLevel === 2){
-      createWall(120,60,100,5, timingIntervals.thrice)
+      createWall(120,60,100,5, timingIntervals.fiveTimes)
+      createWall(180,180,60,5, timingIntervals.fourTimes)
+      createWall(310,380,60,5, timingIntervals.fourTimes)
+      createWall(370,65,5,60, timingIntervals.percentage, 90)
   }
 }
 
 
 
-function drawAllWallObstacles(){
+function drawAllObstacles(){
   flashyWalls();
 }

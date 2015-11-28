@@ -281,7 +281,7 @@ var render = function() {
     ctx.drawImage(bgs[currentLevel].image, 0, 0);
   }
 
-  drawAllWallObstacles();
+  drawAllObstacles();
 
   if (currentLevel === 0) {
     ctx.drawImage(houseImage, 10, 10);

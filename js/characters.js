@@ -330,7 +330,7 @@ function Weapon(name, power, level, x, y) {
   };
 }
 
-var sword = new Weapon('sword', 10, 1, 375, 165);
+var sword = new Weapon('sword', 10, 1, 130, 125);
 var axe = new Weapon('axe', 50, 3, null, null);
 var staff = new Weapon('staff', 5, 100, null, null);
 
