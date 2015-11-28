@@ -280,39 +280,15 @@ var render = function() {
     ctx.drawImage(bgs[currentLevel].image, 0, 0);
   }
 
-  drawAllObstacles();
-
-  if (currentLevel === 0) {
-    ctx.drawImage(houseImage, 10, 10);
-  }
 
   if (stairsReady) {
     ctx.drawImage(stairsImage, stairs.x, stairs.y);
   }
 
-  if (coinReady && currentLevel === 1) {
-    ctx.drawImage(coinImage, coin.x, coin.y)
-  }
-
-  if (gemReady && currentLevel === 2) {
-    ctx.drawImage(gemImage, gem.x, gem.y)
-  }
-
-  if (swordReady && currentLevel === 1) {
-    ctx.drawImage(swordImage, sword.x, sword.y)
-  }
-
-  if (axeReady && currentLevel === 3) {
-    ctx.drawImage(axeImage, axe.x, axe.y);
-  }
-
-  if (ogreReady && currentLevel === 1) {
-    ctx.drawImage(ogreImage, ogre.x, ogre.y)
-  }
-
-  if (batReady && currentLevel === 2) {
-    ctx.drawImage(batImage, bat.x, bat.y);
-  }
+  drawObstacles();
+  drawItems();
+  drawWeapons();
+  drawEnemies();
 
   if (guyReady) {
     ctx.drawImage(guyImage, guy.x + guy.offsetX, guy.y + guy.offsetY);

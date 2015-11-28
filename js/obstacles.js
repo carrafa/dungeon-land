@@ -28,6 +28,7 @@ function flashyWalls() {
     createWall(230, 275, 5, 70, timingIntervals.percentage, 50);
     createWall(170, 375, 5, 70, timingIntervals.percentage, 50);
     createWall(105, 275, 5, 70, timingIntervals.percentage, 50);
+    createWall(160, 60, 100, 5, timingIntervals.percentage, 90);
   }
 }
 
@@ -80,6 +81,8 @@ var flame04 = new FlameCreator(3, 10, 325, 350)
 var flame05 = new FlameCreator(3, 10, 260, 350)
 var flame06 = new FlameCreator(3, 10, 200, 350)
 var flame07 = new FlameCreator(3, 10, 130, 350)
+var flame08 = new FlameCreator(3, 10, 225, 95)
+var flame09 = new FlameCreator(3, 10, 225, 475)
 
 updateAllFlames = function() {
   flame01.update();
@@ -89,6 +92,8 @@ updateAllFlames = function() {
   flame05.update();
   flame06.update();
   flame07.update();
+  flame08.update();
+  flame09.update();
 }
 
 
@@ -106,12 +111,14 @@ function drawFlames() {
       ctx.drawImage(flameImage, flame05.x, flame05.y);
       ctx.drawImage(flameImage, flame06.x, flame06.y);
       ctx.drawImage(flameImage, flame07.x, flame07.y);
+      ctx.drawImage(flameImage, flame08.x, flame08.y);
+      ctx.drawImage(flameImage, flame09.x, flame09.y);
     }
   }
 };
 
 
-function drawAllObstacles() {
+function drawObstacles() {
   flashyWalls();
   drawFlames(250, 250);
   drawFlames(100, 100);

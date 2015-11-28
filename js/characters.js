@@ -232,7 +232,7 @@ Enemy.prototype = {
 
 var ogre = new Enemy('ogre', 1, 50, 2, 30, 50, 225);
 var bat = new Enemy('bat', 2, 100, 4, 20, 250, 400);
-var greenDragon = new Enemy('greenDragon', 3, 200, 500, null, null, null);
+var greenDragon = new Enemy('greenDragon', 3, 200, 500, null, 400, 450);
 var skeleton = new Enemy('skeleton', 5, 500, 150, null, null, null);
 var redDragon = new Enemy('redDragon', 6, 1000, 1000, null, null, null);
 
@@ -267,10 +267,51 @@ bat.attack = function() {
   }
 };
 
+greenDragon.attack = function() {
+  if (currentLevel === 4) {
+    this.attacking = true;
+  } else {
+    this.attacking = false;
+  }
+}
+
+skeleton.attack = function() {
+  if (currentLevel === 4) {
+    this.attacking = true;
+  } else {
+    this.attacking = false;
+  }
+}
+
+redDragon.attack = function() {
+  if (currentLevel === 6) {
+    this.attacking = true;
+  } else {
+    this.attacking = false;
+  }
+}
+
 function updateEnemies() {
   ogre.update();
   bat.update();
+  greenDragon.update();
+  skeleton.update();
+  redDragon.update();
 }
+
+function drawEnemies() {
+  if (ogreReady && currentLevel === 1) {
+    ctx.drawImage(ogreImage, ogre.x, ogre.y)
+  }
+
+  if (batReady && currentLevel === 2) {
+    ctx.drawImage(batImage, bat.x, bat.y);
+  }
+
+  if (greenDragonReady && currentLevel === 4) {
+    ctx.drawImage(greenDragonImage, greenDragon.x, greenDragon.y);
+  }
+};
 
 
 //======================items==============================
@@ -319,7 +360,23 @@ function updateItems() {
   gem.update();
 }
 
+function drawItems() {
+  if (currentLevel === 0) {
+    ctx.drawImage(houseImage, 10, 10);
+  }
+
+
+  if (coinReady && currentLevel === 1) {
+    ctx.drawImage(coinImage, coin.x, coin.y)
+  }
+
+  if (gemReady && currentLevel === 2) {
+    ctx.drawImage(gemImage, gem.x, gem.y)
+  }
+};
+
 //========weapons===============
+
 
 var allWeapons = [];
 
@@ -364,3 +421,13 @@ function updateWeapons() {
   sword.update();
   axe.update();
 }
+
+function drawWeapons() {
+  if (swordReady && currentLevel === 1) {
+    ctx.drawImage(swordImage, sword.x, sword.y)
+  }
+
+  if (axeReady && currentLevel === 3) {
+    ctx.drawImage(axeImage, axe.x, axe.y);
+  }
+};

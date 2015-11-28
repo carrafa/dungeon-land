@@ -237,6 +237,13 @@ bat03Image.onload = function() {
 }
 bat03Image.src = "/images/enemies/bat03.png";
 
+var greenDragonReady = false;
+var greenDragonImage = new Image();
+greenDragonImage.onload = function() {
+  greenDragonReady = true;
+}
+greenDragonImage.src = "/images/enemies/greenDragon.png";
+
 
 //=====traps=======
 
