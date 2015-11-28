@@ -25,6 +25,8 @@ var bgs = [
   loadLevel("/images/bgs/bg02.png"),
   loadLevel("/images/bgs/bg03.png"),
   loadLevel("/images/bgs/bg04.png"),
+  loadLevel("/images/bgs/bg05.png"),
+  loadLevel("/images/bgs/bg06.png"),
   loadLevel("/images/bgs/bg00.png")
 ];
 

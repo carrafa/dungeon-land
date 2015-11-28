@@ -27,6 +27,12 @@ var stairLocation = [{
 }, {
   x: 450,
   y: 450
+}, {
+  x: 75,
+  y: 30
+}, {
+  x: 445,
+  y: 30
 }];
 
 function levelSwitcher() {

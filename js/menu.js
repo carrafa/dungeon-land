@@ -43,8 +43,10 @@ $('#reset').on('click', function() {
 $('#pause').on('click', function() {
   if (theme.paused === false) {
     theme.pause();
+    $('#pause').text('>');
   } else {
     theme.play();
+    $('#pause').text('||');
   }
 });
 
