@@ -285,4 +285,9 @@ h1 {
     height: 60px;
     margin-top: 20px;
   }
+
+  #music-controls{
+    display: none;
+  };
+
 }

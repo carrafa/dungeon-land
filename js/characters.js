@@ -33,10 +33,9 @@ var guy = {
       this.imageR = "/images/guy/guyR.png";
       this.imageLAttack = "/images/guy/guyAttackL.png";
       this.imageRAttack = "/images/guy/guyAttackR.png";
-
     }
-    this.power = 5;
-    this.attackRange = 40
+    this.power = 1;
+    this.attackRange = 40;
   },
   equipSword: function() {
     this.weapon = "sword";
@@ -47,7 +46,7 @@ var guy = {
       this.imageRAttack = "/images/guy/guySwordAttackR.png";
     }
     this.power = 10;
-    this.attackRange = 50
+    this.attackRange = 50;
   },
   equipAxe: function() {
     this.weapon = "Axe";
@@ -58,7 +57,7 @@ var guy = {
       this.imageRAttack = "/images/guy/guyAxeAttackR.png";
     }
     this.power = 25;
-    this.attackRange = 50
+    this.attackRange = 50;
   },
   becomeWizard: function() {
     this.weapon = "wizard";
@@ -233,9 +232,9 @@ Enemy.prototype = {
 
 var ogre = new Enemy('ogre', 1, 50, 2, 30, 50, 225);
 var bat = new Enemy('bat', 2, 100, 4, 20, 250, 400);
-var skeleton = new Enemy('skeleton', 3, 150, 150, null, null, null);
-var greenDragon = new Enemy('greenDragon', 4, 500, 500, null, null, null);
-var redDragon = new Enemy('redDragon', 5, 1000, 1000, null, null, null);
+var greenDragon = new Enemy('greenDragon', 3, 200, 500, null, null, null);
+var skeleton = new Enemy('skeleton', 5, 500, 150, null, null, null);
+var redDragon = new Enemy('redDragon', 6, 1000, 1000, null, null, null);
 
 
 ogre.attack = function() {
