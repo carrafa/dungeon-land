@@ -231,7 +231,7 @@ Enemy.prototype = {
 
 var ogre = new Enemy('ogre', 1, 50, 2, 30, 50, 225);
 var bat = new Enemy('bat', 2, 100, 4, 20, 250, 400);
-var greenDragon = new Enemy('greenDragon', 4, 200, 500, 30, 400, 450);
+var greenDragon = new Enemy('greenDragon', 4, 200, 500, 30, 270, 450);
 var skeleton = new Enemy('skeleton', 5, 500, 150, 40, 340, 295);
 var redDragon = new Enemy('redDragon', 6, 1000, 1000, 35, 380, 193);
 
@@ -378,7 +378,7 @@ function Item(level, health, x, y) {
       (rangeDetector(guy.x, guy.y, this.x, this.y) === true)) {
       this.x = -100;
       this.y = -100;
-      guy.health += heart.health
+      guy.health += this.health
       this.removeItem();
     }
   };
@@ -389,7 +389,7 @@ var stairs = new Item(0, 0, 355, 365);
 var coin = new Item(1, 0, 200, 375);
 var gem = new Item(2, 0, 320, 65);
 var crown = new Item(4, 0, null, null);
-var heart = new Item(1, 20, 15, 450);
+var heart = new Item(1, 20, 130, 125);
 var apple = new Item(2, 20, 320, 455);
 var sandwich = new Item(3, 20, 320, 460);
 var friedChicken = new Item(5, 20, 215, 15);
@@ -489,7 +489,7 @@ function Weapon(name, level, power, x, y) {
   };
 }
 
-var sword = new Weapon('sword', 1, 10, 130, 125);
+var sword = new Weapon('sword', 1, 10, 30, 450);
 var axe = new Weapon('axe', 3, 50, 270, 115);
 var staff = new Weapon('staff', 5, 100, 465, 10);
 

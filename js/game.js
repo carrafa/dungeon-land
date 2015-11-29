@@ -298,7 +298,6 @@ var render = function() {
 
   if (deadReady === true && guy.health < 0) {
     ctx.drawImage(deadImage, 0, 0);
-    setTimeout(showControls, 2000);
   };
 
   if (powerOn === false) {
