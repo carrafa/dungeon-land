@@ -213,51 +213,71 @@ var ogreReady = false;
 var ogreImage = new Image();
 ogreImage.onload = function() {
   ogreReady = true;
-}
+};
 ogreImage.src = "/images/enemies/ogre.png";
 
 var ogreAttackReady = false;
 var ogreAttackImage = new Image();
 ogreAttackImage.onload = function() {
   ogreAttackReady = true;
-}
+};
 ogreAttackImage.src = "/images/enemies/ogreAttack.png";
 
 var batReady = false;
 var batImage = new Image();
 batImage.onload = function() {
   batReady = true;
-}
+};
 batImage.src = "/images/enemies/bat01.png";
 
 var bat02Ready = false;
 var bat02Image = new Image();
 bat02Image.onload = function() {
   bat02Ready = true;
-}
+};
 bat02Image.src = "/images/enemies/bat02.png";
 
 var bat03Ready = false;
 var bat03Image = new Image();
 bat03Image.onload = function() {
   bat03Ready = true;
-}
+};
 bat03Image.src = "/images/enemies/bat03.png";
 
 var greenDragonReady = false;
 var greenDragonImage = new Image();
 greenDragonImage.onload = function() {
   greenDragonReady = true;
-}
+};
 greenDragonImage.src = "/images/enemies/greenDragon.png";
 
 var skeletonReady = false;
 var skeletonImage = new Image();
 skeletonImage.onload = function() {
   skeletonReady = true;
-}
+};
 skeletonImage.src = "/images/enemies/skeleton01.png";
 
+var redDragonReady = false;
+var redDragonImage = new Image();
+redDragonImage.onload = function() {
+  redDragonReady = true;
+};
+redDragonImage.src = "/images/enemies/redDragon01.png";
+
+var redDragon02Ready = false;
+var redDragon02Image = new Image();
+redDragon02Image.onload = function() {
+  redDragon02Ready = true;
+};
+redDragon02Image.src = "/images/enemies/redDragon02.png";
+
+var redDragon03Ready = false;
+var redDragon03Image = new Image();
+redDragon03Image.onload = function() {
+  redDragon03Ready = true;
+};
+redDragon03Image.src = "/images/enemies/redDragon03.png";
 
 //=====traps=======
 
@@ -265,19 +285,19 @@ var flameReady = false;
 var flameImage = new Image();
 flameImage.onload = function() {
   flameReady = true;
-}
+};
 flameImage.src = "/images/traps/flame01.png";
 
 var flame02Ready = false;
 var flame02Image = new Image();
 flame02Image.onload = function() {
   flame02Ready = true;
-}
+};
 flame02Image.src = "/images/traps/flame02.png";
 
 var flame03Ready = false;
 var flame03Image = new Image();
 flame03Image.onload = function() {
   flame03Ready = true;
-}
+};
 flame03Image.src = "/images/traps/flame03.png";

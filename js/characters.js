@@ -233,7 +233,7 @@ var ogre = new Enemy('ogre', 1, 50, 2, 30, 50, 225);
 var bat = new Enemy('bat', 2, 100, 4, 20, 250, 400);
 var greenDragon = new Enemy('greenDragon', 4, 200, 500, 30, 400, 450);
 var skeleton = new Enemy('skeleton', 5, 500, 150, 40, 340, 295);
-var redDragon = new Enemy('redDragon', 6, 1000, 1000, null, null, null);
+var redDragon = new Enemy('redDragon', 6, 1000, 1000, 35, 380, 193);
 
 
 ogre.attack = function() {
@@ -274,6 +274,14 @@ greenDragon.attack = function() {
   }
 }
 
+redDragon.attack = function() {
+  if (currentLevel === 6) {
+    this.attacking = true;
+  } else {
+    this.attacking = false;
+  }
+}
+
 skeleton.image = [
   "/images/enemies/skeleton01.png",
   "/images/enemies/skeleton02.png",
@@ -299,13 +307,33 @@ skeleton.attack = function() {
 
 }
 
+redDragon.image = [
+  "/images/enemies/redDragon01.png",
+  "/images/enemies/redDragon01.png",
+  "/images/enemies/redDragon01.png",
+  "/images/enemies/redDragon02.png",
+  "/images/enemies/redDragon03.png",
+  "/images/enemies/redDragon02.png",
+  "/images/enemies/redDragon03.png",
+  "/images/enemies/redDragon02.png",
+  "/images/enemies/redDragon03.png",
+  "/images/enemies/redDragon02.png",
+];
+
 redDragon.attack = function() {
-  if (currentLevel === 6) {
-    this.attacking = true;
-  } else {
-    this.attacking = false;
+  var index = Math.floor(n / 11);
+  if (currentLevel === 4) {
+    redDragonImage.src = redDragon.image[0];
   }
-}
+  if (currentLevel === 6) {
+    redDragonImage.src = redDragon.image[index];
+    if (index > 2) {
+      redDragon.attacking = true;
+    } else {
+      redDragon.attacking = false;
+    }
+  }
+};
 
 function updateEnemies() {
   ogre.update();
@@ -330,6 +358,10 @@ function drawEnemies() {
 
   if (skeletonReady && currentLevel === 5) {
     ctx.drawImage(skeletonImage, skeleton.x, skeleton.y);
+  }
+
+  if (redDragonReady && (currentLevel === 6) || (currentLevel === 4)) {
+    ctx.drawImage(redDragonImage, redDragon.x, redDragon.y);
   }
 };
 
@@ -442,7 +474,7 @@ staff.equip = function() {
   guy.becomeWizard();
   var $staff = $('<li>');
   $("#status ul").append($staff);
-  $staff.text("you're a wizardddd!!");
+  $staff.text("wizardddd!!!");
   allWeapons.push(this);
 };
 
