@@ -295,6 +295,9 @@ var render = function() {
   // drawFog();
 
   if (deadReady === true && guy.health < 0) {
+    theme.pause();
+    theme.currentTime = 0;
+    guyDeadTheme.play();
     ctx.drawImage(deadImage, 0, 0);
   };
 
