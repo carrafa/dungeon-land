@@ -23,9 +23,8 @@ header {
     padding:20px 3%;
     margin: 0 auto;
     height:40%;
-    /*min-width: 850px;*/
-    max-width: 1000px;
 }
+
 #canvas-container {
     display:inline-block;
     width:60%;
@@ -52,6 +51,7 @@ ul{
   display: inline-block;
   width: 30%;
   min-width:280px;
+  max-width: 375px;
   height: 510px;
   background-color: snow;
   position: absolute;
