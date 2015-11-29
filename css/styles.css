@@ -1,7 +1,7 @@
 body {
-  background-color: dodgerblue;
+  background-color: dimgray;
   margin: 0;
-  min-width: 950px;
+  max-width: 930px;
   cursor: pointer;
   font-family: 'Press Start 2P', cursive;
 }
@@ -115,7 +115,7 @@ h1 {
 }
 
 .key-container {
-  width: 300px;
+  width: 100%;
   margin-top: 30px;
   margin-left: 20%;
 }

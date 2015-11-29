@@ -218,7 +218,7 @@ $('#spacebar').mouseup(function() {
 //===========================================================================
 //---------------------------------------------------------------------------
 
-//==========get mouse coordinates (for testing/level design) ===========
+//==========log mouse coordinates (for testing/level design) ===========
 
 function logMouseCoordinates(e) {
   var mouseX, mouseY;
