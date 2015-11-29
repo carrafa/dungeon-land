@@ -44,7 +44,7 @@ function FlameCreator(level, rate, modifier, range, x, y) {
   this.x = x;
   this.y = y;
   this.killer = false;
-  this.image = ["/images/traps/flame01.png",
+  this.image = ["images/traps/flame01.png",
     "images/traps/flame02.png",
     "images/traps/flame03.png",
     "images/traps/flame02.png",
