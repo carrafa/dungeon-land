@@ -183,6 +183,41 @@ gemImage.onload = new function() {
 };
 gemImage.src = "/images/items/gem.png"
 
+var crownReady = false;
+var crownImage = new Image();
+crownImage.onload = new function() {
+  crownReady = true;
+};
+crownImage.src = "/images/items/crown.png"
+
+var heartReady = false;
+var heartImage = new Image();
+heartImage.onload = new function() {
+  heartReady = true;
+};
+heartImage.src = "/images/items/heart.png"
+
+var appleReady = false;
+var appleImage = new Image();
+appleImage.onload = new function() {
+  appleReady = true;
+};
+appleImage.src = "/images/items/apple.png"
+
+var sandwichReady = false;
+var sandwichImage = new Image();
+sandwichImage.onload = new function() {
+  sandwichReady = true;
+};
+sandwichImage.src = "/images/items/sandwich.png"
+
+var friedChickenReady = false;
+var friedChickenImage = new Image();
+friedChickenImage.onload = new function() {
+  friedChickenReady = true;
+};
+friedChickenImage.src = "/images/items/friedChicken.png"
+
 
 //======weapon images===================
 

@@ -368,26 +368,31 @@ function drawEnemies() {
 
 //======================items==============================
 
-function Item(level, x, y) {
+function Item(level, health, x, y) {
   this.x = x;
   this.y = y;
+  this.health = health;
   this.level = level;
   this.update = function() {
     if ((currentLevel === this.level) &&
       (rangeDetector(guy.x, guy.y, this.x, this.y) === true)) {
       this.x = -100;
       this.y = -100;
+      guy.health += heart.health
       this.removeItem();
     }
   };
 };
 
-var house = new Item(0, null, null);
-var stairs = new Item(0, 355, 365);
-var coin = new Item(1, 200, 375);
-var gem = new Item(2, 320, 65);
-var guitar = new Item(3, null, null);
-var tiara = new Item(4, null, null);
+var house = new Item(0, 0, null, null);
+var stairs = new Item(0, 0, 355, 365);
+var coin = new Item(1, 0, 200, 375);
+var gem = new Item(2, 0, 320, 65);
+var crown = new Item(4, 0, null, null);
+var heart = new Item(1, 20, 15, 450);
+var apple = new Item(2, 20, 320, 455);
+var sandwich = new Item(3, 20, 320, 460);
+var friedChicken = new Item(5, 20, 215, 15);
 
 coin.removeItem = function() {
   var $coin = $('<li>');
@@ -395,21 +400,43 @@ coin.removeItem = function() {
   $coin.text("look, a coin.");
 };
 
-gem.update = function() {
-  if (
-    (currentLevel === 2) &&
-    (rangeDetector(guy.x, guy.y, this.x, this.y) === true)) {
-    this.y = -100;
-    this.x = -100;
-    var $gem = $('<li>');
-    $("#status ul").append($gem);
-    $gem.text("heyyyy a gem.");
-  }
+gem.removeItem = function() {
+  var $gem = $('<li>');
+  $("#status ul").append($gem);
+  $gem.text("heyyyy a gem.");
+};
+
+heart.removeItem = function() {
+  var $heart = $('<li>');
+  $("#status ul").append($heart);
+  $heart.text("awww heartssss");
+};
+
+apple.removeItem = function() {
+  var $apple = $('<li>');
+  $("#status ul").append($apple);
+  $apple.text("yummm apple");
+};
+
+sandwich.removeItem = function() {
+  var $sandwich = $('<li>');
+  $("#status ul").append($sandwich);
+  $sandwich.text("is that a sandwich?");
+};
+
+friedChicken.removeItem = function() {
+  var $friedChicken = $('<li>');
+  $("#status ul").append($friedChicken);
+  $friedChicken.text("delicious fried chickennnnnn");
 };
 
 function updateItems() {
   coin.update();
   gem.update();
+  heart.update();
+  apple.update();
+  sandwich.update();
+  friedChicken.update();
 }
 
 function drawItems() {
@@ -417,13 +444,26 @@ function drawItems() {
     ctx.drawImage(houseImage, 10, 10);
   }
 
-
   if (coinReady && currentLevel === 1) {
     ctx.drawImage(coinImage, coin.x, coin.y)
   }
 
   if (gemReady && currentLevel === 2) {
     ctx.drawImage(gemImage, gem.x, gem.y)
+  }
+
+  if (heartReady && currentLevel === 1) {
+    ctx.drawImage(heartImage, heart.x, heart.y)
+  }
+
+  if (appleReady && currentLevel === 2) {
+    ctx.drawImage(appleImage, apple.x, apple.y)
+  }
+  if (sandwichReady && currentLevel === 3) {
+    ctx.drawImage(sandwichImage, sandwich.x, sandwich.y)
+  }
+  if (friedChickenReady && currentLevel === 5) {
+    ctx.drawImage(friedChickenImage, friedChicken.x, friedChicken.y)
   }
 };
 
