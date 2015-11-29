@@ -93,7 +93,7 @@ h1 {
   margin-top: 10px;
 }
 
-#on-off-container {
+#reset-container {
   margin-top: 50px;
   text-align: center;
   width: 100%;
@@ -109,13 +109,12 @@ h1 {
   font-size: 1em;
 }
 
-#power {
-  color: red;
-}
-
 #pause{
   width: 50px;
+}
 
+#reset{
+  color: red;
 }
 
 .key-container {

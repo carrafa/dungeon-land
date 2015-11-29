@@ -1,7 +1,5 @@
 console.log('ow, my browser');
 
-powerOn = true;
-
 //---------------------------------------------------------------------------
 //===========================================================================
 //                          LEVEL SWITCHER
@@ -299,10 +297,6 @@ var render = function() {
   if (deadReady === true && guy.health < 0) {
     ctx.drawImage(deadImage, 0, 0);
   };
-
-  if (powerOn === false) {
-    ctx.fillRect(10, 10, 480, 480);
-  }
 
 };
 
