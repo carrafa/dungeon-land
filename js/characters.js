@@ -173,9 +173,6 @@ var guy = {
     if (keysDown[188] === true) {
       this.disarm();
     }
-    if (keysDown[222] === true) {
-      this.becomeDragon();
-    }
     if (guy.health > 100) {
       guy.health = 100;
     }
