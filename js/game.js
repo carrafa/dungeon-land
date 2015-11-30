@@ -68,7 +68,7 @@ function updateN() {
   };
 };
 
-// ==== for timing stuff ====
+// ==== for timing and animating stuff ====
 
 timingIntervals = {
   twice: function() {
@@ -116,12 +116,6 @@ canvas.height = 500;
 canvas.setAttribute('id', 'canvas');
 document.getElementById('canvas-container').appendChild(canvas);
 
-// var fogCanvas = document.createElement('canvas');
-// var fogCtx = fogCanvas.getContext('2d');
-// fogCanvas.width = 500;
-// fogCanvas.height = 500;
-// fogCanvas.setAttribute('id', 'fogCanvas');
-// document.getElementById('canvas-container').appendChild(fogCanvas);
 
 //---------------------------------------------------------------------------
 //===========================================================================

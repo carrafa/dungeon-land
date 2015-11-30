@@ -68,7 +68,7 @@ var guy = {
       this.imageRAttack = "images/guy/guyWizardAttackR.png";
     };
     this.power = 100;
-    this.attackRange = 70;
+    this.attackRange = 50;
   },
   attack: function() {
     console.log('hyaaaa!');
@@ -164,6 +164,9 @@ var guy = {
     if (keysDown[188] === true) {
       this.disarm();
     }
+    if (guy.health > 100) {
+      guy.health = 100;
+    }
   }
 };
 
@@ -178,7 +181,6 @@ function damageInflictor(enemy) {
     enemy.health = enemy.health - guy.power;
   }
 };
-
 
 //============================enemies==============================
 
@@ -298,9 +300,9 @@ skeleton.image = [
 ]
 
 skeleton.attack = function() {
-  var rando = Math.floor(n / 9);
-  skeletonImage.src = skeleton.image[rando];
-  if (currentLevel === 5 && (rando < 6)) {
+  var index = Math.floor(n / 9);
+  skeletonImage.src = skeleton.image[index];
+  if (currentLevel === 5 && (index < 6)) {
     this.attacking = true;
   } else {
     this.attacking = false;
