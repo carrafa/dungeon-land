@@ -283,7 +283,6 @@ redDragon.attack = function() {
 }
 
 skeleton.image = [
-  "images/enemies/skeleton01.png",
   "images/enemies/skeleton02.png",
   "images/enemies/skeleton03.png",
   "images/enemies/skeleton04.png",
@@ -294,12 +293,14 @@ skeleton.image = [
   "images/enemies/skeleton01.png",
   "images/enemies/skeleton01.png",
   "images/enemies/skeleton01.png",
+  "images/enemies/skeleton01.png",
   "images/enemies/skeleton01.png"
 ]
 
 skeleton.attack = function() {
-  skeletonImage.src = skeleton.image[Math.floor(n / 9)];
-  if (currentLevel === 5) {
+  var rando = Math.floor(n / 9);
+  skeletonImage.src = skeleton.image[rando];
+  if (currentLevel === 5 && (rando < 6)) {
     this.attacking = true;
   } else {
     this.attacking = false;
