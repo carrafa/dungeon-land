@@ -182,19 +182,19 @@ h1 {
 }
 
 #up {
-  background-image: url("images/icons/up.gif");
+  background-image: url("../images/icons/up.gif");
   background-size: cover;
 }
 #down {
-  background-image: url("images/icons/down.gif");
+  background-image: url("../images/icons/down.gif");
   background-size: cover;
 }
 #left  {
-  background-image: url("images/icons/left.gif");
+  background-image: url("../images/icons/left.gif");
   background-size: cover;
 }
 #right {
-  background-image: url("images/icons/right.gif");
+  background-image: url("../images/icons/right.gif");
   background-size: cover;
 }
 
