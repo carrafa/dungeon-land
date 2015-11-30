@@ -84,47 +84,60 @@ FlameCreator.prototype = {
 var flame01 = new FlameCreator(1, 10, 0, 20, 300, 135);
 
 //level 2 flames
-var flame02 = new FlameCreator(2, 10, 0, 20, 150, 465)
+var flame02 = new FlameCreator(2, 10, 0, 20, 150, 465);
 
 //level 3 flames
-var flame04 = new FlameCreator(3, 10, 0, 20, 325, 350)
-var flame03 = new FlameCreator(3, 10, 0, 20, 390, 350)
-var flame05 = new FlameCreator(3, 10, 0, 20, 260, 350)
-var flame06 = new FlameCreator(3, 10, 0, 20, 200, 350)
-var flame07 = new FlameCreator(3, 10, 0, 20, 130, 350)
-var flame08 = new FlameCreator(3, 10, 0, 20, 225, 95)
-var flame09 = new FlameCreator(3, 10, 0, 20, 225, 475)
+var flame04 = new FlameCreator(3, 10, 0, 20, 325, 350);
+var flame03 = new FlameCreator(3, 10, 0, 20, 390, 350);
+var flame05 = new FlameCreator(3, 10, 0, 20, 260, 350);
+var flame06 = new FlameCreator(3, 10, 0, 20, 200, 350);
+var flame07 = new FlameCreator(3, 10, 0, 20, 130, 350);
+var flame08 = new FlameCreator(3, 10, 0, 20, 225, 95);
+var flame09 = new FlameCreator(3, 10, 0, 20, 225, 475);
 
 //level 5 flames
-var flame10 = new FlameCreator(5, 10, 2, 10, 245, 343)
-var flame11 = new FlameCreator(5, 101, 2, 10, 245, 323)
-var flame12 = new FlameCreator(5, 101, 2, 10, 245, 303)
-var flame13 = new FlameCreator(5, 101, 2, 10, 245, 283)
+var flame10 = new FlameCreator(5, 10, 2, 10, 245, 343);
+var flame11 = new FlameCreator(5, 101, 2, 10, 245, 323);
+var flame12 = new FlameCreator(5, 101, 2, 10, 245, 303);
+var flame13 = new FlameCreator(5, 101, 2, 10, 245, 283);
 
-var flame14 = new FlameCreator(5, 101, 2, 10, 177, 343)
-var flame15 = new FlameCreator(5, 101, 2, 10, 177, 323)
-var flame16 = new FlameCreator(5, 101, 2, 10, 177, 303)
-var flame17 = new FlameCreator(5, 101, 2, 10, 177, 283)
+var flame14 = new FlameCreator(5, 101, 2, 10, 177, 343);
+var flame15 = new FlameCreator(5, 101, 2, 10, 177, 323);
+var flame16 = new FlameCreator(5, 101, 2, 10, 177, 303);
+var flame17 = new FlameCreator(5, 101, 2, 10, 177, 283);
 
-var flame18 = new FlameCreator(5, 101, 2, 10, 190, 55)
-var flame19 = new FlameCreator(5, 101, 2, 10, 205, 55)
-var flame20 = new FlameCreator(5, 101, 2, 10, 220, 55)
-var flame21 = new FlameCreator(5, 101, 2, 10, 235, 55)
+var flame18 = new FlameCreator(5, 101, 2, 10, 190, 55);
+var flame19 = new FlameCreator(5, 101, 2, 10, 205, 55);
+var flame20 = new FlameCreator(5, 101, 2, 10, 220, 55);
+var flame21 = new FlameCreator(5, 101, 2, 10, 235, 55);
 
-var flame22 = new FlameCreator(5, 101, 2, 10, 439, 55)
-var flame23 = new FlameCreator(5, 101, 2, 10, 453, 55)
-var flame24 = new FlameCreator(5, 101, 2, 10, 466, 55)
-var flame25 = new FlameCreator(5, 101, 2, 10, 480, 55)
+var flame22 = new FlameCreator(5, 101, 2, 10, 439, 55);
+var flame23 = new FlameCreator(5, 101, 2, 10, 453, 55);
+var flame24 = new FlameCreator(5, 101, 2, 10, 466, 55);
+var flame25 = new FlameCreator(5, 101, 2, 10, 480, 55);
 
 //level 6 flames
-var flame26 = new FlameCreator(6, 10, 0, 20, 70, 90)
-var flame27 = new FlameCreator(6, 10, 0, 20, 100, 90)
-var flame28 = new FlameCreator(6, 10, 0, 20, 70, 180)
-var flame29 = new FlameCreator(6, 10, 0, 20, 100, 180)
-var flame30 = new FlameCreator(6, 10, 0, 20, 70, 270)
-var flame31 = new FlameCreator(6, 10, 0, 20, 100, 270)
-var flame32 = new FlameCreator(6, 10, 0, 20, 260, 280)
-var flame33 = new FlameCreator(6, 10, 0, 20, 290, 280)
+var flame26 = new FlameCreator(6, 10, 0, 20, 70, 90);
+var flame27 = new FlameCreator(6, 10, 0, 20, 100, 90);
+var flame28 = new FlameCreator(6, 10, 0, 20, 70, 180);
+var flame29 = new FlameCreator(6, 10, 0, 20, 100, 180);
+var flame30 = new FlameCreator(6, 10, 0, 20, 70, 270);
+var flame31 = new FlameCreator(6, 10, 0, 20, 100, 270);
+var flame32 = new FlameCreator(6, 10, 0, 20, 70, 360);
+var flame33 = new FlameCreator(6, 10, 0, 20, 100, 360);
+
+var flame34 = new FlameCreator(6, 10, 0, 20, 130, 395);
+var flame35 = new FlameCreator(6, 10, 0, 20, 130, 420);
+var flame36 = new FlameCreator(6, 10, 0, 20, 180, 395);
+var flame37 = new FlameCreator(6, 10, 0, 20, 180, 420);
+var flame38 = new FlameCreator(6, 10, 0, 20, 230, 395);
+var flame39 = new FlameCreator(6, 10, 0, 20, 230, 420);
+
+var flame40 = new FlameCreator(6, 10, 0, 20, 260, 360);
+var flame41 = new FlameCreator(6, 10, 0, 20, 290, 360);
+
+var flame42 = new FlameCreator(6, 10, 0, 20, 260, 270);
+var flame43 = new FlameCreator(6, 10, 0, 20, 290, 270);
 
 updateAllFlames = function() {
   if (currentLevel === 1) {
@@ -170,6 +183,16 @@ updateAllFlames = function() {
     flame31.update();
     flame32.update();
     flame33.update();
+    flame34.update();
+    flame35.update();
+    flame36.update();
+    flame37.update();
+    flame38.update();
+    flame39.update();
+    flame40.update();
+    flame41.update();
+    flame42.update();
+    flame43.update();
   }
 };
 
@@ -218,6 +241,16 @@ function drawFlames() {
       ctx.drawImage(flameImage, flame31.x, flame31.y);
       ctx.drawImage(flameImage, flame32.x, flame32.y);
       ctx.drawImage(flameImage, flame33.x, flame33.y);
+      ctx.drawImage(flameImage, flame34.x, flame34.y);
+      ctx.drawImage(flameImage, flame35.x, flame35.y);
+      ctx.drawImage(flameImage, flame36.x, flame36.y);
+      ctx.drawImage(flameImage, flame37.x, flame37.y);
+      ctx.drawImage(flameImage, flame38.x, flame38.y);
+      ctx.drawImage(flameImage, flame39.x, flame39.y);
+      ctx.drawImage(flameImage, flame40.x, flame40.y);
+      ctx.drawImage(flameImage, flame41.x, flame41.y);
+      ctx.drawImage(flameImage, flame42.x, flame42.y);
+      ctx.drawImage(flameImage, flame43.x, flame43.y);
     }
   }
 };
