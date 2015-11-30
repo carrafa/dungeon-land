@@ -218,6 +218,12 @@ Enemy.prototype = {
       (this.attacking === true)
     ) {
       guy.health -= this.power;
+      if (guy.direction === "right") {
+        guy.x -= 40;
+      }
+      if (guy.direction === "left") {
+        guy.x += 40;
+      }
     }
     if (this.health < 0) {
       this.x = -100;
@@ -239,7 +245,7 @@ var redDragon = new Enemy('redDragon', 6, 1000, 1000, 35, 380, 193);
 
 
 ogre.attack = function() {
-  if ((n > 10 && n < 25) || (n > 45)) {
+  if (timingIntervals.percentage(70)) {
     this.attacking = true;
   } else {
     this.attacking = false;
