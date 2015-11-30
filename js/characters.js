@@ -202,7 +202,7 @@ function Enemy(name, level, health, power, attackRange, x, y) {
   this.x = x;
   this.y = y;
   allEnemies.push(this);
-}
+};
 
 
 Enemy.prototype = {
@@ -280,7 +280,7 @@ greenDragon.attack = function() {
   } else {
     this.attacking = false;
   }
-}
+};
 
 redDragon.attack = function() {
   if (currentLevel === 6) {
@@ -288,7 +288,7 @@ redDragon.attack = function() {
   } else {
     this.attacking = false;
   }
-}
+};
 
 skeleton.image = [
   "images/enemies/skeleton02.png",
@@ -303,7 +303,7 @@ skeleton.image = [
   "images/enemies/skeleton01.png",
   "images/enemies/skeleton01.png",
   "images/enemies/skeleton01.png"
-]
+];
 
 skeleton.attack = function() {
   var index = Math.floor(n / 9);
@@ -314,7 +314,7 @@ skeleton.attack = function() {
     this.attacking = false;
   }
 
-}
+};
 
 redDragon.image = [
   "images/enemies/redDragon01.png",
@@ -350,7 +350,7 @@ function updateEnemies() {
   greenDragon.update();
   skeleton.update();
   redDragon.update();
-}
+};
 
 function drawEnemies() {
   if (ogreReady && currentLevel === 1) {
@@ -446,7 +446,7 @@ function updateItems() {
   apple.update();
   sandwich.update();
   friedChicken.update();
-}
+};
 
 function drawItems() {
   if (currentLevel === 0) {
@@ -495,8 +495,8 @@ function Weapon(name, level, power, x, y) {
       this.y = -100;
       this.equip();
     }
-  };
-}
+  }
+};
 
 var sword = new Weapon('sword', 1, 10, 30, 450);
 var axe = new Weapon('axe', 3, 50, 270, 115);
@@ -531,7 +531,7 @@ function updateWeapons() {
   sword.update();
   axe.update();
   staff.update();
-}
+};
 
 function drawWeapons() {
   if (swordReady && currentLevel === 1) {

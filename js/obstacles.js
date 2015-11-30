@@ -4,6 +4,9 @@ function createWall(x, y, w, h, intervalFunction, num) {
   if (intervalFunction(num)) {
     ctx.fillStyle = "red";
     ctx.fillRect(x, y, w, h);
+    if (collision(guy.x + 5, guy.y + 5, 25, 25)) {
+      guy.health -= 2;
+    }
   }
 };
 
