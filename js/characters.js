@@ -15,10 +15,10 @@ var guy = {
   weapon: "unarmed",
   attackRange: 30,
   direction: "right",
-  imageL: "/images/guy/guyL.png",
-  imageR: "/images/guy/guyR.png",
-  imageLAttack: "/images/guy/guyAttackL.png",
-  imageRAttack: "/images/guy/guyAttackR.png",
+  imageL: "images/guy/guyL.png",
+  imageR: "images/guy/guyR.png",
+  imageLAttack: "images/guy/guyAttackL.png",
+  imageRAttack: "images/guy/guyAttackR.png",
   attacking: false,
   x: 20,
   y: 60,
@@ -29,10 +29,10 @@ var guy = {
   disarm: function() {
     this.weapon = "unarmed";
     if (this.weapon === "unarmed") {
-      this.imageL = "/images/guy/guyL.png";
-      this.imageR = "/images/guy/guyR.png";
-      this.imageLAttack = "/images/guy/guyAttackL.png";
-      this.imageRAttack = "/images/guy/guyAttackR.png";
+      this.imageL = "images/guy/guyL.png";
+      this.imageR = "images/guy/guyR.png";
+      this.imageLAttack = "images/guy/guyAttackL.png";
+      this.imageRAttack = "images/guy/guyAttackR.png";
     }
     this.power = 1;
     this.attackRange = 40;
@@ -40,10 +40,10 @@ var guy = {
   equipSword: function() {
     this.weapon = "sword";
     if (this.weapon === "sword") {
-      this.imageL = "/images/guy/guySwordL.png";
-      this.imageR = "/images/guy/guySwordR.png";
-      this.imageLAttack = "/images/guy/guySwordAttackL.png";
-      this.imageRAttack = "/images/guy/guySwordAttackR.png";
+      this.imageL = "images/guy/guySwordL.png";
+      this.imageR = "images/guy/guySwordR.png";
+      this.imageLAttack = "images/guy/guySwordAttackL.png";
+      this.imageRAttack = "images/guy/guySwordAttackR.png";
     }
     this.power = 10;
     this.attackRange = 40;
@@ -51,10 +51,10 @@ var guy = {
   equipAxe: function() {
     this.weapon = "Axe";
     if (this.weapon === "Axe") {
-      this.imageL = "/images/guy/guyAxeL.png";
-      this.imageR = "/images/guy/guyAxeR.png";
-      this.imageLAttack = "/images/guy/guyAxeAttackL.png";
-      this.imageRAttack = "/images/guy/guyAxeAttackR.png";
+      this.imageL = "images/guy/guyAxeL.png";
+      this.imageR = "images/guy/guyAxeR.png";
+      this.imageLAttack = "images/guy/guyAxeAttackL.png";
+      this.imageRAttack = "images/guy/guyAxeAttackR.png";
     }
     this.power = 25;
     this.attackRange = 50;
@@ -62,10 +62,10 @@ var guy = {
   becomeWizard: function() {
     this.weapon = "staff";
     if (this.weapon === "staff") {
-      this.imageL = "/images/guy/guyWizardL.png";
-      this.imageR = "/images/guy/guyWizardR.png";
-      this.imageLAttack = "/images/guy/guyWizardAttackL.png";
-      this.imageRAttack = "/images/guy/guyWizardAttackR.png";
+      this.imageL = "images/guy/guyWizardL.png";
+      this.imageR = "images/guy/guyWizardR.png";
+      this.imageLAttack = "images/guy/guyWizardAttackL.png";
+      this.imageRAttack = "images/guy/guyWizardAttackR.png";
     };
     this.power = 100;
     this.attackRange = 70;
@@ -243,9 +243,9 @@ ogre.attack = function() {
     this.attacking = false;
   }
   if (this.attacking === true) {
-    ogreImage.src = "/images/enemies/ogreAttack.png";
+    ogreImage.src = "images/enemies/ogreAttack.png";
   } else {
-    ogreImage.src = "/images/enemies/ogre.png";
+    ogreImage.src = "images/enemies/ogre.png";
   }
 };
 
@@ -256,13 +256,13 @@ bat.attack = function() {
     this.attacking = false;
   }
   if (n < 25) {
-    batImage.src = "/images/enemies/bat01.png";
+    batImage.src = "images/enemies/bat01.png";
   }
   if ((n > 25 && n < 50) || (n > 75)) {
-    batImage.src = "/images/enemies/bat02.png";
+    batImage.src = "images/enemies/bat02.png";
   }
   if (n > 50 && n < 75) {
-    batImage.src = "/images/enemies/bat03.png";
+    batImage.src = "images/enemies/bat03.png";
   }
 };
 
@@ -283,18 +283,18 @@ redDragon.attack = function() {
 }
 
 skeleton.image = [
-  "/images/enemies/skeleton01.png",
-  "/images/enemies/skeleton02.png",
-  "/images/enemies/skeleton03.png",
-  "/images/enemies/skeleton04.png",
-  "/images/enemies/skeleton05.png",
-  "/images/enemies/skeleton04.png",
-  "/images/enemies/skeleton03.png",
-  "/images/enemies/skeleton02.png",
-  "/images/enemies/skeleton01.png",
-  "/images/enemies/skeleton01.png",
-  "/images/enemies/skeleton01.png",
-  "/images/enemies/skeleton01.png"
+  "images/enemies/skeleton01.png",
+  "images/enemies/skeleton02.png",
+  "images/enemies/skeleton03.png",
+  "images/enemies/skeleton04.png",
+  "images/enemies/skeleton05.png",
+  "images/enemies/skeleton04.png",
+  "images/enemies/skeleton03.png",
+  "images/enemies/skeleton02.png",
+  "images/enemies/skeleton01.png",
+  "images/enemies/skeleton01.png",
+  "images/enemies/skeleton01.png",
+  "images/enemies/skeleton01.png"
 ]
 
 skeleton.attack = function() {
@@ -308,16 +308,16 @@ skeleton.attack = function() {
 }
 
 redDragon.image = [
-  "/images/enemies/redDragon01.png",
-  "/images/enemies/redDragon01.png",
-  "/images/enemies/redDragon01.png",
-  "/images/enemies/redDragon02.png",
-  "/images/enemies/redDragon03.png",
-  "/images/enemies/redDragon02.png",
-  "/images/enemies/redDragon03.png",
-  "/images/enemies/redDragon02.png",
-  "/images/enemies/redDragon03.png",
-  "/images/enemies/redDragon02.png",
+  "images/enemies/redDragon01.png",
+  "images/enemies/redDragon01.png",
+  "images/enemies/redDragon01.png",
+  "images/enemies/redDragon02.png",
+  "images/enemies/redDragon03.png",
+  "images/enemies/redDragon02.png",
+  "images/enemies/redDragon03.png",
+  "images/enemies/redDragon02.png",
+  "images/enemies/redDragon03.png",
+  "images/enemies/redDragon02.png",
 ];
 
 redDragon.attack = function() {
