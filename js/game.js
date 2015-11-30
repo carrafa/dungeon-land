@@ -297,8 +297,12 @@ var render = function() {
 
   if (currentLevel === 7) {
     ctx.drawImage(theEndImage, 0, 0, 500, 500);
+    theme.pause();
+    theme.currentTime = 0;
+    theEnd.play();
     guy.becomeDragon();
     ctx.drawImage(guyImage, guy.x + guy.offsetX, guy.y + guy.offsetY);
+
   }
 
 };
