@@ -1,7 +1,5 @@
 console.log('ow, my browser');
 
-powerOn = true;
-
 //---------------------------------------------------------------------------
 //===========================================================================
 //                          LEVEL SWITCHER
@@ -220,7 +218,7 @@ $('#spacebar').mouseup(function() {
 //===========================================================================
 //---------------------------------------------------------------------------
 
-//==========get mouse coordinates (for testing/level design) ===========
+//==========log mouse coordinates (for testing/level design) ===========
 
 function logMouseCoordinates(e) {
   var mouseX, mouseY;
@@ -297,12 +295,11 @@ var render = function() {
   // drawFog();
 
   if (deadReady === true && guy.health < 0) {
+    theme.pause();
+    theme.currentTime = 0;
+    guyDeadTheme.play();
     ctx.drawImage(deadImage, 0, 0);
   };
-
-  if (powerOn === false) {
-    ctx.fillRect(10, 10, 480, 480);
-  }
 
 };
 
