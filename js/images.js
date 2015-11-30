@@ -153,6 +153,36 @@ guyWizardAttackRImage.onload = function() {
 };
 guyWizardAttackRImage.src = "images/guy/guyWizardAttackR.png";
 
+var guyFlying01RReady = false;
+var guyFlying01RImage = new Image();
+guyFlying01RImage.onload = function() {
+  guyFlying01RReady = true;
+};
+guyFlying01RImage.src = "images/guy/guyFlying01R.png";
+
+var guyFlying02RReady = false;
+var guyFlying02RImage = new Image();
+guyFlying01RImage.onload = function() {
+  guyFlying02RReady = true;
+};
+guyFlying02RImage.src = "images/guy/guyFlying02R.png";
+
+var guyFlying03RReady = false;
+var guyFlying03RImage = new Image();
+guyFlying03RImage.onload = function() {
+  guyFlying03RReady = true;
+};
+guyFlying03RImage.src = "images/guy/guyFlying03R.png";
+
+var flyingGuy = {
+  right: ["images/guy/guyFlying01R.png", "images/guy/guyFlying02R.png",
+    "images/guy/guyFlying03R.png", "images/guy/guyFlying02R.png"
+  ],
+  left: ["images/guy/guyFlying01L.png", "images/guy/guyFlying02L.png",
+    "images/guy/guyFlying03L.png", "images/guy/guyFlying02L.png"
+  ],
+};
+
 //======building/item images===================
 
 var houseReady = false;
@@ -336,3 +366,12 @@ flame03Image.onload = function() {
   flame03Ready = true;
 };
 flame03Image.src = "images/traps/flame03.png";
+
+//==========the end=======
+
+var theEndReady = false;
+var theEndImage = new Image();
+theEndImage.onload = function() {
+  theEndReady = true;
+};
+theEndImage.src = "images/bgs/theEnd.png";

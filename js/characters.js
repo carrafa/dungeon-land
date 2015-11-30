@@ -70,6 +70,15 @@ var guy = {
     this.power = 100;
     this.attackRange = 50;
   },
+  becomeDragon: function() {
+    this.weapon = "dragon";
+    if (this.weapon === "dragon") {
+      this.imageR = flyingGuy.right[Math.floor(n / 26)]
+      this.imageRAttack = flyingGuy.right[Math.floor(n / 26)]
+      this.imageL = flyingGuy.left[Math.floor(n / 26)]
+      this.imageLAttack = flyingGuy.left[Math.floor(n / 26)]
+    }
+  },
   attack: function() {
     console.log('hyaaaa!');
     if (this.direction === "left") {
@@ -163,6 +172,9 @@ var guy = {
     }
     if (keysDown[188] === true) {
       this.disarm();
+    }
+    if (keysDown[222] === true) {
+      this.becomeDragon();
     }
     if (guy.health > 100) {
       guy.health = 100;
