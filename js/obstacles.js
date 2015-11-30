@@ -34,6 +34,10 @@ function flashyWalls() {
     createWall(105, 275, 5, 70, timingIntervals.percentage, 50);
     createWall(160, 60, 100, 5, timingIntervals.percentage, 90);
   }
+
+  if ((currentLevel === 6) || (currentLevel === 4)) {
+    createWall(315, 195, 5, 50, timingIntervals.percentage, 80);
+  }
 }
 
 
