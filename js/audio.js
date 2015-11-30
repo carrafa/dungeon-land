@@ -9,3 +9,6 @@ guyDeadTheme.loop = false;
 
 var theme = new Audio('audio/theme.mp3');
 theme.loop = true;
+
+var theEnd = new Audio("audio/theEnd.mp3");
+theEnd.loop = false;

@@ -29,6 +29,9 @@ var stairLocation = [{
 }, {
   x: 445,
   y: 30
+}, {
+  x: -100,
+  y: -100
 }];
 
 function levelSwitcher() {
@@ -36,7 +39,7 @@ function levelSwitcher() {
     currentLevel++;
   }
   if (currentLevel >= stairLocation.length) {
-    currentLevel = 0;
+    currentLevel = 7;
   };
   stairs.x = stairLocation[currentLevel].x;
   stairs.y = stairLocation[currentLevel].y;
@@ -46,9 +49,6 @@ function levelSwitcher() {
 
 $('#level').on('click', function() {
   currentLevel++;
-  if (currentLevel > 7) {
-    currentLevel = 0;
-  }
 })
 
 //---------------------------------------------------------------------------
@@ -294,6 +294,16 @@ var render = function() {
     guyDeadTheme.play();
     ctx.drawImage(deadImage, 0, 0);
   };
+
+  if (currentLevel === 7) {
+    ctx.drawImage(theEndImage, 0, 0, 500, 500);
+    theme.pause();
+    theme.currentTime = 0;
+    theEnd.play();
+    guy.becomeDragon();
+    ctx.drawImage(guyImage, guy.x + guy.offsetX, guy.y + guy.offsetY);
+
+  }
 
 };
 

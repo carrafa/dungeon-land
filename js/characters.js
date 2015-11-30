@@ -70,6 +70,15 @@ var guy = {
     this.power = 100;
     this.attackRange = 50;
   },
+  becomeDragon: function() {
+    this.weapon = "dragon";
+    if (this.weapon === "dragon") {
+      this.imageR = flyingGuy.right[Math.floor(n / 26)]
+      this.imageRAttack = flyingGuy.right[Math.floor(n / 26)]
+      this.imageL = flyingGuy.left[Math.floor(n / 26)]
+      this.imageLAttack = flyingGuy.left[Math.floor(n / 26)]
+    }
+  },
   attack: function() {
     console.log('hyaaaa!');
     if (this.direction === "left") {
@@ -164,6 +173,9 @@ var guy = {
     if (keysDown[188] === true) {
       this.disarm();
     }
+    if (keysDown[222] === true) {
+      this.becomeDragon();
+    }
     if (guy.health > 100) {
       guy.health = 100;
     }
@@ -202,7 +214,7 @@ function Enemy(name, level, health, power, attackRange, x, y) {
   this.x = x;
   this.y = y;
   allEnemies.push(this);
-}
+};
 
 
 Enemy.prototype = {
@@ -218,6 +230,12 @@ Enemy.prototype = {
       (this.attacking === true)
     ) {
       guy.health -= this.power;
+      if (guy.direction === "right") {
+        guy.x -= 40;
+      }
+      if (guy.direction === "left") {
+        guy.x += 40;
+      }
     }
     if (this.health < 0) {
       this.x = -100;
@@ -239,7 +257,7 @@ var redDragon = new Enemy('redDragon', 6, 1000, 1000, 35, 380, 193);
 
 
 ogre.attack = function() {
-  if ((n > 10 && n < 25) || (n > 45)) {
+  if (timingIntervals.percentage(70)) {
     this.attacking = true;
   } else {
     this.attacking = false;
@@ -274,7 +292,7 @@ greenDragon.attack = function() {
   } else {
     this.attacking = false;
   }
-}
+};
 
 redDragon.attack = function() {
   if (currentLevel === 6) {
@@ -282,7 +300,7 @@ redDragon.attack = function() {
   } else {
     this.attacking = false;
   }
-}
+};
 
 skeleton.image = [
   "images/enemies/skeleton02.png",
@@ -297,7 +315,7 @@ skeleton.image = [
   "images/enemies/skeleton01.png",
   "images/enemies/skeleton01.png",
   "images/enemies/skeleton01.png"
-]
+];
 
 skeleton.attack = function() {
   var index = Math.floor(n / 9);
@@ -308,7 +326,7 @@ skeleton.attack = function() {
     this.attacking = false;
   }
 
-}
+};
 
 redDragon.image = [
   "images/enemies/redDragon01.png",
@@ -344,7 +362,7 @@ function updateEnemies() {
   greenDragon.update();
   skeleton.update();
   redDragon.update();
-}
+};
 
 function drawEnemies() {
   if (ogreReady && currentLevel === 1) {
@@ -440,7 +458,7 @@ function updateItems() {
   apple.update();
   sandwich.update();
   friedChicken.update();
-}
+};
 
 function drawItems() {
   if (currentLevel === 0) {
@@ -489,8 +507,8 @@ function Weapon(name, level, power, x, y) {
       this.y = -100;
       this.equip();
     }
-  };
-}
+  }
+};
 
 var sword = new Weapon('sword', 1, 10, 30, 450);
 var axe = new Weapon('axe', 3, 50, 270, 115);
@@ -525,7 +543,7 @@ function updateWeapons() {
   sword.update();
   axe.update();
   staff.update();
-}
+};
 
 function drawWeapons() {
   if (swordReady && currentLevel === 1) {

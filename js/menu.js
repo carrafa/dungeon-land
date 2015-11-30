@@ -43,6 +43,9 @@ function updateMenu() {
   $('#level').text(function() {
     if (currentLevel === 0) {
       return 'home';
+    }
+    if (currentLevel === 7) {
+      return 'the end';
     } else {
       return currentLevel;
     };
