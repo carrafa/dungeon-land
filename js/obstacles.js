@@ -8,6 +8,7 @@ function createWall(x, y, w, h, intervalFunction, num) {
 };
 
 function flashyWalls() {
+
   if (currentLevel === 1) {
     createWall(350, 270, 100, 5, timingIntervals.percentage, 50);
     createWall(100, 270, 100, 5, timingIntervals.percentage, 95);

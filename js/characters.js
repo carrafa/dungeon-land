@@ -68,7 +68,7 @@ var guy = {
       this.imageRAttack = "images/guy/guyWizardAttackR.png";
     };
     this.power = 100;
-    this.attackRange = 70;
+    this.attackRange = 50;
   },
   attack: function() {
     console.log('hyaaaa!');
@@ -164,6 +164,9 @@ var guy = {
     if (keysDown[188] === true) {
       this.disarm();
     }
+    if (guy.health > 100) {
+      guy.health = 100;
+    }
   }
 };
 
@@ -178,7 +181,6 @@ function damageInflictor(enemy) {
     enemy.health = enemy.health - guy.power;
   }
 };
-
 
 //============================enemies==============================
 
@@ -283,7 +285,6 @@ redDragon.attack = function() {
 }
 
 skeleton.image = [
-  "images/enemies/skeleton01.png",
   "images/enemies/skeleton02.png",
   "images/enemies/skeleton03.png",
   "images/enemies/skeleton04.png",
@@ -294,12 +295,14 @@ skeleton.image = [
   "images/enemies/skeleton01.png",
   "images/enemies/skeleton01.png",
   "images/enemies/skeleton01.png",
+  "images/enemies/skeleton01.png",
   "images/enemies/skeleton01.png"
 ]
 
 skeleton.attack = function() {
-  skeletonImage.src = skeleton.image[Math.floor(n / 9)];
-  if (currentLevel === 5) {
+  var index = Math.floor(n / 9);
+  skeletonImage.src = skeleton.image[index];
+  if (currentLevel === 5 && (index < 6)) {
     this.attacking = true;
   } else {
     this.attacking = false;
