@@ -1,10 +1,18 @@
-DUNGEON LAND
+![dl logo](images/screenshots/DL-Logo.png)
 
-This is an 8-bit diablo-style dungeon explorer.
+This is a JavaScript 8-bit Diablo-style dungeon explorer.  This game was programmed mostly using HTML5's Canvas element, with some jQuery DOM manipulation to show the stats in the menu.
 
-The collision detecting for the walls is done by color.  Whenever your character is about to move to the next square, there's a function that checks to see if it's red.  If it is, it won't let you move.
+![screenshot1](images/screenshots/DL-SS01.png)
 
-The attacking is done by changing the source image for the characters.  If the source image is the attacking version, it will give out damage to another character that is near.
+## Collision Detection
+The collision detecting for the walls is done by color.  I wanted to write it this way so it would be easy to draw new levels and just drop them in without having to worry about plotting wall coordinates.  It is built in to the movement function for the main character.  
 
+![screenshot2](images/screenshots/DL-SS02.png)
 
-This was done mostly in Canvas, with some jQuery DOM manipulation to show the stats in the menu.
+#### getImageData
+getImageData is a method on Canvas that returns the rgba value of pixels for a defined area as an array.  The movement function calls this method on the pixels the character is about to move to before it allows him to move there.  if it returns any pixels that have an R value of 255, then the character isn't allowed to move in that direction.
+
+![screenshot3](images/screenshots/DL-SS03.png)
+
+## Attacking
+The attacking is done by changing the source image for the characters.  If the source image is the attacking version, it will hand out damage to another character that is within range.
