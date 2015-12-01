@@ -27,6 +27,6 @@ The attacking is done by changing the source image for the characters.  If the s
 ![screenshot5](images/screenshots/DL-SS05.png)
 
 ### requestAnimationFrame
-The core of the game is the main()  loop, which has three basic components.  First, runs a function that updates the positions of all of the objects that need to be drawn on the canvas.  Second, runs a function that renders all of said objects.  Finally, it calls requestAnimationFrame, which again calls main(), causing the function to loop, and thus the illusion of movement is achieved.  
+The core of the game is the main()  loop, which has three basic components.  First, it runs a function that updates the positions of all of the objects that need to be drawn on the canvas.  Second, it runs a function that renders all of said objects.  Finally, it calls requestAnimationFrame, which again calls main(), causing the function to loop, and thus the illusion of movement is achieved.  
 
 # NEAT!
