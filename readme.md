@@ -1,6 +1,6 @@
 ![dl logo](images/screenshots/DL-Logo.png)
 
-This is a JavaScript 8-bit Diablo-style dungeon explorer.  This game was programmed mostly using HTML5's Canvas element, with some jQuery DOM manipulation to show the stats in the menu.
+This is a 8-bit Diablo-style dungeon explorer.  This game was programmed mostly using HTML5's Canvas element and JavaScript, with some jQuery DOM manipulation to show the stats in the menu.
 
 ![screenshot1](images/screenshots/DL-SS01.png)
 
@@ -27,6 +27,4 @@ The attacking is done by changing the source image for the characters.  If the s
 ![screenshot5](images/screenshots/DL-SS05.png)
 
 ### requestAnimationFrame
-The core of the game is the main()  loop, which has three basic components.  First, it runs a function that updates the positions of all of the objects that need to be drawn on the canvas.  Second, it runs a function that renders all of said objects.  Finally, it calls requestAnimationFrame, which again calls main(), causing the function to loop, and thus the illusion of movement is achieved.  
-
-# NEAT!
+The core of the game is the main loop, which has three basic components.  First, it runs a function that updates the positions of all of the objects that need to be drawn on the canvas.  Second, it runs a function that renders all of said objects.  Finally, it calls requestAnimationFrame, which again calls main(), causing the function to loop, and thus the illusion of movement is achieved.  NEAT!
